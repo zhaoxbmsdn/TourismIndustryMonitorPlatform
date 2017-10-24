@@ -1,0 +1,46 @@
+			/*
+			 *	去除浏览器所有元素默认的padding和margin设置 
+			*/
+			*{
+				padding: 0;
+				margin: 0;
+			 }
+ 
+			/*
+			 * 浏览器尺寸的改变，就是根节点html的长宽改变，
+			 * 我们可以用%来将浏览器尺寸和元素尺寸联系起来，做到自适应。
+			 */
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+			body {
+				background: url(../images/background.png) no-repeat;
+				background-size: cover;
+				/*
+				 * background-position 属性设置背景图像的起始位置。
+				 * 这个属性设置背景原图像（由 background-image 定义）的位置，背景图像如果要重复，将从这一点开始。
+				 * 提示：您需要把 background-attachment 属性设置为 "fixed"，才能保证该属性在 Firefox 和 Opera 中正常工作。
+				 */
+				background-position: center;
+				/*
+				 * 属性设置背景图像是否固定或者随着页面的其余部分滚动。
+				 */
+				background-attachment: fixed;
+			}
+			/*
+			 *   通用边框样式(包边效果)
+			 */
+			.border{
+				/*
+				 * 取父元素宽度的5%作为边长
+				 * margin、padding的百分比数值是相对父元素宽度的宽度计算
+				 * 强制元素高度为0，以防止内容填充 
+				 */
+				width:3%;
+				height: 0;
+				padding-bottom:3%;
+				border-color:#49d9fe;
+				background-color: gray;
+			}
+			

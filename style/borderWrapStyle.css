@@ -1,0 +1,40 @@
+			#echarts{
+				width: 98%;
+				height: 98%;
+				position: relative;
+				background-color: rgba(0,117,169,0.5);
+				background-attachment: fixed;
+				background-size: cover;
+				left: 2%;
+				top: 2%;
+				right: 2%;
+				bottom: 2%;
+			}
+			#d1{
+				position: absolute;
+				border-top: 2px solid #49d9fe;
+				border-left: 2px solid #49d9fe;
+				left: 2px;
+				top:2px;
+			}
+			#d2{
+				position: absolute;
+				border-top: 2px solid #49d9fe;
+				border-right: 2px solid #49d9fe;
+				right: 2px;
+				top: 2px;
+			}
+			#d3{
+				position: absolute;
+				border-left: 2px solid #49d9fe;
+				border-bottom: 2px solid #49d9fe;
+				bottom: 2px;
+				left: 2px;
+			}
+			#d4{
+				position: absolute;
+				border-right: 2px solid #49d9fe;
+				border-bottom: 2px solid #49d9fe;
+				bottom: 2px;
+				right: 2px;
+			}
