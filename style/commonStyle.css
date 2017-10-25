@@ -28,19 +28,5 @@
 				 */
 				background-attachment: fixed;
 			}
-			/*
-			 *   通用边框样式(包边效果)
-			 */
-			.border{
-				/*
-				 * 取父元素宽度的5%作为边长
-				 * margin、padding的百分比数值是相对父元素宽度的宽度计算
-				 * 强制元素高度为0，以防止内容填充 
-				 */
-				width:3%;
-				height: 0;
-				padding-bottom:3%;
-				border-color:#49d9fe;
-				background-color: gray;
-			}
+
 			

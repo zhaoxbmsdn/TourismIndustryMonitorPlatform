@@ -1,40 +1,42 @@
-			#echarts{
-				width: 98%;
-				height: 98%;
-				position: relative;
-				background-color: rgba(0,117,169,0.5);
-				background-attachment: fixed;
-				background-size: cover;
-				left: 2%;
-				top: 2%;
-				right: 2%;
-				bottom: 2%;
-			}
 			#d1{
 				position: absolute;
 				border-top: 2px solid #49d9fe;
 				border-left: 2px solid #49d9fe;
-				left: 2px;
-				top:2px;
+				left: 0px;
+				top:0px;
 			}
 			#d2{
 				position: absolute;
 				border-top: 2px solid #49d9fe;
 				border-right: 2px solid #49d9fe;
-				right: 2px;
-				top: 2px;
+				right: 0px;
+				top: 0px;
 			}
 			#d3{
 				position: absolute;
 				border-left: 2px solid #49d9fe;
 				border-bottom: 2px solid #49d9fe;
-				bottom: 2px;
-				left: 2px;
+				bottom: 0px;
+				left: 0px;
 			}
 			#d4{
 				position: absolute;
 				border-right: 2px solid #49d9fe;
 				border-bottom: 2px solid #49d9fe;
-				bottom: 2px;
-				right: 2px;
+				bottom: 0px;
+				right: 0px;
+			}
+						/*
+			 *   通用边框样式(包边效果)
+			 */
+			.border{
+				/*
+				 * 取父元素宽度的5%作为边长
+				 * margin、padding的百分比数值是相对父元素宽度的宽度计算
+				 * 强制元素高度为0，以防止内容填充 
+				 */
+				width:3%;
+				height: 0;
+				padding-bottom:3%;
+				border-color:#49d9fe;
 			}

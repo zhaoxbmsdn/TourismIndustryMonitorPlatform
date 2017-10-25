@@ -5,15 +5,101 @@
 		<title>旅客流量</title>
 		<link rel="stylesheet" href="../style/commonStyle.css" />
 		<link rel="stylesheet" href="../style/borderWrapStyle.css" />
+		<script type="text/javascript" src="../js/echarts-all.js" ></script>
 		<style>
+			#echarts{
+				top:-4%;
+				margin-left: 5px;
+				margin-right: 5px;
+				position: relative;
+				z-index: 0;
+				width: calc(100% - 10px);
+				height: calc(100% - 40px);
+				background-color: rgba(0,117,169,0.5);
+				background-attachment: fixed;
+				background-size: cover;
+			}
+			#trapezo{
+				position: relative;
+				display: table;
+				z-index: 1;
+				margin: 0;
+				padding: 0;
+				color: red;
+				top: 0px;
+				text-align:center;
+				font-size: 12px;
+				left: 40%;	 /* 将其放置在中心位置 */
+			    height:8%;  /*  高度与边框大小相似*/
+			    width:17%;   /*  宽度为总宽度的17*/
+			    background-color: #0D146A;
+			}
+			#trapezo p{
+				display: table-cell;
+				vertical-align: middle;
+			}
+			/*
+			 *  伪元素插入到目标元素 !内容! 的前面和后面。
+			*/
+			#trapezo:before{
+				content: "";
+				display: block;
+				/*
+				 *   宽和高
+				 */
+				width: 17%;   
+				height: 100%;
+				background-color: #0D146A;
+				position: absolute;
+				top: 0px;
+				left: -17%;
+				transform:skewX(30deg);
+				-ms-transform:skewX(30deg);
+				-webkit-transform:skewX(30deg);
+			}
+			#trapezo:after{
+				content: "";
+				display: block;
+				width: 17%;
+				height: 100%;
+				background-color: #0D146A;
+				position: absolute;
+				top: 0px;
+				right: -17%;
+				transform:skewX(-30deg);
+				-ms-transform:skewX(-30deg);
+				-webkit-transform:skewX(-30deg);
+			}
+			#main{
+				height: 100%;
+				width: 100%;
+			}
 		</style>
 	</head>
 	<body>
+		<div id="trapezo">
+			<p>旅客流量</p>
+		</div>
 		<div id="echarts">
+			<div id="main"></div>
 			<div id="d1" class="border"></div>
 			<div id="d2" class="border"></div>
 			<div id="d3" class="border"></div>
 			<div id="d4" class="border"></div>
 		</div>
+		<script>
+			var myChart = echarts.init(document.getElementById("main"));
+			var option = {
+				titile:{
+					show:false
+				},
+				grid:{
+					show:true
+				},
+				backgroundColor:'transparent',
+				
+			};
+			myChart.setOption(option);
+		</script>
 	</body>
 </html>
