@@ -89,6 +89,42 @@
 		</div>
 		<script>
 			var myChart = echarts.init(document.getElementById("main"));
+			var start = +new Date(2017,11,1);
+			var oneDay = 24*60*60*1000;
+			
+			function selectFrom(lowerValue,upperValue)
+			{
+				var choices = upperValue - lowerValue+1;
+				return Math.floor(Math.random()*choices+lowerValue);
+			}
+			
+			/*
+			 * data 格式
+			 * [
+			 * 		[2017-10-1,200],
+			 * 		[2017-10-2,300],
+			 * 		[2017-10-3,200]
+			 * ]
+			 */
+			function manualData(){
+				var data = [];
+				var i = 0;
+				for(i;i<100;i++)
+				{
+					var now = new Date(start += oneDay);
+					data.push([[now.getFullYear(),now.getMonth(),now.getDate()].join("-"),selectFrom(100,500)]);
+				}
+				return data;
+			}
+			var eData = manualData();
+			console.log(eData);
+			var date = [];
+			var dat = []
+			eData.forEach(function(item)
+			{
+				date.push(item[0]);
+				dat.push(item[1]);
+			});		
 			var option = {
 				titile:{
 					show:false
@@ -96,7 +132,74 @@
 				grid:{
 					show:true
 				},
+				textStyle:{
+					color:'white'
+				},
 				backgroundColor:'transparent',
+				dataZoom: [{
+			        type: 'inside',
+			        start: 0,
+			        end: 10
+				    },
+				    {
+				        start: 0,
+				        end: 10,
+				        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+				        handleSize: '80%',
+				        handleStyle: {
+				            color: '#fff',
+				            shadowBlur: 3,
+				            shadowColor: 'rgba(0, 0, 0, 0.6)',
+				            shadowOffsetX: 2,
+				            shadowOffsetY: 2
+			       		}
+			   		}
+				],
+				xAxis:{
+					show:true,
+					type:'category',
+					data:date
+				},
+				yAxis:{
+					show:true,
+					type:'value'
+				},
+				series:[
+					{
+						name:'areaLine',
+						type:'line',
+						data:dat,
+						smooth:true,
+						lineStyle:{
+							normal:{
+								color:'#5bdeff',
+								opacity:0.5
+							}
+						},
+						areaStyle:{
+							normal:{
+								color:{
+									type: 'linear',
+								    x: 0,
+								    y: 0,
+								    x2: 0,
+								    y2: 1,
+								    colorStops: [
+								    	{
+								        	offset: 0, color: '#8906a1' // 0% 处的颜色
+								    	}, 
+
+								    		{
+								        	offset: 1, color: '#2b8c98' // 100% 处的颜色
+								    	}
+								    ],
+								    globalCoord: false // 缺省为 false
+								},
+								opacity:0.73
+							}
+						}
+					}
+				]
 				
 			};
 			myChart.setOption(option);
