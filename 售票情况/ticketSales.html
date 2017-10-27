@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>售票情况</title>
+		<script type="text/javascript" src="../js/echarts-all.js" ></script>
+		<link rel="stylesheet" href="../style/commonStyle.css" />
+		<style>
+			#main{
+				height: 100%;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main"></div>
+		<script>
+			//初始化echarts实例，将其容器指向div
+			var myChart = echarts.init(document.getElementById("main"));
+			
+			
+			var appConfig = {};
+			//通用线条样式
+			appConfig.lineStyle = {color:'rgba(0,117,169,1)'};
+			//通用字体颜色
+			appConfig.textColor = '#5bdeff';
+			//通用面积颜色
+			appConfig.areaColor = [];
+			//通用透明背景颜色
+			appConfig.backgroundColor = 'rgba(0,117,169,0.7)';
+			//通用边框颜色
+			appConfig.borderColor = '#49d9fe';
+			//雷达半径
+			appConfig.radarRadius = '50%';
+			/*
+			 *   Ddata格式
+			 * 	[
+			 * 		['2017-10-1',[{name:online,value:0},{name:offline,value:3000}]],
+			 * 		['2017-10-2',[~]],
+			 *  ]
+			 */
+			
+			var now = +new Date();
+			var oneDay = 24 * 60 * 60 * 1000;
+			
+			function selectFrom(lowerValue,upperValue)
+			{
+				var choices = upperValue - lowerValue + 1;
+				return Math.floor(Math.random() * choices + lowerValue);
+			}
+			
+			function createObj(name){
+				var obj = new Object();
+				obj.name = name;
+				obj.value = selectFrom(100,1000);
+				return obj;
+			}
+			
+			var originalData = [];
+			
+			for(var i = 0; i< 1000; i++)
+			{
+				var tday = new Date(now+=oneDay);
+				var cday = [tday.getFullYear(),tday.getMonth(),tday.getDay()].join("-");
+				originalData.push([cday,[createObj("OTA"),createObj("电商"),createObj("线下"),createObj("其他")]]);
+			}
+			
+			console.log(originalData);
+			
+			var option = {
+				//标题
+				title:{
+					show:true,
+					text:'售票状况',
+					left:20,
+					top:20,
+					padding:[10,20,10,20],
+					backgroundColor:appConfig.backgroundColor,
+					borderColor:appConfig.borderColor,
+					borderWidth:2,
+					textStyle:{
+						fontSize:14,
+						color:appConfig.textColor
+					}
+				},
+				series:[
+					{
+						type:'pie',
+						name:'ticket Sales',
+						hoverAnimation:false,
+						stillShowZeroSum:true,
+						cursor:'pointer',
+						data:[]
+					}
+				]
+			}
+		</script>
+	</body>
+</html>
