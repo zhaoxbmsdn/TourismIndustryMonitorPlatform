@@ -10,14 +10,11 @@
 				height: 100%;
 				width: 100%;
 			}
-			#st{
-				position: absolute;
-			}
 		</style>
 	</head>
 	<body>
 		<div id="main"></div>
-		<div id="st"></div>
+		
 		<script>
 			//初始化echarts实例，将其容器指向div
 			var myChart = echarts.init(document.getElementById("main"));
@@ -78,7 +75,56 @@
 			console.log(originalData);
 			
 			var option = {
-				title:{
+				
+				baseOption:{
+					timeline:{
+						axisType:'category',
+						currendIndex:'5',
+						label:{
+							normal:{
+								color:'white'
+							}
+						},
+						rewind:true,
+						left: '10%',
+			            right: null,
+			            top: 50,
+			            bottom: 0,
+			            width: 70,
+			            height: null,
+						orient:'vertical',
+						inverse:true,
+						symbol: 'none',
+						padding:5,
+			            lineStyle: {
+			            	show:false,
+			                color: '#555'
+			            },
+			            checkpointStyle: {
+			                color: '#bbb',
+			                borderColor: '#777',
+			                borderWidth: 2
+			            },
+			            label: {
+			                normal: {
+			                	position:10,
+			                    textStyle: {
+			                        color: '#999',
+			                        fontSize: 10
+			                    }
+			                },
+			                emphasis: {
+			                    textStyle: {
+			                        color: '#999',
+			                        fontSize: 15
+			                    }
+			                }
+			            },
+						data:originalData.map(function(item,index,array){
+							return item[0];
+						})
+					},
+					title:{
 						show:true,
 						text:'售票状况',
 						left:20,
@@ -91,14 +137,17 @@
 							fontSize:14,
 							color:appConfig.textColor
 						}
-				},
-				legend: {
-				    orient: 'horizontal',
-				    right: '10%',
-				    bottom:'5%'  
-				},
-				color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
-				series:[
+					},
+					legend: {
+				        orient: 'horizontal',
+				        right: '10%',
+				        bottom:'5%',
+				        data:originalData[0][1].map(function(item,index,array){
+				        	return item.name;
+				        })
+				  	},
+				  	color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+				  	series:[
 					{
 						name:'ticketSales',
 						type:'pie',
@@ -114,11 +163,8 @@
 						markLine:{
 							symbol:['none','circle']
 						}
-					}
-				]
-				
-			};
-				/*
+					}]
+			  	},
 			  	options:originalData.map(function(item,index,array){
 					return {
 						'series':[
@@ -127,22 +173,9 @@
 						}]
 					}
 			  	})
-			  	*/
+			};
 			
 			myChart.setOption(option);
-			myChart.setOption({
-				legend:{
-					data:originalData[0][1].map(function(item,index,array){
-				        return item.name;
-				    }) 
-				},
-				series:[
-				{
-					data:originalData[0][1]
-				}
-				]
-			}
-			);
 			
 		</script>
 	</body>
