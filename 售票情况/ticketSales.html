@@ -10,18 +10,33 @@
 				height: 100%;
 				width: 100%;
 			}
-			#st{
+			#dt{
 				position: absolute;
+				bottom: 5%;
+				left: 10%;
+				color: white;
+			}
+			select{
+				/* 消除小箭头的默认样式  */
+				appearance:none;
+  				-moz-appearance:none;
+  				-webkit-appearance:none;
+  				background: transparent;
+  				color: white;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="main"></div>
-		<div id="st"></div>
+		<div id="dt">
+			<span>日期</span>
+			<select id ="st" name="sDate" onchange="selectEcharts()"></select>
+		</div>
 		<script>
+			/* 在页面加载时，为下拉菜单添加选项 */
+			
 			//初始化echarts实例，将其容器指向div
 			var myChart = echarts.init(document.getElementById("main"));
-			
 			
 			var appConfig = {};
 			//通用线条样式
@@ -69,14 +84,13 @@
 			var originalData = [];
 			
 			for(var i = 0; i< 1000; i++)
-			{
-				var tday = new Date(now+=oneDay);
-				var cday = [tday.getFullYear(),tday.getMonth(),tday.getDay()].join("-");
-				originalData.push([cday,[createObj("OTA"),createObj("电商"),createObj("线下"),createObj("其他")]]);
-			}
-			
+				{
+					var tday = new Date(now+=oneDay);
+					var cday = [tday.getFullYear(),tday.getMonth(),tday.getDay()].join("-");
+					originalData.push([cday,[createObj("OTA"),createObj("电商"),createObj("线下"),createObj("其他")]]);
+				}
 			console.log(originalData);
-			
+					
 			var option = {
 				title:{
 						show:true,
@@ -129,20 +143,52 @@
 			  	})
 			  	*/
 			
+			
 			myChart.setOption(option);
+			/*
+			 *   默认加载最后一项的数据
+			 */
 			myChart.setOption({
 				legend:{
-					data:originalData[0][1].map(function(item,index,array){
-				        return item.name;
-				    }) 
+					data:originalData[0][1].map(function(item,index,array){return item.name;})
 				},
 				series:[
 				{
 					data:originalData[0][1]
 				}
-				]
-			}
+				]}
 			);
+			
+			window.onload = function(){
+				/* 
+				 * 	为下拉菜单添加日期节点;
+				 *  默认选中最新的日期，即显示最近的数据；
+				 *  点击后，同步刷新echarts(加载对应的数据)
+				 *  
+				*/
+				var element = document.getElementById("st");
+				originalData.forEach(function(item,index,array){
+					/* 
+					 *   构造option节点
+					 */
+					var op = document.createElement("option");
+					var txt = document.createTextNode(item[0]);
+					op.appendChild(txt);
+					/*
+					 *   设置option元素的value值
+					 */
+					op.setAttribute("value",index);
+					/*
+					 *   附加option节点
+					 */
+					element.appendChild(op);
+				});
+			}
+			
+			function selectEcharts()
+			{
+				console.log("选中的值为： "+this.option[this.option.selectedIndex].value);
+			}
 			
 		</script>
 	</body>
