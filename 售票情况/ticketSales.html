@@ -5,6 +5,7 @@
 		<title>售票情况</title>
 		<script type="text/javascript" src="../js/echarts-all.js" ></script>
 		<link rel="stylesheet" href="../style/commonStyle.css" />
+		<script type="text/javascript" src="../js/echarts-config.js" ></script>
 		<style>
 			#main{
 				height: 100%;
@@ -12,9 +13,10 @@
 			}
 			#dt{
 				position: absolute;
-				bottom: 5%;
-				left: 10%;
-				color: white;
+				bottom: 5.5%;
+				left: 20px;
+				color: #5bdeff;
+				font-size: 14px;
 			}
 			select{
 				/* 消除小箭头的默认样式  */
@@ -22,7 +24,11 @@
   				-moz-appearance:none;
   				-webkit-appearance:none;
   				background: transparent;
-  				color: white;
+  				color: #5bdeff;
+			}
+			select::-ms-expand { display: none; }
+			select option{
+				color: #5bdeff;
 			}
 		</style>
 	</head>
@@ -30,7 +36,7 @@
 		<div id="main"></div>
 		<div id="dt">
 			<span>日期</span>
-			<select id ="st" name="sDate" onchange="selectEcharts()"></select>
+			<select id ="st" name="sDate" onchange="selectEcharts(this.value)"></select>
 		</div>
 		<script>
 			/* 在页面加载时，为下拉菜单添加选项 */
@@ -38,22 +44,7 @@
 			//初始化echarts实例，将其容器指向div
 			var myChart = echarts.init(document.getElementById("main"));
 			
-			var appConfig = {};
-			//通用线条样式
-			appConfig.lineStyle = {color:'rgba(0,117,169,1)'};
-			//通用字体颜色
-			appConfig.textColor = '#5bdeff';
-			//通用面积颜色
-			appConfig.areaColor = [];
-			//通用透明背景颜色
-			appConfig.backgroundColor = 'rgba(0,117,169,0.7)';
-			//通用边框颜色
-			appConfig.borderColor = '#49d9fe';
-			//雷达半径
-			appConfig.radarRadius = '50%';
-			
-			var testData = [''];
-			
+
 			/*
 			 *   Ddata格式
 			 * 	[
@@ -83,10 +74,10 @@
 			
 			var originalData = [];
 			
-			for(var i = 0; i< 1000; i++)
+			for(var i = 0; i< 100; i++)
 				{
 					var tday = new Date(now+=oneDay);
-					var cday = [tday.getFullYear(),tday.getMonth(),tday.getDay()].join("-");
+					var cday = [tday.getFullYear(),tday.getMonth()+1,tday.getDate()].join("-");
 					originalData.push([cday,[createObj("OTA"),createObj("电商"),createObj("线下"),createObj("其他")]]);
 				}
 			console.log(originalData);
@@ -95,23 +86,23 @@
 				title:{
 						show:true,
 						text:'售票状况',
-						left:20,
-						top:20,
-						padding:[10,20,10,20],
 						backgroundColor:appConfig.backgroundColor,
 						borderColor:appConfig.borderColor,
 						borderWidth:2,
-						textStyle:{
-							fontSize:14,
-							color:appConfig.textColor
-						}
+						padding:appConfig.titleStyle.padding,
+						left:appConfig.titleStyle.left,
+						top:appConfig.titleStyle.top,
+						textStyle:appConfig.titleStyle.textStyle
 				},
 				legend: {
 				    orient: 'horizontal',
 				    right: '10%',
-				    bottom:'5%'  
+				    bottom:'5%',
+				    textStyle:{
+				    	color:'white'
+				    }
 				},
-				color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+				color:['#b76872','#77c1b8', '#3298d8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
 				series:[
 					{
 						name:'ticketSales',
@@ -122,7 +113,16 @@
 						label:{
 							normal:{
 								formatter:'{c}',
-								symbol:'cicle'
+								symbol:'cicle',
+								color:'#5bdeff',
+								position:'outside'
+							}
+						},
+						labelLine:{
+							normal:{
+								length:25,
+								length2:50,
+								smooth:0.1
 							}
 						},
 						markLine:{
@@ -179,15 +179,33 @@
 					 */
 					op.setAttribute("value",index);
 					/*
+					 *   默认选中最新的日期
+					 */
+					if(originalData.length-1 === index)
+					{
+						op.setAttribute('selected',index);
+					}
+					/*
 					 *   附加option节点
 					 */
 					element.appendChild(op);
 				});
 			}
-			
-			function selectEcharts()
+			/*
+			 *   根据索引信息，刷新echarts
+			 */
+			function selectEcharts(value)
 			{
-				console.log("选中的值为： "+this.option[this.option.selectedIndex].value);
+				myChart.setOption({
+					legend:{
+						data:originalData[value][1].map(function(item,index,array){return item.name;})
+					},
+					series:[
+						{
+							data:originalData[value][1]
+						}
+					]}
+				);
 			}
 			
 		</script>

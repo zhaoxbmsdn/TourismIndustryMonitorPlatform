@@ -5,6 +5,7 @@
 		<title>舆论管理</title>
 		<link rel="stylesheet" href="../style/commonStyle.css" />
 		<script type="text/javascript" src="../js/echarts-all.js" ></script>
+		<script type="text/javascript" src="../js/echarts-config.js" ></script>
 		<style>
 			#main{
 				width: 100%;
@@ -66,36 +67,19 @@
 			
 			Data.sort(createComparisonFunction(1));
 			
-			var appConfig = {};
-			//通用线条样式
-			appConfig.lineStyle = {color:'rgba(0,117,169,1)'};
-			//通用字体颜色
-			appConfig.textColor = '#5bdeff';
-			//通用面积颜色
-			appConfig.areaColor = [];
-			appConfig.color = ['green','yellow','red'];
-			//通用透明背景颜色
-			appConfig.backgroundColor = 'rgba(0,117,169,0.7)';
-			//通用边框颜色
-			appConfig.borderColor = '#49d9fe';
-			//雷达半径
-			appConfig.radarRadius = '50%';
 			var option = {
 				//标题
 				title:{
 					show:true,
-					text:'舆		论',
-					left:20,
-					top:20,
-					padding:[10,20,10,20],
+					text:'舆 情 管 理',
 					backgroundColor:appConfig.backgroundColor,
 					borderColor:appConfig.borderColor,
 					borderWidth:2,
-					textStyle:{
-						fontSize:14,
-						color:appConfig.textColor
-					}
-				},
+					padding:appConfig.titleStyle.padding,
+					left:appConfig.titleStyle.left,
+					top:appConfig.titleStyle.top,
+					textStyle:appConfig.titleStyle.textStyle
+				},		
 				grid:{
 					show:false,
 					top:80

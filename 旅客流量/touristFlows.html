@@ -14,7 +14,7 @@
 				position: relative;
 				z-index: 0;
 				width: calc(100% - 10px);
-				height: calc(100% - 40px);
+				height: 96%;
 				background-color: rgba(0,117,169,0.5);
 				background-attachment: fixed;
 				background-size: cover;
@@ -25,7 +25,7 @@
 				z-index: 1;
 				margin: 0;
 				padding: 0;
-				color: red;
+				color: #5bdeff;
 				top: 0px;
 				text-align:center;
 				font-size: 12px;
@@ -112,7 +112,7 @@
 				for(i;i<100;i++)
 				{
 					var now = new Date(start += oneDay);
-					data.push([[now.getFullYear(),now.getMonth(),now.getDate()].join("-"),selectFrom(100,500)]);
+					data.push([[now.getFullYear(),now.getMonth()+1,now.getDate()].join("-"),selectFrom(100,500)]);
 				}
 				return data;
 			}
@@ -130,13 +130,17 @@
 					show:false
 				},
 				grid:{
-					show:true
+					show:false
 				},
 				textStyle:{
 					color:'white'
 				},
 				backgroundColor:'transparent',
-				dataZoom: [{
+				dataZoom: [
+					{
+					/*
+					 *   内置型数据漫游
+					 */
 			        type: 'inside',
 			        start: 0,
 			        end: 10
@@ -144,25 +148,45 @@
 				    {
 				        start: 0,
 				        end: 10,
-				        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-				        handleSize: '80%',
+				        type:'slider',
+				        zoomLock:30,
+				        showDetail:false,
+				        showDataShadow:false,
+				        handleIcon: 'M32 14h-3.154c-0.864-5.57-5.276-9.982-10.846-10.846v-3.154h-4v3.154c-5.57 0.864-9.982 5.276-10.846 10.846h-3.154v4h3.154c0.864 5.57 5.276 9.982 10.846 10.846v3.154h4v-3.154c5.57-0.864 9.982-5.276 10.846-10.846h3.154v-4zM24.776 14h-3.118c-0.603-1.705-1.953-3.056-3.658-3.658v-3.118c3.36 0.765 6.010 3.416 6.776 6.776zM16 18c-1.105 0-2-0.895-2-2s0.895-2 2-2c1.105 0 2 0.895 2 2s-0.895 2-2 2zM14 7.224v3.118c-1.705 0.603-3.056 1.953-3.658 3.658h-3.118c0.765-3.36 3.416-6.010 6.776-6.776zM7.224 18h3.118c0.603 1.705 1.953 3.056 3.658 3.658v3.118c-3.36-0.765-6.010-3.416-6.776-6.776zM18 24.776v-3.118c1.705-0.603 3.056-1.953 3.658-3.658h3.118c-0.765 3.36-3.416 6.010-6.776 6.776z',
+				        handleSize: 18,
 				        handleStyle: {
 				            color: '#fff',
-				            shadowBlur: 3,
-				            shadowColor: 'rgba(0, 0, 0, 0.6)',
-				            shadowOffsetX: 2,
-				            shadowOffsetY: 2
-			       		}
+			       		},
+			       		height:1
 			   		}
 				],
 				xAxis:{
 					show:true,
 					type:'category',
+					axisTick:{
+						show:false
+					},
+					axisLine:{
+						show:false
+					},
 					data:date
 				},
 				yAxis:{
 					show:true,
-					type:'value'
+					type:'value',
+					splitNumber:3,
+					axisLine:{
+						show:false
+					},
+					axisTick:{
+						show:false
+					},
+					splitLine:{
+						show:true,
+						lineStyle:{
+							opacity:0.2
+						}
+					}
 				},
 				series:[
 					{

@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>新闻影响力</title>
 		<script src="../js/echarts-all.js"></script>
+		<script type="text/javascript" src="../js/echarts-config.js" ></script>
 		<link rel="stylesheet" href="../style/commonStyle.css" />
 		<style>
 			#main{
@@ -30,42 +31,6 @@
 		<script>
 			//初始化echarts实例，将其容器指向div
 			var myChart = echarts.init(document.getElementById("main"));
-			/* 
-			 *  配置项设置
-			*/
-			var appConfig = {};
-			//通用线条样式
-			appConfig.lineStyle = {color:'rgba(0,117,169,1)'};
-			//通用字体颜色
-			appConfig.textColor = '#5bdeff';
-			//通用面积颜色
-			appConfig.areaColor = [];
-			//通用透明背景颜色
-			appConfig.backgroundColor = 'rgba(0,117,169,0.7)';
-			//通用边框颜色
-			appConfig.borderColor = '#49d9fe';
-			//雷达半径
-			appConfig.radarRadius = '50%';
-			//通用雷达指示器设置
-			appConfig.setIndicator = function(arr)
-			{
-				var data = [];
-				arr.forEach(function(element)
-					{
-						data.push({
-							name:element,
-							color:appConfig.textColor,
-							max:1000,
-							min:0
-						});
-					}
-				);
-				return data;
-			}
-			//通用图例数据设置
-			appConfig.legendData = [];
-			//通用坐标系数据设置
-			appConfig.data = [];
 			
 			/*
 			 * 绘制框架,构造一个原型的雷达图，拥有三个维度（新闻条数、阅读数及转发量）
@@ -75,23 +40,20 @@
 				title:{
 					show:true,
 					text:'新闻影响力',
-					left:20,
-					top:20,
-					padding:[10,20,10,20],
 					backgroundColor:appConfig.backgroundColor,
 					borderColor:appConfig.borderColor,
 					borderWidth:2,
-					textStyle:{
-						fontSize:14,
-						color:appConfig.textColor
-					}
+					padding:appConfig.titleStyle.padding,
+					left:appConfig.titleStyle.left,
+					top:appConfig.titleStyle.top,
+					textStyle:appConfig.titleStyle.textStyle
 				},
 				//雷达坐标系
 				radar:{
 					center:['50%','50%'],
 					radius:appConfig.radarRadius,
 					shape:'circle',
-					splitNumber:5,
+					splitNumber:4,
 					//刻度线，直径线
 					axisLine:{
 						show:true,
@@ -101,7 +63,7 @@
 						show:true,
 						textStyle:{
 							color: appConfig.textColor,
-	                        fontSize:10
+	                        fontSize:8
 						}
 					},
 					axisTick:{
