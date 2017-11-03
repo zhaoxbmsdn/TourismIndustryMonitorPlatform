@@ -14,23 +14,47 @@
 				 *  测试github
 				 */
 			}
-			/*
-			 *   通用字体样式
-			 */
-			.fontStyle{
-				font-family: ;
-				font-size: ;
-				font-style: ;
-				font-weight: ;
-				color: ;
-			}
+
 		</style>
 	</head>
 	<body>
 		<div id="main" class=""></div>
 		<script>
 			//初始化echarts实例，将其容器指向div
-			var myChart = echarts.init(document.getElementById("main"));
+			var myChart = echarts.init(document.getElementById("main"));	
+			
+			/* 
+			 *  测试数据
+			 */
+			var dData = [];
+			dData.push(['新浪',{'阅读数':100,'新闻条数':200,'转发量':200}]);
+			dData.push(['腾讯',{'阅读数':300,'新闻条数':600,'转发量':300}]);
+			dData.push(['电商',{'阅读数':400,'新闻条数':500,'转发量':300}]);
+			
+			function setRadarData(arr){
+				var d = [];
+				arr.forEach(function(item,index,array){
+					d.push({
+						'name':item[0],
+						'value':(function(){
+							var a =[];
+							for(var i in item[1])
+							{
+								a.push(item[1][i]);
+							}
+							return a;
+						})(),
+						'areaStyle':{
+							'normal':{
+								'color':appConfig.color[index],
+								'opacity':0.4
+							}
+						}
+					});
+				});
+				return d;
+			}
+
 			
 			/*
 			 * 绘制框架,构造一个原型的雷达图，拥有三个维度（新闻条数、阅读数及转发量）
@@ -38,29 +62,40 @@
 			var option = {
 				//标题
 				title:{
-					show:true,
-					text:'新闻影响力',
+					text:'{a|新闻影响力}',
 					backgroundColor:appConfig.backgroundColor,
 					borderColor:appConfig.borderColor,
 					borderWidth:2,
-					padding:appConfig.titleStyle.padding,
-					left:appConfig.titleStyle.left,
-					top:appConfig.titleStyle.top,
-					textStyle:appConfig.titleStyle.textStyle
+					padding:appConfig.titlePadding,
+					left:appConfig.titleLeft,
+					top:appConfig.titleTop,
+					textStyle:{
+						'fontSize':12,
+						'color':appConfig.textColor,
+						rich:{
+							a:{
+								align:'center',
+								verticalAlign:'center',
+								width:87,
+								height:26
+							}
+						}
+					}
 				},
 				//雷达坐标系
 				radar:{
 					center:['50%','50%'],
-					radius:appConfig.radarRadius,
+					radius:'75%',
 					shape:'circle',
-					splitNumber:4,
+					splitNumber:3,
 					//刻度线，直径线
 					axisLine:{
 						show:true,
 						lineStyle:appConfig.lineStyle
 					},
 					axisLabel:{
-						show:true,
+						show:false,
+						inside:true,
 						textStyle:{
 							color: appConfig.textColor,
 	                        fontSize:8
@@ -77,31 +112,32 @@
 					splitArea:{
 						show:false
 					},
-					indicator:appConfig.setIndicator(['新闻条数','阅读量','转发量(使用量)'])
+					indicator:appConfig.setIndicator(['新闻条数','阅读量','转发量'])
 				},
 				//图例
 				legend:{
 					show:true,
-					type:'scroll',
+					type:'plain',
+					orient:'vertical',
 					textStyle:{
-						color:'red'
+						color:'white'
 					},
 					icon:'circle',
-					data:appConfig.legendData,
-					bottom:'5%'
+					data:dData.map(function(item,index,array){
+						return item[0]
+					}),
+					right:'5%',
+					bottom:'middle'
 				},
 				//系列
 				series:[
 				{
 					name:'radarData',
 					type:'radar',
-					data:appConfig.data
+					data:setRadarData(dData)
 				}]
 			};
 			myChart.setOption(option);
-			myChart.setOption({
-				
-			});
 			
 		</script>
 	</body>

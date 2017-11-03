@@ -18,25 +18,42 @@
 				color: #5bdeff;
 				font-size: 14px;
 			}
-			select{
+			#st{
 				/* 消除小箭头的默认样式  */
 				appearance:none;
   				-moz-appearance:none;
   				-webkit-appearance:none;
-  				background: transparent;
+  				background: #0D146A;
+  				
+  				/*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+ 				border: none;
   				color: #5bdeff;
+  				padding-right: 2px;
+  				outline: none;
+  				cursor: pointer;
 			}
-			select::-ms-expand { display: none; }
 			select option{
+				appearance:none;
+  				-moz-appearance:none;
+  				-webkit-appearance:none;
+				/*
+				 *  选项颜色
+				 */
 				color: #5bdeff;
+				/*
+				 *  选项背景颜色
+				 */
+				background-color: #0D146A;
+
 			}
+
 		</style>
 	</head>
 	<body>
 		<div id="main"></div>
 		<div id="dt">
 			<span>日期</span>
-			<select id ="st" name="sDate" onchange="selectEcharts(this.value)"></select>
+			<select id ="st"  name="sDate" onchange="selectEcharts(this.value)" ></select>
 		</div>
 		<script>
 			/* 在页面加载时，为下拉菜单添加选项 */
@@ -84,19 +101,29 @@
 					
 			var option = {
 				title:{
-						show:true,
-						text:'售票状况',
-						backgroundColor:appConfig.backgroundColor,
-						borderColor:appConfig.borderColor,
-						borderWidth:2,
-						padding:appConfig.titleStyle.padding,
-						left:appConfig.titleStyle.left,
-						top:appConfig.titleStyle.top,
-						textStyle:appConfig.titleStyle.textStyle
+					text:'{a|售票状况}',
+					backgroundColor:appConfig.backgroundColor,
+					borderColor:appConfig.borderColor,
+					borderWidth:2,
+					padding:appConfig.titlePadding,
+					left:appConfig.titleLeft,
+					top:appConfig.titleTop,
+					textStyle:{
+						'fontSize':12,
+						'color':appConfig.textColor,
+						rich:{
+							a:{
+								align:'center',
+								verticalAlign:'center',
+								width:87,
+								height:26
+							}
+						}
+					}
 				},
 				legend: {
 				    orient: 'horizontal',
-				    right: '10%',
+				    right: '5%',
 				    bottom:'5%',
 				    textStyle:{
 				    	color:'white'
@@ -107,7 +134,7 @@
 					{
 						name:'ticketSales',
 						type:'pie',
-						radius:'50%',
+						radius:'60%',
 						cursor:'pointer',
 						hoverAnimation:false,
 						label:{
@@ -120,8 +147,8 @@
 						},
 						labelLine:{
 							normal:{
-								length:25,
-								length2:50,
+								length:15,
+								length2:30,
 								smooth:0.1
 							}
 						},
@@ -172,6 +199,7 @@
 					 *   构造option节点
 					 */
 					var op = document.createElement("option");
+					op.style.cssText="border:none;";
 					var txt = document.createTextNode(item[0]);
 					op.appendChild(txt);
 					/*

@@ -14,12 +14,16 @@
 			appConfig.backgroundColor = 'rgba(0,117,169,0.7)';
 			//通用边框颜色
 			appConfig.borderColor = '#49d9fe';
-			//雷达半径
-			appConfig.radarRadius = '50%';
+
 			
 			/*
 			 *    通用标题样式设置
 			 */
+			
+			appConfig.titlePadding = [5,10,5,10];
+			
+			appConfig.titleLeft = 20;
+			appConfig.titleTop = 20;
 			appConfig.titleStyle = {
 				'padding':[5,10,5,10],
 				'left':20,

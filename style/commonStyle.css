@@ -15,7 +15,7 @@
 				height: 100%;
 			}
 			body {
-				background: url(../images/background.png) no-repeat;
+				background-color: #0D146A;
 				background-size: cover;
 				/*
 				 * background-position 属性设置背景图像的起始位置。
