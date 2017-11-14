@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>forecast</title>
+		<link rel="stylesheet" href="../style/commonStyle.css" />
+		<style>
+			/*
+			 *   上下两个div，占据整个页面
+			 */
+			#top{
+				position: relative;   
+				height: 60%;
+				background: yellowgreen;
+				font-size: 12px;
+				font-family: "微软雅黑";
+			}
+			#bottom{
+				position: relative;
+				height: 40%;
+				background: bisque;
+			}
+			/*
+			 *   t标识归属于top  div的子标签
+			 */
+			.t{
+				height: 100%;
+				float: left;
+			}
+			#w_today{
+				width: calc((100% - 60px) / 2);
+				background: yellow;
+			}
+			#w_tomorrow{
+				width: calc((100% - 60px) / 4);
+				background: red;
+			}
+			#w_third_day{
+				width: calc((100% - 60px) / 4);
+				background: yellowgreen;
+			}
+			#w_more{
+				width: 60px;
+				height: 100%;
+				background: blue;
+				text-align: center;
+				color: white;
+			}
+			/*
+			 *    设置li的高度
+			 */
+			ul li{
+				padding: auto;
+				height: calc(100% / 8);
+				width: 100%; 
+				box-sizing: border-box;
+			}
+			/*
+			 *   清除ul默认的格式
+			*/
+			ul{
+				list-style-type: none;
+				text-align: center;  /* 水平居中 */
+			}
+			/*
+			 *  消除a标签默认样式
+			 */
+			a:active,a:visited,a:link,a:hover,a:checked{
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="top">
+			<div id="w_today" class="t"></div>
+			<ul id="w_tomorrow" class="t">
+					<li><span>留空</span></li>
+					<li><span>06月01日</span></li>
+					<li>星期四</li>
+					<li>图片</li>
+					<li>图片</li>
+					<li>21~31</li>
+					<li>小雨</li>
+					<li>南风微风</li>
+			</ul>
+			<ul id="w_third_day" class="t">
+				<li></li>
+				<li>06月02日</li>
+				<li>星期四</li>
+				<li></li> 
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<a id="w_more" class="t" href="http://www.baidu.com">
+				<span >更多天气···</span>
+			</a>
+		</div>
+		<div id="bottom">	
+		</div>
+	</body>
+</html>

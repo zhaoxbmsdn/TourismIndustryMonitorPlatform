@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="../style/commonStyle.css" />
 		<script type="text/javascript" src="../js/echarts-all.js" ></script>
 		<script type="text/javascript" src="../js/echarts-config.js" ></script>
+		<script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
 		<style>
 			#main{
 				width: 100%;
@@ -172,6 +173,9 @@
 				]
 			}
 			myChart.setOption(option);
+			$(window).unload(function(){
+				console.log("haha");
+			});
 		</script>
 	</body>
 </html>
