@@ -6,57 +6,7 @@
 		<link rel="stylesheet" href="../style/commonStyle.css" />
 		<style>
 			/*
-			 *   上下两个div，占据整个页面
-			 */
-			#top{
-				position: relative;   
-				height: 60%;
-				background: yellowgreen;
-				font-size: 12px;
-				font-family: "微软雅黑";
-			}
-			#bottom{
-				position: relative;
-				height: 40%;
-				background: bisque;
-			}
-			/*
-			 *   t标识归属于top  div的子标签
-			 */
-			.t{
-				height: 100%;
-				float: left;
-			}
-			#w_today{
-				width: calc((100% - 60px) / 2);
-				background: yellow;
-			}
-			#w_tomorrow{
-				width: calc((100% - 60px) / 4);
-				background: red;
-			}
-			#w_third_day{
-				width: calc((100% - 60px) / 4);
-				background: yellowgreen;
-			}
-			#w_more{
-				width: 60px;
-				height: 100%;
-				background: blue;
-				text-align: center;
-				color: white;
-			}
-			/*
-			 *    设置li的高度
-			 */
-			ul li{
-				padding: auto;
-				height: calc(100% / 8);
-				width: 100%; 
-				box-sizing: border-box;
-			}
-			/*
-			 *   清除ul默认的格式
+			*   清除所有ul默认的格式
 			*/
 			ul{
 				list-style-type: none;
@@ -68,36 +18,321 @@
 			a:active,a:visited,a:link,a:hover,a:checked{
 				text-decoration: none;
 			}
+			/*
+			 *   上下两个div，占据整个页面
+			 */
+			#top{
+				height: 60%;
+				background: yellowgreen;
+				font-size: 12px;
+				font-family: "微软雅黑";
+			}
+			/*
+			 *	下布局
+			 *	采用弹性布局，共分为6个div 
+			 */
+			#bottom{
+				display: flex;
+				height: 40%;
+				background: bisque;
+				flex-wrap: wrap;
+			}
+			/*
+			 *   呼吸圈样式
+			 */
+			#b_di{
+				flex: none;
+				width: 33.3%;
+				height: 66.6%;
+				background: yellow;
+			}
+				/*
+				 *   呼吸圈图标
+				 */
+				#b_di_img{
+					width:64px ;
+					height: 64px;
+					background: url(../images/images_weather/AQIblue.png);
+				}
+			/*
+			 *	AQI指数文本
+			 */
+			#b_aqi_txt{
+				flex: none;
+				background: green;
+				height: 66.6%;
+				width: 80px;
+			}
+			/*
+			 *  AQI图标
+			 */
+			#b_aq_img{
+				flex: none;
+				background: greenyellow;
+				height: 66.6%;
+				width: calc(66.7% - 80px);
+			}
+				/*
+				 *   泡泡的div
+				 */
+				#bai_bubble{
+					height: 50%;
+					width: 100%;
+				}
+				/*
+				 *	AQI色带
+				 */
+				#bai_band{
+					height: 50%;
+					width: 100%;
+					text-align: center;
+				}
+			/*
+			 *   DI文本
+			 */
+			#b_di_txt{
+				flex: none;
+				background: gray;
+				height: 33.4%;
+				width: 33.3%;
+			}
+			/*
+			 *  温馨提示文本
+			 */
+			#b_tip_txt{
+				flex: none;
+				background: burlywood;
+				height: 33.4%;
+				width: 80px;
+			}
+			/*
+			 *  温馨提示内容
+			 */
+			#b_tips{
+				background: orange;
+				flex: none;
+				height: 33.4%;
+				width: calc(66.7% - 80px);
+				overflow: hidden;
+			}
+			.c_b{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			/*
+			 *   t标识归属于top  div的子标签
+			 */
+			.t{
+				height: 100%;
+				float: left;
+			}
+			#w_today{
+				width: calc((100% - 60px) / 2);
+				text-align: center;
+				background: white;
+			}
+			#w_tomorrow{
+				width: calc((100% - 60px) / 4);
+				background: red;
+			}
+			#w_third_day{
+				width: calc((100% - 60px) / 4);
+				background: yellowgreen;
+			}
+			/*
+			 *    更多天气
+			 * 	    固定宽度，文字竖排，居中
+			 */
+			#w_more{
+				width: 60px;
+				height: 100%;
+				background: blue;
+				color: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			#w_more span{
+				width: 15px;
+			}
+			/*
+			 *   实时天气信息展示；
+			 * 	  布局上，占一半空间
+			 */
+			#ww{
+				width: 100%;
+				height: 50%;
+			}
+			/*
+			 *   当天天气图标
+			 *   占父容器空间的一半
+			 *   居中
+			 */
+			#w_img{
+				height: calc(100% / 2);
+				text-align: center;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			/*
+			 *   实时天气信息
+			 * 	 占父容器空间的一半
+			 * 	 
+			 */
+			#w_info{
+				height: calc(100% / 2);
+				width: 100%;
+				text-align: center;
+			}
+			/*
+			 *   实时温度
+			 * 	 左，宽度一半
+			 */
+			#w_tpt{
+				float: left;
+				padding-right: 5px;
+				height:  100%;
+				width: calc(50% - 5px);
+				font-size: 24px;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+			}
+			/*
+			 *   当天天气
+			 * 	  右，宽度一半
+			 * 	  列表
+			 */
+			#w_ww{
+				float: right;
+				height: 100%;
+				width: 50%;
+				text-align: left;
+			}
+			#w_ww li{
+				height: calc(100% / 2);
+				display: flex;
+				align-items: center;
+				justify-content: flex-start
+			}
+			
+			/*
+			 *   空气质量
+			 * 	 占父容器一半
+			 */
+			#wa{
+				height: 50%;
+			}
+			#wa ul{
+				height: 100%
+			}
+			
+			#wa li{
+				height: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			/*
+			 *	设置li的高度
+			 *	设置flexibel box 弹性布局
+			 *	设置在主轴和交叉轴上的对齐方式
+			 */
+			.t_u li{
+				height: calc(100% / 8);
+				width: 100%; 
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
 		</style>
 	</head>
 	<body>
 		<div id="top">
-			<div id="w_today" class="t"></div>
-			<ul id="w_tomorrow" class="t">
-					<li><span>留空</span></li>
+			<div id="w_today" class="t">
+				<div id="ww">
+					<div id="w_img">
+						<img src="../images/images_weather/ircon_yellow/06.png"/>	
+					</div>
+					<div id="w_info">
+						<span id="w_tpt">28℃</span>
+						<ul id="w_ww">
+							<li>
+								<span>晴转多云</span>
+								<span>南风微风</span>
+							</li>
+							<li>21℃~34℃</li>
+						</ul>
+					</div>
+				</div>
+				<div id="wa">
+					<ul>
+						<li>
+							<span>pm2.5 : </span>
+							<span>44 良</span>
+						</li>
+						<li>
+							<span>Q3 : </span>
+							<span>40</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<ul id="w_tomorrow" class="t t_u">
+					<li></li>
 					<li><span>06月01日</span></li>
 					<li>星期四</li>
-					<li>图片</li>
-					<li>图片</li>
+					<li><img src="../images/images_weather/ircon_blue/06.png"/></li>
+					<li></li>
 					<li>21~31</li>
 					<li>小雨</li>
 					<li>南风微风</li>
 			</ul>
-			<ul id="w_third_day" class="t">
+			<ul id="w_third_day" class="t t_u">
 				<li></li>
 				<li>06月02日</li>
 				<li>星期四</li>
-				<li></li> 
+				<li><img src="../images/images_weather/ircon_blue/05.png"/></li> 
 				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
+				<li>21~31</li>
+				<li>小雨</li>
+				<li>南风微风</li>
 			</ul>
 			<a id="w_more" class="t" href="http://www.baidu.com">
 				<span >更多天气···</span>
 			</a>
 		</div>
-		<div id="bottom">	
+		<div id="bottom">
+			<!--
+            	作者：385852637@qq.com
+            	时间：2017-11-15
+            	描述：呼吸圈
+            -->
+			<div id="b_di" class="c_b">
+				<div id="b_di_img" class="c_b">
+					<span >61</span>
+				</div>
+			</div>
+			<div id="b_aqi_txt" class="c_b">
+				<span>AQI指数</span>
+			</div>			
+			<div id="b_aq_img">
+				<div id="bai_bubble"><img src="../images/images_weather/ircon_aqi/1.png"/></div>
+				<div id="bai_band"><img src="../images/images_weather/aqiband.png"/></div>
+			</div>
+			<div id="b_di_txt" class="c_b">
+				<span>舒适度指数</span>
+			</div>
+			<div id="b_tip_txt" class="c_b">
+				<span class="c_tips">温馨提示 :</span>
+			</div>
+			<div id="b_tips" class="c_b">
+				<span class="c_tips">敏感人群症状易加剧，应避免高强度户外锻炼，外出时做好防护措施。</span>
+			</div>
 		</div>
 	</body>
 </html>
