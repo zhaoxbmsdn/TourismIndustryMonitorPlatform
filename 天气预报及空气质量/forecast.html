@@ -19,11 +19,18 @@
 				text-decoration: none;
 			}
 			/*
+			 *  设置默认的字体颜色
+			 */
+			body{
+				color: white;
+				font-size: 12px;
+			}
+			
+			/*
 			 *   上下两个div，占据整个页面
 			 */
 			#top{
 				height: 60%;
-				background: yellowgreen;
 				font-size: 12px;
 				font-family: "微软雅黑";
 			}
@@ -34,7 +41,6 @@
 			#bottom{
 				display: flex;
 				height: 40%;
-				background: bisque;
 				flex-wrap: wrap;
 			}
 			/*
@@ -44,7 +50,15 @@
 				flex: none;
 				width: 33.3%;
 				height: 66.6%;
-				background: yellow;
+			}
+			.c_b{
+				/*
+				 * 	设置子元素为flex item 
+				 * 	子元素居中排列
+				 */
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 				/*
 				 *   呼吸圈图标
@@ -53,13 +67,13 @@
 					width:64px ;
 					height: 64px;
 					background: url(../images/images_weather/AQIblue.png);
+					font-size: 22px;
 				}
 			/*
 			 *	AQI指数文本
 			 */
 			#b_aqi_txt{
 				flex: none;
-				background: green;
 				height: 66.6%;
 				width: 80px;
 			}
@@ -68,7 +82,6 @@
 			 */
 			#b_aq_img{
 				flex: none;
-				background: greenyellow;
 				height: 66.6%;
 				width: calc(66.7% - 80px);
 			}
@@ -92,7 +105,6 @@
 			 */
 			#b_di_txt{
 				flex: none;
-				background: gray;
 				height: 33.4%;
 				width: 33.3%;
 			}
@@ -101,7 +113,6 @@
 			 */
 			#b_tip_txt{
 				flex: none;
-				background: burlywood;
 				height: 33.4%;
 				width: 80px;
 			}
@@ -109,17 +120,12 @@
 			 *  温馨提示内容
 			 */
 			#b_tips{
-				background: orange;
 				flex: none;
 				height: 33.4%;
 				width: calc(66.7% - 80px);
 				overflow: hidden;
 			}
-			.c_b{
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
+
 			/*
 			 *   t标识归属于top  div的子标签
 			 */
@@ -130,24 +136,22 @@
 			#w_today{
 				width: calc((100% - 60px) / 2);
 				text-align: center;
-				background: white;
 			}
 			#w_tomorrow{
 				width: calc((100% - 60px) / 4);
-				background: red;
 			}
 			#w_third_day{
 				width: calc((100% - 60px) / 4);
-				background: yellowgreen;
+				padding-right:2px ;
 			}
 			/*
 			 *    更多天气
 			 * 	    固定宽度，文字竖排，居中
+			 * 	  预留2px给边框使用
 			 */
 			#w_more{
-				width: 60px;
+				width: 58px;  
 				height: 100%;
-				background: blue;
 				color: white;
 				display: flex;
 				align-items: center;
@@ -155,6 +159,7 @@
 			}
 			#w_more span{
 				width: 15px;
+				font-size: 14px;
 			}
 			/*
 			 *   实时天气信息展示；
@@ -196,7 +201,7 @@
 				padding-right: 5px;
 				height:  100%;
 				width: calc(50% - 5px);
-				font-size: 24px;
+				font-size: 26px;
 				display: flex;
 				align-items: center;
 				justify-content: flex-end;
@@ -216,9 +221,8 @@
 				height: calc(100% / 2);
 				display: flex;
 				align-items: center;
-				justify-content: flex-start
+				justify-content: space-around;
 			}
-			
 			/*
 			 *   空气质量
 			 * 	 占父容器一半
@@ -229,12 +233,43 @@
 			#wa ul{
 				height: 100%
 			}
-			
+			/*
+			 *	pm2.5和Q3设置
+			 */
 			#wa li{
+				/*
+				 *	布局设置
+				 */
 				height: 50%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				/*
+				 *	字体设置
+				 */
+				font-size: 16px;
+			}
+			.c_tips{
+				font-size: 16px;
+			}
+			#wa div{
+				width: 50%;
+				height: 100%;
+				display: flex;
+				align-items:center;
+			}
+			#wa span{
+				margin-left: 4px;
+				background-color: yellow;
+				border-radius:0.2em;
+				width: 55px;
+				color: black;
+			}
+			/*
+			 * 	使空气质量的提示文本与值贴近
+			 */	
+			.f_d{
+				justify-content: flex-end;
 			}
 			/*
 			 *	设置li的高度
@@ -242,11 +277,47 @@
 			 *	设置在主轴和交叉轴上的对齐方式
 			 */
 			.t_u li{
+				/*
+				 *	布局设置
+				 */
 				height: calc(100% / 8);
 				width: 100%; 
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				/*
+				 *	字体设置
+				 */
+				font-size: 12px;
+			}
+			/*
+			 *  天气预报分割线样式
+			 * 	利用边框设置
+			 */
+			.c_l{
+				border-left: 1px solid #56ddff;
+			}
+			.d_l{
+				border-width: 0px 1px;
+				border-color: #56ddff;
+				border-style: solid;
+			}
+			/*
+			 *		设置天气预报图标的高度值
+			 *		使用class会被父类的li选择器覆盖掉
+			 */
+			#w_c_img{
+				height: calc(100% / 4);
+			}
+			#w_d_img{
+				height: calc(100% / 4);				
+			}
+			
+			/*
+			 *	设置标注的定位方式
+			 */
+			#id_bubble{
+				position: absolute;
 			}
 			
 		</style>
@@ -261,7 +332,7 @@
 					<div id="w_info">
 						<span id="w_tpt">28℃</span>
 						<ul id="w_ww">
-							<li>
+							<li >
 								<span>晴转多云</span>
 								<span>南风微风</span>
 							</li>
@@ -272,67 +343,125 @@
 				<div id="wa">
 					<ul>
 						<li>
-							<span>pm2.5 : </span>
-							<span>44 良</span>
+							<div class="f_d"><p>pm2.5 : </p></div>
+							<div><span>44 良</span></div>
 						</li>
 						<li>
-							<span>Q3 : </span>
-							<span>40</span>
+							<div class="f_d"><p>Q3 : </p></div>
+							<div><span>40</span></div>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<ul id="w_tomorrow" class="t t_u">
 					<li></li>
-					<li><span>06月01日</span></li>
-					<li>星期四</li>
-					<li><img src="../images/images_weather/ircon_blue/06.png"/></li>
-					<li></li>
-					<li>21~31</li>
-					<li>小雨</li>
-					<li>南风微风</li>
+					<li class="c_l"><span>06月01日</span></li>
+					<li class="c_l">星期四</li>
+					<li class="c_l" id="w_c_img"><img src="../images/images_weather/ircon_blue/06.png"/></li>
+					<li class="c_l">21~31</li>
+					<li class="c_l">小雨</li>
+					<li class="c_l">南风微风</li>
 			</ul>
 			<ul id="w_third_day" class="t t_u">
 				<li></li>
-				<li>06月02日</li>
-				<li>星期四</li>
-				<li><img src="../images/images_weather/ircon_blue/05.png"/></li> 
-				<li></li>
-				<li>21~31</li>
-				<li>小雨</li>
-				<li>南风微风</li>
+				<li class="d_l">06月02日</li>
+				<li class="d_l">星期四</li>
+				<li class="d_l" id="w_d_img"><img src="../images/images_weather/ircon_blue/05.png"/></li> 
+				<li class="d_l">21~31</li>
+				<li class="d_l">小雨</li>
+				<li class="d_l">南风微风</li>
 			</ul>
 			<a id="w_more" class="t" href="http://www.baidu.com">
 				<span >更多天气···</span>
 			</a>
 		</div>
 		<div id="bottom">
-			<!--
-            	作者：385852637@qq.com
-            	时间：2017-11-15
-            	描述：呼吸圈
-            -->
 			<div id="b_di" class="c_b">
 				<div id="b_di_img" class="c_b">
 					<span >61</span>
 				</div>
 			</div>
 			<div id="b_aqi_txt" class="c_b">
-				<span>AQI指数</span>
+				<span>AQI指数 :</span>
 			</div>			
 			<div id="b_aq_img">
-				<div id="bai_bubble"><img src="../images/images_weather/ircon_aqi/1.png"/></div>
-				<div id="bai_band"><img src="../images/images_weather/aqiband.png"/></div>
+				<div id="bai_bubble"><img id="id_bubble" height="21px" width="33px" src="../images/images_weather/ircon_aqi/1.png"/></div>
+				<div id="bai_band"><img id="id_band" height="22px" width="203px" src="../images/images_weather/aqiband.png"/></div>
 			</div>
 			<div id="b_di_txt" class="c_b">
-				<span>舒适度指数</span>
+				<span class="c_tips">舒适度指数</span>
 			</div>
 			<div id="b_tip_txt" class="c_b">
-				<span class="c_tips">温馨提示 :</span>
+				<span >温馨提示 :</span>
 			</div>
 			<div id="b_tips" class="c_b">
-				<span class="c_tips">敏感人群症状易加剧，应避免高强度户外锻炼，外出时做好防护措施。</span>
+				<span >敏感人群症状易加剧，应避免高强度户外锻炼，外出时做好防护措施。</span>
 			</div>
 		</div>
 	</body>
+	<script>
+		function getViewport(){
+			if(document.compatMode == "BackCompat")
+			{
+				return {
+					width: document.body.clientWidth,
+					height:document.body.height
+				};
+			}
+			else
+			{
+				return {
+					width:document.documentElement.clientWidth,
+					height:document.documentElement.clientHeight,
+					toString:function(){
+						console.log("width: "+this.width);
+						console.log("height: "+this.height);
+					}
+				}
+			}
+		}
+		
+		function getElementLeft(element){
+			var actualLeft = element.offsetLeft;
+			var current = element.offsetParent;
+			while( current !== null)
+			{
+				actualLeft += current.offsetLeft;
+				current = current.offsetParent;
+			}
+			return actualLeft;
+		}
+		function getElementTop(element){
+			var actualTop = element.offsetTop;
+			var current = element.offsetParent;
+			
+			while( current !== null )
+			{
+				actualTop += current.offsetTop;
+				current = current.offsetParent;
+			}
+			return actualTop;
+		}
+		function getElementPostion(element)
+		{
+			var actualLeft = element.offsetLeft;
+			var actualTop = element.offsetTop;
+			var current = element.offsetParent;
+			
+			while( current !== null)
+			{
+				actualLeft += current.offsetLeft;
+				actualTop += current.offsetTop;
+				current = current.offsetParent;
+			}
+			return {
+				left : actualLeft,
+				top : actualTop
+			}
+		}
+		var positon = getElementPostion(document.getElementById("id_band"));
+		var bubble = document.getElementById("id_bubble");
+		bubble.style.left = (positon.left - 16.5)+"px";
+		bubble.style.top = (positon.top - 21)+"px";
+	</script>
 </html>
