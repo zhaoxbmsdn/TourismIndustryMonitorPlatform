@@ -69,6 +69,12 @@
 					background: url(../images/images_weather/AQIblue.png);
 					font-size: 22px;
 				}
+				/*
+				 *	 呼吸圈内文本颜色设置
+				*/
+				#b_di_img{
+					color: #5BDEFF;
+				}
 			/*
 			 *	AQI指数文本
 			 */
@@ -318,6 +324,11 @@
 			 */
 			#id_bubble{
 				position: absolute;
+				height:21px;
+				width:33px;
+				text-align: center;
+				color: green;
+				background: url(../images/images_weather/ircon_aqi/1.png);
 			}
 			
 		</style>
@@ -385,7 +396,9 @@
 				<span>AQI指数 :</span>
 			</div>			
 			<div id="b_aq_img">
-				<div id="bai_bubble"><img id="id_bubble" height="21px" width="33px" src="../images/images_weather/ircon_aqi/1.png"/></div>
+				<div id="bai_bubble">
+					<div id="id_bubble"><span>优</span></div>
+				</div>
 				<div id="bai_band"><img id="id_band" height="22px" width="203px" src="../images/images_weather/aqiband.png"/></div>
 			</div>
 			<div id="b_di_txt" class="c_b">
