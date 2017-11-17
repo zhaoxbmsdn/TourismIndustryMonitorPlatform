@@ -1,0 +1,473 @@
+<html>
+
+	<head>
+		<title>列表</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<style type="text/css">
+			html,body{
+				padding: 0;
+				margin: 0;
+				width: 480px;
+				height: 270px;
+			}
+			#__01 {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 476px;
+				height: 270px;
+				background-image: url(../images/images_list/bg.png);
+				/* set font in the top-class */
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #56ddff;
+			}
+			/* 所有界面元素，包括切换页 */
+			
+			#main {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				background-image: url(../images/images_list/bg_list.png);
+			}
+			/* 包括标签和列表 */
+			
+			#mainframe {
+				position: absolute;
+				left: 15px;
+				top: 16px;
+				width: 443px;
+				height: 238px;
+			}
+			.pageRoll {
+				position: absolute;
+				top:110px;
+				cursor: pointer;
+			}
+			#leftPage {
+				left:1px;
+			}
+			#rightPage {
+				left:462px;
+			}
+			
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				/* 去除列表默认的小圆点图标 */
+			}
+			
+			ul li {
+				display: block;
+				float: left;
+				height: 28px;
+				text-align: center;
+				line-height: 28px;
+				vertical-align: middle;
+				background-image: url(../images/images_list/listLabel.png);
+				background-repeat: no-repeat;
+			}
+			
+			ul li.item {
+				margin: 0;
+				padding: 0px;
+				width: 24.6%;
+				/* 定义鼠标样式 */
+				cursor: pointer;
+			}
+			
+			ul li.splitLine {
+				margin: 0;
+				padding: 0;
+				width: 2px;
+			}
+
+			/* 选中标签时的样式
+				背景使用父元素背景；
+				字体颜色与表格颜色一致； 
+			*/
+			
+			.labSelect {
+				color: #56ddff;
+				/* 字体颜色与表格一致 */
+				background: inherit;
+			}
+			/* 未被选中的标签样式 
+				背景使用图片；
+				字体颜色为白色； 
+			*/	
+			.labNormal {
+				color: white;
+				/* 字体颜色为白色 */
+				background: url(../images/images_list/listLabel.png) no-repeat;
+			}
+			
+			table {
+				width: 100%;
+				/* 字体颜色  */
+				color: #56ddff;
+				/* 字体大小  */
+				font-size: 14px;
+				/* 水平居中  */
+				text-align: center;
+				/* 固定表布局样式 */
+				table-layout: fixed;
+			}
+			
+			tr {
+				/* 设置表格的行高 ：垂直居中*/
+				line-height: 39px;
+			}
+			
+			tr td{
+				width:85px;
+				border-width: 1px;
+				border-top-style: solid;
+				border-top-color: rgba(86, 221, 255, 0.2);
+				cursor: default;
+			}
+			/* 设置后续的td元素的宽度  */
+			/*tr td:nth-child(n+2){
+				width:95.5px;
+			}*/
+			tbody td {
+				/* 设置单元格的边框 ： 只有上边距显示*/
+				overflow:hidden;
+				/* clip 修剪 | ellipsis 省略号 | string 自定义文本 */
+				text-overflow:ellipsis;
+				/* 兼容性代码*/
+				-moz-text-overflow: ellipsis;
+				/* 不换行 */
+				white-space: nowrap;
+			}
+			tbody tr td:hover{
+				color: #24ffed;
+			}
+			.dialog{
+				padding: 2px;
+				display: none;
+				position: absolute;
+				/* 背景颜色 */
+				background-color: white;
+				/* 字体大小 */
+				font-size: 16px;
+				/* 圆角设定 */
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+
+	<body style="background-color:#FFFFFF; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;">
+		<div id="__01">
+				<div id="dialog" class="dialog"></div>
+				<div id="main">
+				<div class="pageRoll" id="leftPage">
+					<img src="../images/images_list/pageLeft.png" />
+				</div>
+				<div id="mainframe">
+					<ul>
+						<li class="item labSelect" id="expert" style="color:#56ddff">
+							<span class="font">专家</span>
+						</li>
+						<li class="splitLine">
+							<img src="../images/images_list/splitLine.png" />
+						</li>
+						<li class="item labNormal" id="material" style="color:white">
+							<span class="font">救援物资</span>
+						</li>
+						<li class="splitLine">
+							<img src="../images/images_list/splitLine.png" />
+						</li>
+						<li class="item labNormal" id="incident" style="color:white">
+							<span class="font">应急事件</span>
+						</li>
+						<li class="splitLine">
+							<img src="../images/images_list/splitLine.png" />
+						</li>
+						<li class="item labNormal" id="plan" style="color:white">
+							<span class="font">应急预案</span>
+						</li>
+					</ul>
+					<table id="table" cellspacing="0">
+						<thead></thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<div class="pageRoll" id="rightPage">
+					<img src="../images/images_list/pageRight.png" />
+				</div>
+			</div>
+			<script type="text/javascript">
+				/*
+				 * 设置全局变量用于保存当天选中的元素；
+				 */
+				window.currentItem = "expert";
+								
+				/*  定义全局的分页对象  */
+				var pageListener = {
+					currentPage: 1,
+				    pageSize: 4,
+				    size:0
+				};
+				
+				/* 注册标签切换事件  */
+				var nodeList = document.getElementsByClassName("item");
+				for(var i = 0; i < nodeList.length; i++) {
+					nodeList[i].addEventListener("mouseover", labelStyle.bind(nodeList[i], nodeList[i], '#56ddff'), false);
+					nodeList[i].addEventListener("mouseout", labelStyle.bind(nodeList[i], nodeList[i], 'white'), false);
+					//注册鼠标点击事件
+					nodeList[i].addEventListener("click", labelSelect.bind(nodeList[i], nodeList[i]), false);
+				}
+				/*  修改对应元素节点的类名 */
+				function labelStyle(ele, str) {
+					/* 修改前判断该元素是否已被选中；若被选中，鼠标的移入移出事件被抑制。 */
+					return(ele.id == currentItem) ? "" : ele.style.color = str;
+				}
+				/* 点击该元素时,标签样式固定;同时，查找对应标签的内容，展示在表格中 */
+				function labelSelect(ele) {
+					/*
+					 * 点击时触发的事件：
+					 * 1、样式更新；
+					 * 2、将全局对象currentItem更新为对应标签
+					 * 3、表格内容置为对应标签的第一页，更新全局对象pageListener，并获取对应标签的数据库表行数；
+					 */
+					if(ele.id != currentItem) {   /* 判断是否当前节点是否为选中的节点 */
+						/*
+						 * 触发点击事件，检查自身是否为高亮元素，若是，不做操作；
+					 	 * 若不是，将自身设置为高亮元素，同时，设置其他元素为普通元素；
+						 */
+						currentItem = ele.id;     
+						var nodeList = document.getElementsByClassName("item");
+						for(var i = 0; i < nodeList.length; i++) {
+							nodeList[i].className = 'item labNormal';
+							nodeList[i].style.color = "white";
+						}
+						ele.className = 'item labSelect';
+						ele.style.color = "#56ddff";
+					}
+
+					/* 点击时，为该标签加载第一页前4行   */
+					/*  以ajax方法请求json数据   */
+					$.getJSON(
+						"/front/emergencylist/home",
+						{"elementId":currentItem},
+						function(data) {
+							/* if success ,empty their child element　*/
+							$("thead").empty();
+							$("tbody").empty();
+							/* 标题 */
+							var thd = null;
+							var thr = null;
+							$.each(data[0],function(key){
+								thd += "<td>"+key+"</td>";
+							});
+							thr =$("<tr></tr>").html(thd);
+							$("thead").append(thr);
+							
+							/* 表内容  */
+							$.each(data,function(key,value){
+								var tr = null; 
+								var td = null;
+								$.each(data[key],function(key,value){
+									/* 每次遍历，新建一个td节点 */
+									td += "<td class='cell' title='"+value+"'>"+cutstr(value,8)+"</td>";
+								});
+								tr = $("<tr></tr>").html(td); 
+								/* 为tbody附加新节点 */
+								$("tbody").append(tr);
+							});
+						}
+					);
+					
+					pageListener.currentPage = 1;
+					/*
+					 * 获取对应标签在数据库中的行数
+					*/
+					$.get(
+						"/front/emergencylist/rowcount",
+						{"elementId":currentItem},
+						function(data){
+							pageListener.size = data;
+						}
+					);
+
+				}
+				
+				/* 加载页面时，触发点击事件（务必保证，加载页面完成后即可加载！） */
+				$("#expert").click();
+				
+				/* 注册鼠标悬浮事件   */
+				$("#leftPage").mousemove(function(){
+					$("#leftPage img").attr("src","images/images_list/pageLeftL.png")
+				});
+				
+				/* 注册鼠标移出事件  */
+				$("#leftPage").mouseout(function(){
+					$("#leftPage img").attr("src","images/images_list/pageLeft.png")
+				});
+				
+								/* 注册鼠标悬浮事件   */
+				$("#rightPage").mousemove(function(){
+					$("#rightPage img").attr("src","images/images_list/pageRightL.png")
+				});
+				
+				/* 注册鼠标移出事件  */
+				$("#rightPage").mouseout(function(){
+					$("#rightPage img").attr("src","images/images_list/pageRight.png")
+				});
+				
+				
+				/* 前翻页 */
+				$("#leftPage").click(function(){
+					/* 若当前为第一页，不做操作；若不是第一页，则将请求前一页的数据，并输出 */
+					if(pageListener.currentPage <= 1)
+					{
+						return;
+					}
+					else{
+						/* 翻页动作使得当前页码-1 */
+						pageListener.currentPage --;
+						var maxRow = pageListener.currentPage *　pageListener.pageSize;
+						/*  请求页面数据 */
+						var url = "/front/emergencylist/pageroll";
+						$.getJSON(
+							url,
+							{"elementId":currentItem,"maxRow":maxRow},
+							function(data){
+								/* if success ,empty their child element　*/
+								$("thead").empty();
+								$("tbody").empty();
+								/* 标题 */
+								var thd = null;
+								var thr = null;
+								$.each(data[0],function(key){
+									thd += "<td>"+key+"</td>";
+								});
+								thr =$("<tr></tr>").html(thd);
+								$("thead").append(thr);
+								
+								/* 表内容  */
+								$.each(data,function(key,value){
+									var tr = null; 
+									var td = null;
+									$.each(data[key],function(key,value){
+										/* 每次遍历，新建一个td节点 */
+										td += "<td class='cell' title='"+value+"'>"+cutstr(value,8)+"</td>";
+									});
+									tr = $("<tr></tr>").html(td); 
+									/* 为tbody附加新节点 */
+									$("tbody").append(tr);
+								});
+							}
+						);
+					}
+					
+				});
+				
+				/* 后翻页  */
+				$("#rightPage").click(
+					function(){
+						/* 当前页的最大行数 */
+						var nowRow = pageListener.currentPage *　pageListener.pageSize;
+						/* 测试当前页是否为末页，若是，无法下翻 */
+						if(nowRow > pageListener.size)
+						{
+							return;
+						}
+						else{  
+							/* 下翻页动作使得当前页码+1 */
+							pageListener.currentPage ++;
+							/* 请求页面的最大行号 */
+							var maxRow = pageListener.currentPage *　pageListener.pageSize;
+							/*  请求页面数据 */
+							var url = "/front/emergencylist/pageroll";
+							$.getJSON(
+								url,
+								{"elementId":currentItem,"maxRow":maxRow},
+								function(data){
+									/* if success ,empty their child element　*/
+									$("thead").empty();
+									$("tbody").empty();
+									/* 标题 */
+									var thd = null;
+									var thr = null;
+									$.each(data[0],function(key){
+										thd += "<td>"+key+"</td>";
+									});
+									thr =$("<tr></tr>").html(thd);
+									$("thead").append(thr);
+									
+									/* 表内容  */
+									$.each(data,function(key,value){
+										var tr = null; 
+										var td = null;
+										$.each(data[key],function(key,value){
+											/* 每次遍历，新建一个td节点 */
+											td += "<td class='cell' title='"+value+"'>"+cutstr(value,8)+"</td>";
+										});
+										tr = $("<tr></tr>").html(td); 
+										/* 为tbody附加新节点 */
+										$("tbody").append(tr);
+									});
+								}
+							);
+						}
+					}
+				);
+				/* 设置显示隐藏单元格的截取内容  */
+				$(function(){
+					var dialog = $("#dialog");
+					$('.cell').hover(
+						function(e){
+							/* 获取鼠标的位置 */
+							var x= e.clientX,y=e.clientY;
+							dialog.css(
+								{
+									"left":x+"px",
+									"top":y+"px",
+									"fontSize":"18px"
+								}
+							).text($(this).attr("title")).fadeIn(30);
+						},
+						function(){
+							dialog.hide();
+						}
+					);
+					
+				});
+			</script>
+		</div>
+		<script>
+		  /* 字符串截取方法 */
+          function cutstr(str, len) {
+		        var str_length = 0;
+		        var str_len = 0;
+		        str_cut = new String();
+		        /* 传入字符串的长度 */
+		        str_len = str.length;
+		        for (var i = 0; i < str_len; i++) {
+		            a = str.charAt(i);
+		            str_length++;
+		            /* escapse()对字符进行16进制编码 */
+		            if (escape(a).length > 4) {
+		                //中文字符经编码之后的长度大于4  
+		                str_length++;
+		            }
+		            str_cut = str_cut.concat(a);
+		            if (str_length > len) {
+		                str_cut = str_cut.concat("..");
+		                return str_cut;
+		            }
+		        }
+		        //如果给定字符串小于指定长度，则返回源字符串；  
+		        if (str_length <= len) {
+		            return str;
+		        }
+		    }
+		</script>
+	</body>
+</html>

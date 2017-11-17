@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>innerManage</title>
+		<link rel="stylesheet" href="../style/commonStyle.css" />
+		<style>
+			/*
+			 * 布局
+			 * 整体八等份，标题2份，安排3份，系统3份
+			 */
+			#title{
+				height: calc(100% / 4);
+				width: 100%;
+				background: url(../images/arrow.png) no-repeat;
+				background-size: cover;
+				background-position: center;
+			}
+			#title span{
+				color: #5BDEFF;
+			}
+			.s_time{
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+				height:  calc(50% - 5px);
+				width: 100%;
+				padding-bottom: 5px;
+				font-size: 22px;
+				font-weight: bold;
+			}
+			.s_date{
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				padding-top: 5px;
+				height: calc(50% - 5px)
+				width: 100%;
+				font-weight: bold;
+				font-size: 12px;
+			}
+			#schedule{
+				height: calc((100% / 8) * 3);
+				width: 100%;
+			}
+			#schedule ul{
+				width: 100%;
+				height: 100%;
+			}
+			#schedule li{
+				width: 100%;
+				height: 33.3%;
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+			.t_style{
+				float: left;
+				width: calc(50% - 5px);
+				height: 100%;
+			}
+			.c_style{
+				float: left;
+				width:  calc(50% - 5px);
+				height: 100%;
+			}
+			#sys{
+				height: calc((100% / 8) * 3);
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			#sys a{
+				display: flex;
+				justify-content:center;
+				align-items:center;
+				height: 30%;
+				min-width: 120px;
+				border: dashed #5BDEFF 1px;
+				border-radius: 36px;
+				color: #49D9FE;
+				font-size: 12px;
+				font-weight: bold;
+			}
+			
+			.tt{
+				font-size: 16px;
+				color: #5BDEFF;
+				font-weight: bold;
+			}
+			.content{
+				font-size: 16px;
+				color: #eee;
+				font-weight: bold;
+			}
+			
+			/*
+			 *   去除默认的无序列表效果
+			 */
+			ul{
+				list-style: none;
+			}
+			/*
+			 *   去除a标签的默认效果
+			 */
+			a:active,a:visited,a:link,a:hover,a:checked{
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="title" >
+			<span class="s_time">
+				22:57
+			</span>
+			<span class="s_date">
+				2017年6月7日  星期三
+			</span>
+		</div>
+		<div id="schedule" >
+			<div class="t_style">
+				<ul>
+					<li>
+						<span class="tt">值班领导 :</span>
+					</li>
+					<li>
+						<span class="tt">联系电话 :</span>
+					</li>
+					<li>
+						<span class="tt">联系人员 :</span>				
+					</li>
+				</ul>
+			</div>
+			<div class="t_style">
+				<ul>
+					<li>
+						<span class="content">胡良宇</span>
+					</li>
+					<li>
+						<span class="content">15982250438</span>
+					</li>
+					<li>
+						<span class="content">赵小波</span>					
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="sys">
+			<a  href="http://www.baidu.com">电子门票系统</a>
+			<a  href="http://www.baidu.com">百度</a>
+			<a  href="http://www.baidu.com">百度</a>
+		</div>
+	</body>
+</html>
