@@ -100,11 +100,15 @@
 		        trigger: 'item'
 		    },
 		    visualMap: {
+		    	type:'continuous',
 		        min: 0,
 		        max: 2500,
 		        left: '5%',
 		        top: 'bottom',
-		        text:['高','低'],           // 文本，默认为数值文本
+		        text:['高','低'],  // 文本，默认为数值文本
+		        textStyle:{
+		        	color:'#eee'
+		        },
 		        calculable : true
 		    },
 		    toolbox: {
@@ -114,7 +118,7 @@
 		        top: 'center',
 		        feature : {
 		            mark : {show: true},
-		            dataView : {show: true, readOnly: false},
+		            dataView : {show: false},
 		            restore : {show: true},
 		            saveAsImage : {show: true}
 		        }
@@ -132,6 +136,34 @@
 		                emphasis: {
 		                    show: true
 		                }
+		            },
+		            markPoint:{
+		            	symbol: 'path://M100,0 L41.22,180.90 L195.10,69.09 L4.89,69.09 L158.77,180.90 z',
+		            	symbolSize:20,
+		            	label:{
+		            		normal:{
+		            			formatter:'',
+		            			fontSize:'9'
+		            		}
+		            	},
+		            	itemStyle:{
+		            		normal:{
+		            			color:'red'
+		            		}
+		            	},
+		            	data:[{
+		            		name:'稻城亚丁',
+		            		coord:[100.3158,28.5383]
+		            	}
+		            	]
+		            },
+		            itemStyle:{
+		            	normal:{
+		            		borderColor:'gray'
+		            	},
+		            	emphasis:{
+		            		areaColor:'#eee',
+		            	}
 		            },
 		            data:[
 		                {name: '北京',value: Math.round(Math.random()*1000)},
