@@ -102,12 +102,15 @@
 		    visualMap: {
 		    	type:'continuous',
 		        min: 0,
-		        max: 2500,
+		        max: 1000,
 		        left: '5%',
 		        top: 'bottom',
 		        text:['高','低'],  // 文本，默认为数值文本
 		        textStyle:{
 		        	color:'#eee'
+		        },
+		        inRange:{
+		        	color:['#93fbde','#3d80ee']
 		        },
 		        calculable : true
 		    },
@@ -166,14 +169,14 @@
 		            	}
 		            },
 		            data:[
-		                {name: '北京',value: Math.round(Math.random()*1000)},
+		                {name: '北京',value: 1000},
 		                {name: '天津',value: Math.round(Math.random()*1000)},
 		                {name: '上海',value: Math.round(Math.random()*1000)},
 		                {name: '重庆',value: Math.round(Math.random()*1000)},
-		                {name: '河北',value: Math.round(Math.random()*1000)},
-		                {name: '河南',value: Math.round(Math.random()*1000)},
+		                {name: '河北',value: 900},
+		                {name: '河南',value: 1000},
 		                {name: '云南',value: Math.round(Math.random()*1000)},
-		                {name: '辽宁',value: Math.round(Math.random()*1000)},
+		                {name: '辽宁',value: 1000},
 		                {name: '黑龙江',value: Math.round(Math.random()*1000)},
 		                {name: '湖南',value: Math.round(Math.random()*1000)},
 		                {name: '安徽',value: Math.round(Math.random()*1000)},

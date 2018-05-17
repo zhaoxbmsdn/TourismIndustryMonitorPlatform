@@ -1,0 +1,105 @@
+/*
+			 * 布局
+			 * 整体八等份，标题2份，安排3份，系统3份
+			 */
+			#manage-title{
+				height: calc(100% / 4);
+				width: 100%;
+				background: url(../../images/arrow.png) no-repeat;
+				background-size: cover;
+				background-position: center;
+			}
+			#manage-title span{
+				color: #5BDEFF;
+			}
+			.s_time{
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				height:  calc(50% - 5px);
+				width: 100%;
+				padding-bottom: 5px;
+				font-size: 22px;
+				font-weight: bold;
+			}
+			.s_date{
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				padding-top: 5px;
+				height: calc(50% - 5px);
+				width: 100%;
+				font-weight: bold;
+				font-size: 12px;
+			}
+			#schedule{
+				height: calc((100% / 8) * 3);
+				width: 100%;
+			}
+			#schedule ul{
+				width: 100%;
+				height: 100%;
+			}
+			#schedule li{
+				width: 100%;
+				height: 33.3%;
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+			.t_style{
+				float: left;
+				width: calc(50% - 5px);
+				height: 100%;
+			}
+			.c_style{
+				float: left;
+				width:  calc(50% - 5px);
+				height: 100%;
+			}
+			#sys{
+				height: calc((100% / 8) * 3);
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			#sys a{
+				display: flex;
+				justify-content:center;
+				align-items:center;
+				height: 30%;
+				min-width: 120px;
+				border: dashed #5BDEFF 1px;
+				border-radius: 36px;
+				color: #49D9FE;
+				font-size: 12px;
+				font-weight: bold;
+			}
+			#sys a:hover{
+				font-size: 16px;
+				color: red;
+			}
+			.tt{
+				font-size: 16px;
+				color: #5BDEFF;
+				font-weight: bold;
+			}
+			.content{
+				font-size: 16px;
+				color: #eee;
+				font-weight: bold;
+			}
+			
+			/*
+			 *   去除默认的无序列表效果
+			 */
+			ul{
+				list-style: none;
+			}
+			/*
+			 *   去除a标签的默认效果
+			 */
+			a:active,a:visited,a:link,a:checked{
+				text-decoration: none;
+			}

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="style/screen/forecast.css" />
+		<link rel="stylesheet" href="style/screen/Manage.css" />
+		<link rel="stylesheet" href="style/screen/emergencyList.css" />
+		<script type="text/javascript" src="js/screen/echarts-all.js" ></script>
+		<script type="text/javascript" src="js/screen/china.js" ></script>
+		<script type="text/javascript" src="js/screen/echarts-config.js" ></script>
+		<!-- 主屏标题的svg -->
+		<script type="text/javascript" src="js/screen/iconfont.js" ></script>  
+		<script type="text/javascript" src="js/screen/apiv2.0.min.js" ></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+				min-height: 900px;
+				min-width: 1600px;
+				max-height: 1080px;
+				max-width: 1920px;
+			}
+			/* echarts容器大小设置 */
+			.main{
+				height: calc(100% - 28px);
+				width: 100%;
+			}
+			body{
+				/* 
+				 * 通过relative限制子元素：10个absolute布局div；
+				 */
+				position: relative;  
+				/*
+				 *	让背景图片居中显示 
+				 */
+				background: url(images/background-all.png) no-repeat;
+				background-attachment: fixed;
+				background-size: cover;
+				/**
+				 * 不显示滚动条
+				 */
+				overflow:hidden;
+			}
+			/* chart的半透明背景边框和内发光特效  */
+			.cover{
+				border: solid 1px rgba(80,191,237,0.35);
+				box-shadow:inset 0px 0px 250px #354f66;
+			}
+			/* 
+			 * css页面布局
+			 * 16等分  
+			 */
+			/* 左上角天气预报  */
+			#forecast{
+				height: calc(25% - 10px);
+				width: calc(25% - 10px);
+				left: 10px;
+				top: 0;
+				position:absolute;
+				background-color: transparent;
+			}
+			#newsinfluence{
+				position:absolute;
+				left: 10px;
+				top: 25%;
+				height: calc(25% - 12px);
+				width: calc(25% - 22px);
+				background-color: rgba(80,191,237,0.15);
+			}
+			#publicopinion{
+				position:absolute;
+				left: 10px;
+				top: 50%;
+				height: calc(25% - 12px);
+				width: calc(25% - 22px);
+				background-color: rgba(80,191,237,0.15);
+			}
+			#ticketsales{
+				position:absolute;
+				left: 10px;
+				top: 75%;
+				height: calc(25% - 12px);
+				width: calc(25% - 22px);
+				background-color: rgba(80,191,237,0.15);
+			}
+			#map{
+				position:absolute;
+				left: 25%;
+				height: calc(75% - 10px);
+				width: calc(50% - 10px);
+				background-color: transparent;
+			}
+			#touristflows{
+				position:absolute;
+				top: 75%;
+				left: 25%;
+				height: calc(25% - 12px);
+				width: calc(25% - 12px);
+				background-color: rgba(80,191,237,0.15);
+			}
+			#carflows{
+				position:absolute;
+				top: 75%;
+				left: 50%;
+				height: calc(25% - 12px);
+				width: calc(25% - 12px);
+				background-color: rgba(80,191,237,0.15);
+			}
+			#innermanage{
+				position:absolute;
+				top: 0;
+				left: 75%;
+				height: calc(25% - 10px);
+				width: calc(25% - 10px);
+				background-color: transparent;
+			}
+			#emergencylist{
+				position:absolute;
+				top: 25%;
+				left: 75%;
+				height: calc(25% - 12px);
+				width: calc(25% - 12px);
+				background-color: transparent;
+			}
+			#tourism{
+				position:absolute;
+				top: 50%;
+				left: 75%;
+				height: calc(50% - 12px);
+				width: calc(25% - 12px);
+				background-color: rgba(80,191,237,0.1);
+			}
+			.triangle-title{
+				height: 24px;
+				padding: 2px;
+				background: transparent;
+			}
+			.triangle-title span{
+				display: inline-block;
+				vertical-align: top;  /* 水平对齐 */
+				font-size: 13px;  /* 刚好17px*/
+				color: #00ffff;
+			}
+			/**
+			 * 标题三角形
+			 */
+			.triangle-title div { 
+				display: inline-block;
+				width: 0; 
+				height: 0; 
+				border-top: 18px solid #00d9f1; 
+				border-right: 18px solid transparent;
+			}
+			/* 主屏标题 */
+			#map-title{
+				width: 100%;
+				height: 56px;
+				text-align: center;
+				background: url(images/screen/map-title.png) no-repeat;
+				background-size:99.5% 100%;
+			}
+			/* 地图内容区 */
+			#map-main{
+				width: 100%;
+				height: calc(100% - 56px);
+			}
+			/* 地图图层菜单  */
+			#map-menu{
+				position: absolute;
+				left: 10%;
+				top: 10%;
+				width: 30px;
+				height: 30px;
+				z-index: 2;
+				background-color: yellow;
+			}
+			/* 地图显示区 */
+			#dcmap{
+				width: 100%;
+				height: 100%;
+			}
+			/* 去除地图水印 */
+			.anchorBL{
+				display:none;
+			} 
+			/* svg字体样式 */
+			.icon {
+			   width: 2em; height: 2em;
+			   vertical-align: -1.9em;
+			   fill: currentColor;
+			   overflow: hidden;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="forecast">
+			<div id="top">
+				<div id="w_today" class="t">
+					<div id="ww">
+						<div id="w_img">
+							<img src="images/images_weather/ircon_yellow/06.png"/>	
+						</div>
+						<div id="w_info">
+							<span id="w_tpt">28℃</span>
+							<ul id="w_ww">
+								<li >
+									<span id="w_today_weath">晴转多云</span>
+									<span id="w_today_wind">南风微风</span>
+								</li>
+								<li id="w_today_range">21℃~34℃</li>
+							</ul>
+						</div>
+					</div>
+					<div id="wa">
+						<ul>
+							<li>
+								<div class="f_d"><p>pm2.5 : </p></div>
+								<div><span id="wa_pm25">44 良</span></div>
+							</li>
+							<li>
+								<div class="f_d"><p>Q3 : </p></div>
+								<div><span id="wa_q3">40</span></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<ul id="w_tomorrow" class="t t_u">
+						<li></li>
+						<li class="c_l"><span id="w_tomorrow_date">06月01日</span></li>
+						<li class="c_l" id="w_tomorrow_week">星期四</li>
+						<li class="c_l" id="w_c_img"><img id="w_tomorrow_icon" src="images/images_weather/ircon_blue/06.png"/></li>
+						<li class="c_l" id="w_tomorrow_range">21℃~31℃</li>
+						<li class="c_l" id="w_tomorrow_weath">小雨</li>
+						<li class="c_l" id="w_tomorrow_wind">南风微风</li>
+				</ul>
+				<ul id="w_third_day" class="t t_u">
+					<li></li>
+					<li class="d_l" id="w_third_date">06月02日</li>
+					<li class="d_l" id="w_third_week">星期四</li>
+					<li class="d_l" id="w_d_img"><img id="w_third_icon" src="images/images_weather/ircon_blue/05.png"/></li>
+					<li class="d_l" id="w_third_range">21℃~31℃</li>
+					<li class="d_l" id="w_third_weath">小雨</li>
+					<li class="d_l" id="w_third_wind">南风微风</li>
+				</ul>
+				<a id="w_more" class="t" href="http://www.baidu.com">
+					<span >更多天气···</span>
+				</a>
+			</div>
+			<div id="bottom">
+				<div id="b_di" class="c_b">
+					<div id="b_di_img" class="c_b">
+						<span id="b_di_number">61</span>
+					</div>
+				</div>
+				<div id="b_aqi_txt" class="c_b">
+					<span>AQI指数 :</span>
+				</div>			
+				<div id="b_aq_img">
+					<div id="bai_bubble">
+						<div id="id_bubble"><span id="id_bubble_aqi">优</span></div>
+					</div>
+					<div id="bai_band"><img id="id_band" height="25px" width="233px" src="images/images_weather/colorband.png"/></div>
+				</div>
+				<div id="b_di_txt" class="c_b">
+					<span class="c_tips">舒适度指数</span>
+				</div>
+				<div id="b_tip_txt" class="c_b">
+					<span >温馨提示 :</span>
+				</div>
+				<div id="b_tips" class="c_b">
+					<span id="b_tips_text">敏感人群症状易加剧，应避免高强度户外锻炼，外出时做好防护措施。</span>
+				</div>
+			</div>
+			</div>
+		<div id="newsinfluence" class="cover">
+				<div class="triangle-title"><div></div><span>新闻影响力</span></div>
+				<div class="main" id="newsMain"></div>
+		</div>
+		<div id="publicopinion" class="cover">
+			<div class="triangle-title"><div></div><span>舆论</span></div>
+			<div class="main" id="publicMain"></div>
+		</div>
+		<div id="ticketsales" class="cover">
+			<div class="triangle-title"><div></div><span>售票</span></div>
+			<div class="main" id="ticketMain"></div>
+		</div>
+		<div id="map">
+			<div id="map-title">
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-lvzhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-youzhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-chanzhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-yezhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-jianzhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-cezhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-pingzhuanhuan"></use>
+				</svg>
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-taizhuanhuan"></use>
+				</svg>
+			</div>
+			<div id="map-main">
+				<div id="map-menu"></div>
+				<div id="dcmap"></div>
+			</div>
+		</div>
+		<div id="touristflows" class="cover">
+			<div class="triangle-title"><div></div><span>游客数量</span></div>
+			<div class="main" id="touristMain"></div>
+		</div>
+		<div id="carflows" class="cover">
+			<div class="triangle-title"><div></div><span>自驾游</span></div>
+			<div class="main" id="carMain"></div>
+		</div>
+		<div id="innermanage" >	
+			<div id="manage-title" >
+				<span class="s_time">
+					15:57
+				</span>
+				<span class="s_date">
+					2018年2月27日  星期二
+				</span>
+			</div>
+			<div id="schedule" >
+				<div class="t_style">
+					<ul>
+						<li>
+							<span class="tt">值班领导 :</span>
+						</li>
+						<li>
+							<span class="tt">联系电话 :</span>
+						</li>
+						<li>
+							<span class="tt">联系人员 :</span>				
+						</li>
+					</ul>
+				</div>
+				<div class="t_style">
+					<ul>
+						<li>
+							<span class="content">胡良宇</span>
+						</li>
+						<li>
+							<span class="content">15982250438</span>
+						</li>
+						<li>
+							<span class="content">赵小波</span>					
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="sys">
+				<a  href="http://www.baidu.com">电子门票系统</a>
+				<a  href="http://www.baidu.com">百度</a>
+				<a  href="http://www.baidu.com">百度</a>
+			</div>
+		</div>
+		<div id="emergencylist" class="cover">
+			<div class="pageRoll" id="leftPage"></div>
+			<div id="mainframe">
+					<ul>
+						<li class="item labSelect" id="expert" style="color:#56ddff">
+							<span class="font">专家</span>
+						</li>
+						<li class="item labNormal" id="material" style="color:white">
+							<span class="font">救援物资</span>
+						</li>
+						<li class="item labNormal" id="incident" style="color:white">
+							<span class="font">应急事件</span>
+						</li>
+						<li class="item labNormal" id="plan" style="color:white">
+							<span class="font">应急预案</span>
+						</li>
+					</ul>
+					<table id="table" cellspacing="0">
+						<thead>
+							<tr>
+								<td >序号</td><td>名称</td><td>职称</td><td>工作单位</td><td>擅长领域</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="interval">
+								<td class="cell" title="1">1</td><td class="cell" title="邓德智">邓德智</td><td class="cell" title="暂无">暂无</td><td class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</td><td class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</td>
+							</tr>
+							<tr class="">
+								<td class="cell " title="2">2</td><td class="cell" title="王方">王方</td><td class="cell" title="副教授">副教授</td><td class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</td><td class="cell" title="旅游管理研究">旅游管理研..</td>
+							</tr>
+							<tr class="interval">
+								<td class="cell" title="3">3</td><td class="cell" title="傅林放">傅林放</td><td class="cell" title="副教授">副教授</td><td class="cell" title="浙江四海方圆律师事务所">浙江四海方..</td><td class="cell" title="法律咨询">法律咨询</td>	
+							</tr>
+							<tr>
+								<td class="cell" title="4">4</td><td class="cell" title="刘晖">刘晖</td><td class="cell" title="副教授">副教授</td><td class="cell" title="浙江省休闲学会">浙江省休闲..</td><td class="cell" title="旅游管理研究、民族旅游研究">旅游管理研..</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+			<div class="pageRoll" id="rightPage"></div>
+		</div>
+		<div id="tourism" class="cover">
+			<div class="triangle-title"><div></div><span>旅游资源区域分布</span></div>
+			<div class="main" id="tourismMain"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
+	<script>
+			var map = new BMap.Map("dcmap");    // 创建Map实例
+			map.centerAndZoom(new BMap.Point(100.273813,28.459287), 12);
+			map.setMinZoom(6);	//设置地图允许的最小级别。
+			map.setMaxZoom(15);	//设置地图允许的最大级别。
+			map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+			//map.disableDragging();     //禁止拖拽
+			//map.disableScrollWheelZoom();	//禁用滚轮放大缩小
+			map.disableDoubleClickZoom();	//禁用双击放大
+			map.clearOverlays();        //清除地图覆盖物
+	</script>
+</html>

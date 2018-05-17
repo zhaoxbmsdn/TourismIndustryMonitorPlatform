@@ -1,0 +1,325 @@
+
+			/*
+			 *  设置默认的字体颜色
+			 */
+			body{
+				color: white;
+				font-size: 10px;
+			}
+			/*
+			 *   上下两个div，占据整个页面(6:4)
+			 */
+			#top{
+				height: 60%;
+				font-size: 12px;
+				font-family: "微软雅黑";
+			}
+			/*
+			 *	下布局
+			 *	采用弹性布局，共分为6个div 
+			 */
+			#bottom{
+				display: flex;
+				height: 40%;
+				flex-wrap: wrap;
+			}
+			/*
+			 *   呼吸圈样式
+			 */
+			#b_di{
+				flex: none;
+				width: 25%;
+				height: 66.6%;
+			}
+			.c_b{
+				/*
+				 * 	设置子元素为flex item 
+				 * 	子元素居中排列
+				 */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+				/*
+				 *   呼吸圈图标
+				 */
+				#b_di_img{
+					width:64px ;
+					height: 64px;
+					background: url(../../images/images_weather/AQIblue.png);
+					font-size: 22px;
+				}
+				/*
+				 *	 呼吸圈内文本颜色设置
+				*/
+				#b_di_img{
+					color: #5BDEFF;
+				}
+			/*
+			 *	AQI指数文本
+			 */
+			#b_aqi_txt{
+				flex: none;
+				height: 66.6%;
+				width: 60px;
+			}
+			/*
+			 *  AQI图标
+			 */
+			#b_aq_img{
+				flex: none;
+				height: 66.6%;
+				width: calc(75% - 60px);
+			}
+				/*
+				 *   泡泡的div
+				 */
+				#bai_bubble{
+					height: 50%;
+					width: 100%;
+				}
+				/*
+				 *	AQI色带
+				 */
+				#bai_band{
+					height: 50%;
+					width: 100%;
+					text-align: center;
+				}
+			/*
+			 *   DI文本
+			 */
+			#b_di_txt{
+				flex: none;
+				height: 33.4%;
+				width: 25%;
+			}
+			/*
+			 *  温馨提示文本
+			 */
+			#b_tip_txt{
+				flex: none;
+				height: 33.4%;
+				width: 60px;
+			}
+			/*
+			 *  温馨提示内容
+			 */
+			#b_tips{
+				flex: none;
+				height: 33.4%;
+				width: calc(75% - 60px);
+				overflow: hidden;
+			}
+
+			/*
+			 *   t标识归属于top  div的子标签
+			 */
+			.t{
+				height: 100%;
+				float: left;
+			}
+			#w_today{
+				width: calc((100% - 60px) / 2);
+				text-align: center;
+			}
+			#w_tomorrow{
+				width: calc((100% - 60px) / 4);
+			}
+			#w_third_day{
+				width: calc((100% - 60px) / 4);
+				padding-right:2px ;
+			}
+			/*
+			 *    更多天气
+			 * 	    固定宽度，文字竖排，居中
+			 * 	  预留2px给边框使用
+			 */
+			#w_more{
+				width: 58px;  
+				height: 100%;
+				color: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			#w_more span{
+				width: 15px;
+				font-size: 14px;
+			}
+			/*
+			 *   实时天气信息展示；
+			 * 	  布局上，占一半空间
+			 */
+			#ww{
+				width: 100%;
+				height: 50%;
+			}
+			/*
+			 *   当天天气图标
+			 *   占父容器空间的一半
+			 *   居中
+			 */
+			#w_img{
+				height: calc(100% / 2);
+				text-align: center;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			/*
+			 *   实时天气信息
+			 * 	 占父容器空间的一半
+			 * 	 
+			 */
+			#w_info{
+				height: calc(100% / 2);
+				width: 100%;
+				text-align: center;
+			}
+			/*
+			 *   实时温度
+			 * 	 左，宽度一半
+			 */
+			#w_tpt{
+				float: left;
+				padding-right: 5px;
+				height:  100%;
+				width: calc(50% - 5px);
+				font-size: 26px;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+			}
+			/*
+			 *   当天天气
+			 * 	  右，宽度一半
+			 * 	  列表
+			 */
+			#w_ww{
+				float: right;
+				height: 100%;
+				width: 50%;
+				text-align: left;
+			}
+			#w_ww li{
+				height: calc(100% / 2);
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+			/*
+			 *   空气质量
+			 * 	 占父容器一半
+			 */
+			#wa{
+				height: 50%;
+			}
+			#wa ul{
+				height: 100%
+			}
+			/*
+			 *	pm2.5和Q3设置
+			 */
+			#wa li{
+				/*
+				 *	布局设置
+				 */
+				height: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				/*
+				 *	字体设置
+				 */
+				font-size: 16px;
+			}
+			.c_tips{
+				font-size: 16px;
+			}
+			#wa div{
+				width: 50%;
+				height: 100%;
+				display: flex;
+				align-items:center;
+			}
+			#wa span{
+				margin-left: 4px;
+				background-color: yellow;
+				border-radius:0.2em;
+				width: 55px;
+				color: black;
+			}
+			/*
+			 * 	使空气质量的提示文本与值贴近
+			 */	
+			.f_d{
+				justify-content: flex-end;
+			}
+			/*
+			 *	设置li的高度
+			 *	设置flexibel box 弹性布局
+			 *	设置在主轴和交叉轴上的对齐方式
+			 */
+			.t_u li{
+				/*
+				 *	布局设置
+				 */
+				height: calc(100% / 8);
+				width: 100%; 
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				/*
+				 *	字体设置
+				 */
+				font-size: 12px;
+			}
+			/*
+			 *  天气预报分割线样式
+			 * 	利用边框设置
+			 */
+			.c_l{
+				border-left: 1px solid #56ddff;
+			}
+			.d_l{
+				border-width: 0 1px;
+				border-color: #56ddff;
+				border-style: solid;
+			}
+			/*
+			 *		设置天气预报图标的高度值
+			 *		使用class会被父类的li选择器覆盖掉
+			 */
+			#w_c_img{
+				height: calc(100% / 4);
+			}
+			#w_d_img{
+				height: calc(100% / 4);				
+			}
+			/*
+			 *	设置标注的定位方式；
+			 *  绝对定位
+			 */
+			#id_bubble{
+				position: absolute;
+				height:21px;
+				width:33px;
+				text-align: center;
+				color: green;
+				background: url(../../images/images_weather/ircon_aqi/1.png);
+			}
+			/*
+			*   清除所有ul默认的格式
+			*/
+			#top ul{
+				list-style-type: none;
+				text-align: center;  /* 水平居中 */
+			}
+			/*
+			 *  消除a标签默认样式
+			 */
+			a:active,a:visited,a:link,a:hover,a:checked{
+				text-decoration: none;
+			}
