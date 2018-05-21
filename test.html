@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<style>
-			*{
-				margin: 0;
-				padding: 0;
-			}
-			html,body{
-				height: 100%;
-				width: 100%;
-				min-width: 1280px;
-				min-height: 720px;
-				overflow:hidden;
-			}
-			#test{
-				float: left;
-				width: 50%;
-				height: 50%;
-				background-color: red;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="test"></div>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" id="aa"/>
+<span id="bb">{{}}</span>
+<script>
+    var obj = {};
+    Object.defineProperty(obj,'hello',{
+        set:function(val){
+            document.getElementById('bb').innerHTML = val;
+        }
+    });
+    document.getElementById('aa').onkeyup = function(e){
+        obj.hello = e.target.value;
+    };
+    obj.hello = "";
+
+
+</script>
+</body>
 </html>

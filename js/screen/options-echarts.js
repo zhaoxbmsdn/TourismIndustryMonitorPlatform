@@ -1,5 +1,5 @@
 			/**
-			 * echarts实例
+			 * 生成echarts Dom实例
 			 */
 			//新闻影响力
 			var newsInfluence = echarts.init(document.getElementById("newsMain"));	
@@ -18,9 +18,467 @@
 			var raderColor = ['#00d9f1','#f6cac0','#99f5c0'];   //数据面积区域填充颜色数组
 			var raderFrameLineColor = 'rgb(37,85,135)';         //雷达图直径线和分割线颜色
 			var raderLegendRadius = 5;//雷达图图例大小
-			
 			var pieColor = ['#4287ff','#61ceff','#56fbff','#c791aa','#f3d4cd'];
-			/* 
+			
+			/**
+			 * echarts框架样式
+			 */
+			//新闻影响力
+			var newsInfluenceOption = {
+				color:['#00d9f1','#f6cac0','#99f5c0'],
+				textStyle:{
+					color:'#eee'
+				},
+				//雷达坐标系
+				radar:{
+					center:['50%','50%'],
+					radius:'85%',
+					shape:'circle',
+					splitNumber:5,
+					nameGap:4,
+					//刻度线，直径线
+					axisLine:{
+						show:true,
+						lineStyle:{
+							color:raderFrameLineColor,
+							opacity: 0.5,
+							width:1
+						}
+					},
+					axisLabel:{
+						show:false,
+						inside:true,
+						textStyle:{
+							color: '#eee',
+	                        fontSize:8
+						}
+					},
+					axisTick:{show:false},
+					//分割线，圆形线
+					splitLine:{
+						show:true,
+						lineStyle:{
+							//分割线的颜色
+							color:raderFrameLineColor,
+							shadowOffsetX: 0,
+		                    shadowOffsetY: 0,
+		                    shadowColor: '#00a7e6',
+		                    shadowBlur:10,
+							width:1,
+							opacity: 0.7,
+						}
+					},
+					splitArea:{
+						show:true,
+						//填充区域的颜色
+						areaStyle: {
+		                    color: ['rgb(10,34,61)']
+		                }
+					},
+					indicator:[
+						{name:'点赞量',max:1000,min:0},
+						{name:'阅读量',max:1000,min:0},
+						{name:'转发量',max:1000,min:0}
+					]
+				},
+				//图例
+				legend:{
+					show:true,
+					type:'plain',
+					right:'5%',
+					bottom:'5%',
+					orient:'vertical',
+					textStyle:{color:'white'},
+					icon:'circle',
+					itemWidth:raderLegendRadius,
+					itemHeight:raderLegendRadius
+				},
+				//系列
+				series:[
+				{
+					name:'radarData',
+					type:'radar',
+					symbol:'none'
+				}]
+			};
+			//舆情
+			var publicOpinionOption = {
+				grid:{
+					show:false,
+					top:'15%',
+					left:'15%',
+					right:'15%',
+					bottom:'15%'
+				},
+				color:raderColor,
+				xAxis:{
+					show:true,
+					type:'category',
+					axisLabel:{
+						show:true,
+						textStyle:{color:'white'}
+					},
+					axisTick:{show:false},
+					axisLine:{show:false},
+					splitLine:{show:false}
+				},
+				yAxis:{
+					shwo:true,
+					type:'value',
+					splitNumber:2,
+					axisLine:{show:false},
+					axisLabel:{
+						show:true,
+						textStyle:{
+							color:'#eee'
+						}
+					},
+					axisTick:{show:false},
+					splitLine:{
+						show:true,
+						lineStyle:{
+							color:'#204587',
+							opacity:0.7
+						}
+					}
+				},
+				series:[
+					{
+						name:'OpinionBar',
+						type:'bar',
+						barWidth:'20%',
+						itemStyle:{
+							normal:{
+								barBorderRadius:80
+							}
+						},
+						label:{
+							normal:{
+								show:false,
+								formatter:'{b}'
+							}
+						}
+					}
+				]
+			};
+			var ticketSalesOption = {
+				legend: {
+				    orient: 'horizontal',
+				    right: '2%',
+				    bottom:'2%',
+				    textStyle:{color:'white'},
+				    itemWidth:10,
+				    itemHeight:10
+				},
+				color:pieColor,
+				series:[
+					{
+						name:'ticketSales',
+						type:'pie',
+						radius:'75%',
+						center:['50%','43%'],
+						cursor:'pointer',
+						hoverAnimation:false,
+						label:{
+							normal:{
+								formatter:'{c}',
+								symbol:'cicle',
+								color:'#eee',
+								fontSize:12,
+								position:'outside'
+							}
+						},
+						labelLine:{
+							normal:{
+								length:5,
+								length2:25,
+								smooth:0.1
+							}
+						},
+						markLine:{
+							symbol:['none','circle']
+						}
+					}
+				]
+				
+			};
+			var touristFlowOption = {
+				titile:{
+					show:false
+				},
+				grid:{
+					show:false,
+					cursor:'pointer',
+					top:'10%',
+					bottom:'15%',
+					left:'10%',
+					right:'5%'
+				},
+				textStyle:{
+					color:'white'
+				},
+				backgroundColor:'transparent',
+				dataZoom: [
+					{
+					/*
+					 *   内置型数据漫游
+					 */
+			        type: 'inside',
+			        start: 90,
+			        end: 100
+				    }
+				],
+				xAxis:{
+					show:true,
+					type:'category',
+					axisTick:{show:false},
+					axisLine:{show:false}
+				},
+				yAxis:{
+					show:true,
+					type:'value',
+					splitNumber:3,
+					axisLine:{show:false},
+					axisTick:{show:false},
+					splitLine:{
+						show:true,
+						lineStyle:{
+							opacity:0.2
+						}
+					}
+				},
+				series:[
+					{
+						name:'areaLine',
+						type:'line',
+						smooth:true,
+						symbol:'circle',
+						showSymbol:false,
+						lineStyle:{
+							normal:{
+								color:'#00ffff',
+								opacity:1
+							}
+						},
+						areaStyle:{
+							normal:{
+								color:{
+									type: 'linear',
+								    x: 0,
+								    y: 0,
+								    x2: 0,
+								    y2: 1,
+								    colorStops: [
+								    	{
+								        	offset: 1, color: 'rgba(80,191,237,0.15)' // 100% 处的颜色  下部颜色
+								    	}, 
+
+								    		{
+								        	offset: 0, color: '#00ffff ' // 0% 处的颜色 上部颜色
+								    	}
+								    ],
+								    globalCoord: false // 缺省为 false
+								},
+								cursor:'pointer',
+								opacity:0.73
+							}
+						}
+					}
+				]
+				
+			};
+			var carFlowOption = {
+			    title : {show:false},
+			    tooltip : {trigger: 'item'},
+			    visualMap: {
+			    	type:'continuous',
+			        min: 0,
+			        max: 1000,
+			        left: '5%',
+			        bottom:'15%',
+			        itemWidth:10,
+			        itemHeight:80, 
+			        textStyle:{
+			        	color:'#eee'
+			        },
+			        inRange:{
+			        	color:['#93fbde','#3d80ee']
+			        },
+			        calculable : false
+			    },
+			    series : [
+			        {
+			            name: '自驾游车辆数',
+			            type: 'map',
+			            mapType: 'china',
+			            roam: false,
+			            aspectScale:0.9,  //地图长宽比
+			            zoom:1.2,
+			            label: {
+			            	normal:{
+			            		show: false
+			            	},
+			            	emphasis:{
+			            		show:true,
+			            		color:'#eee'
+			            	}
+			                
+			            },
+			    		itemStyle:{
+			            	normal:{
+			            		borderColor:'gray'
+			            	},
+			            	emphasis:{
+			            		areaColor:'rgba(80,191,237,0.1)',
+			            	}
+			            },
+			            markPoint:{
+			            	symbol: 'path://M774.4 360.533333c0 140.8-253.866667 569.6-253.866667 569.6s-253.866667-428.8-253.866666-569.6 113.066667-253.866667 253.866666-253.866666 253.866667 113.066667 253.866667 253.866666z',
+			            	symbolSize:10,
+			            	symbolKeepAspect:true,
+			            	label:{
+			            		normal:{
+			            			show:false,
+			            			fontSize:'9'
+			            		}
+			            	},
+			            	itemStyle:{
+			            		normal:{
+			            			color:'#eee'
+			            		}
+			            	}
+			            }
+			        }
+			    ]
+			};
+			var tourismOption = {
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
+			    textStyle:{
+			    	color:'#eee'
+			    },
+			    legend: {
+			    	top:0,
+			    	right:'5%',
+			    	icon:'circle',
+			    	itemWidth:5,
+			    	itemHeight:5,	
+				    textStyle:{
+				    	color:'#eee'
+				    }
+			    },
+			    grid: {
+			    	show:false,
+			    	top:30,
+			        left: '3%',
+			        right: '5%',
+			        bottom: '1%',
+			        containLabel: true
+			    },
+			    xAxis:  {
+			        type: 'value',
+			        axisLabel:{
+			        	show:true,
+			        	margin:0
+			        },
+			        axisLine:{show:false},
+			        axisTick:{show:false},
+			        splitLine:{show:false}
+			    },
+			    yAxis: {
+			        type: 'category',
+			       	axisLine:{show:false},
+			        axisTick:{show:false} 
+			    },
+			    series: [
+			        {
+			            name: '吃',
+			            type: 'bar',
+			            stack: '总量',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            }
+			        },
+			        {
+			            name: '住',
+			            type: 'bar',
+			            stack: '总量',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            }
+			        },
+			        {
+			            name: '行',
+			            type: 'bar',
+			            stack: '总量',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            }
+			        },
+			        {
+			            name: '游',
+			            type: 'bar',
+			            stack: '总量',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            } 
+			        },
+			        {
+			            name: '购',
+			            type: 'bar',
+			            stack: '总量',
+			            barCategoryGap:'40%',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            }
+			        },
+			        		        {
+			            name: '厕',
+			            type: 'bar',
+			            stack: '总量',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            }
+			        },
+			        {
+			            name: '娱',
+			            type: 'bar',
+			            stack: '总量',
+			            barCategoryGap:'40%',
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'insideRight'
+			                }
+			            }
+			        }
+			    ]
+			};
+			
+			/*
 			 *  测试数据
 			 */
 			var dData = [];
@@ -75,85 +533,17 @@
 			/*
 			 * 绘制框架,构造一个原型的雷达图，拥有三个维度（新闻条数、阅读数及转发量）
 			 */
-			var newsInfluenceOption = {
-				color:['#00d9f1','#f6cac0','#99f5c0'],
-				//雷达坐标系
-				radar:{
-					center:['50%','50%'],
-					radius:'85%',
-					shape:'circle',
-					splitNumber:5,
-					nameGap:4,
-					//刻度线，直径线
-					axisLine:{
-						show:true,
-						lineStyle:{
-							color:raderFrameLineColor,
-							opacity: 0.5,
-							width:1
-						}
-					},
-					axisLabel:{
-						show:false,
-						inside:true,
-						textStyle:{
-							color: '#eee',
-	                        fontSize:8
-						}
-					},
-					axisTick:{
-						show:false
-					},
-					//分割线，圆形线
-					splitLine:{
-						show:true,
-						lineStyle:{
-							//分割线的颜色
-							color:raderFrameLineColor,
-							shadowOffsetX: 0,
-		                    shadowOffsetY: 0,
-		                    shadowColor: '#00a7e6',
-		                    shadowBlur:10,
-							width:1,
-							opacity: 0.7,
-						}
-					},
-					splitArea:{
-						show:true,
-						//填充区域的颜色
-						areaStyle: {
-		                    color: ['rgb(10,34,61)']
-		                }
-					},
-					indicator:setIndicator(['点赞量','阅读量','转发量'])
-				},
-				//图例
+			newsInfluence.setOption(newsInfluenceOption);
+			newsInfluence.setOption({
 				legend:{
-					show:true,
-					type:'plain',
-					right:'5%',
-					bottom:'5%',
-					orient:'vertical',
-					textStyle:{color:'white'},
-					icon:'circle',
-					itemWidth:raderLegendRadius,
-					itemHeight:raderLegendRadius,
 					data:dData.map(function(item,index,array){
 						return item[0]
-					}),
-
+					})
 				},
-				//系列
-				series:[
-				{
-					name:'radarData',
-					type:'radar',
-					symbol:'none',
+				series:[{
 					data:setRadarData(dData)
 				}]
-			};
-			newsInfluence.setOption(newsInfluenceOption);
-			
+			});
 			
 			/**
 			 * 舆论测试数据
@@ -205,79 +595,12 @@
 			}
 			
 			Data.sort(createComparisonFunction(1));
-			
-			var publicOpinionOption = {
-				grid:{
-					show:false,
-					top:'15%',
-					left:'15%',
-					right:'15%',
-					bottom:'15%'
-				},
-				color:raderColor,
-				xAxis:{
-					show:true,
-					type:'category',
-					axisLabel:{
-						show:true,
-						textStyle:{
-							color:'white'
-						}
-					},
-					axisTick:{
-						show:false
-					},
-					axisLine:{
-						show:false
-					},
-					splitLine:{
-						show:false
-					},
-					data:Data.map(function(item,index,array){
-						return  item[0];
-					})
-				},
-				yAxis:{
-					shwo:true,
-					type:'value',
-					splitNumber:2,
-					axisLine:{
-						show:false
-					},
-					axisLabel:{
-						show:true,
-						textStyle:{
-							color:'#eee'
-						}
-					},
-					axisTick:{
-						show:false
-					},
-					splitLine:{
-						show:true,
-						lineStyle:{
-							color:'#204587',
-							opacity:0.7
-						}
-					}
-				},
-				series:[
-					{
-						name:'OpinionBar',
-						type:'bar',
-						barWidth:'20%',
-						itemStyle:{
-							normal:{
-								barBorderRadius:80
-							}
-						},
-						label:{
-							normal:{
-								show:false,
-								formatter:'{b}'
-							}
-						},
-						data:Data.map(function(item,index,array){
+			/**
+			 * 设置数据样式
+			 * @param {Object} data
+			 */
+			function setPOData(data){
+				return data.map(function(item,index,array){
 							return {
 									'name':item[0],
 									'value':item[1],
@@ -287,12 +610,20 @@
 										}
 									}
 							};
-						})
-					}
-				]
+					})
 			}
-			publicOpinion.setOption(publicOpinionOption);
 			
+			publicOpinion.setOption(publicOpinionOption);
+			publicOpinion.setOption({
+				xAxis:{
+					data:Data.map(function(item,index,array){
+						return item[0];
+					})
+				},
+				series:[{
+						data:setPOData(Data)
+				}]
+			});
 	
 			/**
 			 * 售票测试数据
@@ -332,54 +663,13 @@
 					var cday = [tday.getFullYear(),tday.getMonth()+1,tday.getDate()].join("-");
 					originalData.push([cday,[createObj("OTA"),createObj("电商"),createObj("线下"),createObj("其他")]]);
 			}
-			var ticketSalesOption = {
-				legend: {
-				    orient: 'horizontal',
-				    right: '2%',
-				    bottom:'2%',
-				    textStyle:{
-				    	color:'white'
-				    },
-				    itemWidth:10,
-				    itemHeight:10
-				},
-				color:pieColor,
-				series:[
-					{
-						name:'ticketSales',
-						type:'pie',
-						radius:'75%',
-						center:['50%','43%'],
-						cursor:'pointer',
-						hoverAnimation:false,
-						label:{
-							normal:{
-								formatter:'{c}',
-								symbol:'cicle',
-								color:'#eee',
-								fontSize:12,
-								position:'outside'
-							}
-						},
-						labelLine:{
-							normal:{
-								length:5,
-								length2:25,
-								smooth:0.1
-							}
-						},
-						markLine:{
-							symbol:['none','circle']
-						}
-					}
-				]
-				
-			};
-			
 			ticketSales.setOption(ticketSalesOption);
 			ticketSales.setOption({
 				legend:{
-					data:originalData[0][1].map(function(item,index,array){return item.name;})
+					/**
+					 * name
+					 */
+					data:originalData[0][1].map(function(item,index,array){return item.name;})  
 				},
 				series:[
 				{
@@ -425,358 +715,101 @@
 				dat.push(item[1]);
 			});		
 			
-			var touristFlowOption = {
-				titile:{
-					show:false
-				},
-				grid:{
-					show:false,
-					cursor:'pointer',
-					top:'10%',
-					bottom:'15%',
-					left:'10%',
-					right:'5%'
-				},
-				textStyle:{
-					color:'white'
-				},
-				backgroundColor:'transparent',
-				dataZoom: [
-					{
-					/*
-					 *   内置型数据漫游
-					 */
-			        type: 'inside',
-			        start: 90,
-			        end: 100
-				    }
-				],
+			touristFlow.setOption(touristFlowOption);
+			touristFlow.setOption({
 				xAxis:{
-					show:true,
-					type:'category',
-					axisTick:{
-						show:false
-					},
-					axisLine:{
-						show:false
-					},
 					data:date
 				},
-				yAxis:{
-					show:true,
-					type:'value',
-					splitNumber:3,
-					axisLine:{
-						show:false
+				series:[{
+					data:dat
+				}]
+			});
+			
+			carFlow.setOption(carFlowOption);
+			carFlow.setOption({
+				series:[{
+					markPoint:{
+						data:[{
+				            		name:'稻城亚丁',
+				            		coord:[100.3158,28.5383]
+				            }]
 					},
-					axisTick:{
-						show:false
-					},
-					splitLine:{
-						show:true,
-						lineStyle:{
-							opacity:0.2
-						}
-					}
-				},
-				series:[
-					{
-						name:'areaLine',
-						type:'line',
-						data:dat,
-						smooth:true,
-						symbol:'circle',
-						showSymbol:false,
-						lineStyle:{
-							normal:{
-								color:'#00ffff',
-								opacity:1
-							}
-						},
-						areaStyle:{
-							normal:{
-								color:{
-									type: 'linear',
-								    x: 0,
-								    y: 0,
-								    x2: 0,
-								    y2: 1,
-								    colorStops: [
-								    	{
-								        	offset: 1, color: 'rgba(80,191,237,0.15)' // 100% 处的颜色  下部颜色
-								    	}, 
-
-								    		{
-								        	offset: 0, color: '#00ffff ' // 0% 处的颜色 上部颜色
-								    	}
-								    ],
-								    globalCoord: false // 缺省为 false
-								},
-								cursor:'pointer',
-								opacity:0.73
-							}
-						}
-					}
-				]
-				
-			};
-			touristFlow.setOption(touristFlowOption);
-	
-		carFlowOption = {
-		    title : {
-					show:false
-		    },
-		    tooltip : {
-		        trigger: 'item'
-		    },
-		    visualMap: {
-		    	type:'continuous',
-		        min: 0,
-		        max: 1000,
-		        left: '5%',
-		        bottom:'15%',
-		        itemWidth:10,
-		        itemHeight:80, 
-		        textStyle:{
-		        	color:'#eee'
-		        },
-		        inRange:{
-		        	color:['#93fbde','#3d80ee']
-		        },
-		        calculable : false
-		    },
-		    series : [
-		        {
-		            name: '自驾游车辆数',
-		            type: 'map',
-		            mapType: 'china',
-		            roam: false,
-		            aspectScale:0.9,  //地图长宽比
-		            zoom:1.2,
-		            label: {
-		            	normal:{
-		            		show: false
-		            	},
-		            	emphasis:{
-		            		show:true,
-		            		color:'#eee'
-		            	}
-		                
-		            },
-		    		itemStyle:{
-		            	normal:{
-		            		borderColor:'gray'
-		            	},
-		            	emphasis:{
-		            		areaColor:'rgba(80,191,237,0.1)',
-		            	}
-		            },
-		            markPoint:{
-		            	symbol: 'path://M774.4 360.533333c0 140.8-253.866667 569.6-253.866667 569.6s-253.866667-428.8-253.866666-569.6 113.066667-253.866667 253.866666-253.866666 253.866667 113.066667 253.866667 253.866666z',
-		            	symbolSize:10,
-		            	symbolKeepAspect:true,
-		            	label:{
-		            		normal:{
-		            			show:false,
-		            			fontSize:'9'
-		            		}
-		            	},
-		            	itemStyle:{
-		            		normal:{
-		            			color:'#eee'
-		            		}
-		            	},
-		            	data:[{
-		            		name:'稻城亚丁',
-		            		coord:[100.3158,28.5383]
-		            	}
-		            	]
-		            },
-		            data:[
-		                {name: '北京',value: 1000},
-		                {name: '天津',value: Math.round(Math.random()*1000)},
-		                {name: '上海',value: Math.round(Math.random()*1000)},
-		                {name: '重庆',value: Math.round(Math.random()*1000)},
-		                {name: '河北',value: 900},
-		                {name: '河南',value: 1000},
-		                {name: '云南',value: Math.round(Math.random()*1000)},
-		                {name: '辽宁',value: 1000},
-		                {name: '黑龙江',value: Math.round(Math.random()*1000)},
-		                {name: '湖南',value: Math.round(Math.random()*1000)},
-		                {name: '安徽',value: Math.round(Math.random()*1000)},
-		                {name: '山东',value: Math.round(Math.random()*1000)},
-		                {name: '新疆',value: Math.round(Math.random()*1000)},
-		                {name: '江苏',value: Math.round(Math.random()*1000)},
-		                {name: '浙江',value: Math.round(Math.random()*1000)},
-		                {name: '江西',value: Math.round(Math.random()*1000)},
-		                {name: '湖北',value: Math.round(Math.random()*1000)},
-		                {name: '广西',value: Math.round(Math.random()*1000)},
-		                {name: '甘肃',value: Math.round(Math.random()*1000)},
-		                {name: '山西',value: Math.round(Math.random()*1000)},
-		                {name: '内蒙古',value: Math.round(Math.random()*1000)},
-		                {name: '陕西',value: Math.round(Math.random()*1000)},
-		                {name: '吉林',value: Math.round(Math.random()*1000)},
-		                {name: '福建',value: Math.round(Math.random()*1000)},
-		                {name: '贵州',value: Math.round(Math.random()*1000)},
-		                {name: '广东',value: Math.round(Math.random()*1000)},
-		                {name: '青海',value: Math.round(Math.random()*1000)},
-		                {name: '西藏',value: Math.round(Math.random()*1000)},
-		                {name: '四川',value: Math.round(Math.random()*1000)},
-		                {name: '宁夏',value: Math.round(Math.random()*1000)},
-		                {name: '海南',value: Math.round(Math.random()*1000)},
-		                {name: '台湾',value: Math.round(Math.random()*1000)},
-		                {name: '香港',value: Math.round(Math.random()*1000)},
-		                {name: '澳门',value: Math.round(Math.random()*1000)}
-		            ]
-		        }
-		    ]
-};
-		carFlow.setOption(carFlowOption);
+					data:[
+				                {name: '北京',value: 1000},
+				                {name: '天津',value: Math.round(Math.random()*1000)},
+				                {name: '上海',value: Math.round(Math.random()*1000)},
+				                {name: '重庆',value: Math.round(Math.random()*1000)},
+				                {name: '河北',value: 900},
+				                {name: '河南',value: 1000},
+				                {name: '云南',value: Math.round(Math.random()*1000)},
+				                {name: '辽宁',value: 1000},
+				                {name: '黑龙江',value: Math.round(Math.random()*1000)},
+				                {name: '湖南',value: Math.round(Math.random()*1000)},
+				                {name: '安徽',value: Math.round(Math.random()*1000)},
+				                {name: '山东',value: Math.round(Math.random()*1000)},
+				                {name: '新疆',value: Math.round(Math.random()*1000)},
+				                {name: '江苏',value: Math.round(Math.random()*1000)},
+				                {name: '浙江',value: Math.round(Math.random()*1000)},
+				                {name: '江西',value: Math.round(Math.random()*1000)},
+				                {name: '湖北',value: Math.round(Math.random()*1000)},
+				                {name: '广西',value: Math.round(Math.random()*1000)},
+				                {name: '甘肃',value: Math.round(Math.random()*1000)},
+				                {name: '山西',value: Math.round(Math.random()*1000)},
+				                {name: '内蒙古',value: Math.round(Math.random()*1000)},
+				                {name: '陕西',value: Math.round(Math.random()*1000)},
+				                {name: '吉林',value: Math.round(Math.random()*1000)},
+				                {name: '福建',value: Math.round(Math.random()*1000)},
+				                {name: '贵州',value: Math.round(Math.random()*1000)},
+				                {name: '广东',value: Math.round(Math.random()*1000)},
+				                {name: '青海',value: Math.round(Math.random()*1000)},
+				                {name: '西藏',value: Math.round(Math.random()*1000)},
+				                {name: '四川',value: Math.round(Math.random()*1000)},
+				                {name: '宁夏',value: Math.round(Math.random()*1000)},
+				                {name: '海南',value: Math.round(Math.random()*1000)},
+				                {name: '台湾',value: Math.round(Math.random()*1000)},
+				                {name: '香港',value: Math.round(Math.random()*1000)},
+				                {name: '澳门',value: Math.round(Math.random()*1000)}
+				            ]
+				}]
+			});
 		
 
-		tourismOption = {
-		    tooltip : {
-		        trigger: 'axis',
-		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-		        }
-		    },
-		    color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
-		    textStyle:{
-		    	color:'#eee'
-		    },
-		    legend: {
-		    	top:0,
-		    	right:'5%',
-		    	icon:'circle',
-		    	itemWidth:5,
-		    	itemHeight:5,	
-			    textStyle:{
-			    	color:'#eee'
-			    },
-		        data: ['吃', '住','行','游','购','娱','厕']
-		    },
-		    grid: {
-		    	show:false,
-		    	top:30,
-		        left: '3%',
-		        right: '5	%',
-		        bottom: '1%',
-		        containLabel: true
-		    },
-		    xAxis:  {
-		        type: 'value',
-		        axisLabel:{
-		        	show:true,
-		        	margin:0
-		        },
-		        axisLine:{
-		        	show:false
-		        },
-		        axisTick:{
-		        	show:false
-		        },
-		        splitLine:{
-		        	show:false
-		        }
-		    },
-		    yAxis: {
-		        type: 'category',
-		       	axisLine:{
-		        	show:false
-		        },
-		        axisTick:{
-		        	show:false
-		        },
-		        data: ['金珠镇','香格里拉镇','桑堆乡','省母乡','傍河乡','色拉乡','巨龙乡','邓波乡','木拉乡','赤土乡','蒙自乡','各卡乡','吉呷乡','俄牙同乡']
-		    },
-		    series: [
-		        {
-		            name: '吃',
-		            type: 'bar',
-		            stack: '总量',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [320, 302, 301, 334, 390, 330, 320,320, 302, 301, 334, 390, 330, 320]
-		        },
-		        {
-		            name: '住',
-		            type: 'bar',
-		            stack: '总量',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [120, 132, 101, 134, 90, 230, 210,20, 132, 101, 134, 90, 230, 210]
-		        },
-		        {
-		            name: '行',
-		            type: 'bar',
-		            stack: '总量',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310]
-		        },
-		        {
-		            name: '游',
-		            type: 'bar',
-		            stack: '总量',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [150, 212, 201, 154, 190, 330, 410,150, 212, 201, 154, 190, 330, 410]
-		        },
-		        {
-		            name: '购',
-		            type: 'bar',
-		            stack: '总量',
-		            barCategoryGap:'40%',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [80, 82, 91, 94, 120, 130, 130,80, 82, 91, 94, 190, 130, 120]
-		        },
-		        		        {
-		            name: '厕',
-		            type: 'bar',
-		            stack: '总量',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [50, 22, 21, 54, 10, 30, 40,10, 12, 21, 54, 10, 30, 40]
-		        },
-		        {
-		            name: '娱',
-		            type: 'bar',
-		            stack: '总量',
-		            barCategoryGap:'40%',
-		            label: {
-		                normal: {
-		                    show: false,
-		                    position: 'insideRight'
-		                }
-		            },
-		            data: [20, 82, 19, 34, 90, 30, 20,20, 32, 17, 34, 10, 30, 20]
-		        }
-		    ]
-		};
 		tourism.setOption(tourismOption);
+		tourism.setOption({
+			legend:{
+		        data: ['吃', '住','行','游','购','娱','厕']
+			},
+			yAxis:{
+		        data: ['金珠镇','香格里拉镇','桑堆乡','省母乡','傍河乡','色拉乡','巨龙乡','邓波乡','木拉乡','赤土乡','蒙自乡','各卡乡','吉呷乡','俄牙同乡']
+			},
+			series:[
+				{
+					name: '吃',
+		            data: [320, 302, 301, 334, 390, 330, 320,320, 302, 301, 334, 390, 330, 320]
+				},
+				{
+					name:'住',
+					data:[120, 132, 101, 134, 90, 230, 210,20, 132, 101, 134, 90, 230, 210]
+				},
+				{
+					name:'行',
+					data: [220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310]
+				},
+				{
+					name:'游',
+					data:[150, 212, 201, 154, 190, 330, 410,150, 212, 201, 154, 190, 330, 410]
+				},
+				{
+					name:'购',
+					data:[80, 82, 91, 94, 120, 130, 130,80, 82, 91, 94, 190, 130, 120]
+				},
+				{
+					name:'娱',
+					data:[20, 82, 19, 34, 90, 30, 20,20, 32, 17, 34, 10, 30, 20]
+				},
+				{
+					name:'厕',
+					data:[50, 22, 21, 54, 10, 30, 40,10, 12, 21, 54, 10, 30, 40]
+				}
+			]
+		});

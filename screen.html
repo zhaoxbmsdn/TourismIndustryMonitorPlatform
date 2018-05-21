@@ -172,12 +172,42 @@
 			/* 地图图层菜单  */
 			#map-menu{
 				position: absolute;
-				left: 10%;
-				top: 10%;
-				width: 30px;
-				height: 30px;
+				bottom: 2%;
+				left: 10px;
+				width: 44px;
+				height: 44px;
 				z-index: 2;
-				background-color: yellow;
+			}
+			.menu-item{
+				position: absolute;
+				width: 40px;
+				height: 40px;
+				transition: left .5s;
+				left: 0;
+				background-color: rgb(80,191,237);
+				border: 1px solid #eee;
+				color: white;
+			}
+			.menu-item:hover{
+				color: red;
+			}
+			
+			#map-menu:hover #IconId1{
+				z-index: 5;
+				left: 0px;
+			}
+			#map-menu:hover #IconId2{
+				left: 42px;
+			}
+			#map-menu:hover #IconId3{
+				z-index: 3;
+				left: 84px;
+			}
+			#map-menu:hover #IconId4{
+				left: 126px;
+			}
+			#map-menu:hover #IconId5{
+				left: 168px;
 			}
 			/* 地图显示区 */
 			#dcmap{
@@ -318,7 +348,17 @@
 				</svg>
 			</div>
 			<div id="map-main">
-				<div id="map-menu"></div>
+				<div id="map-menu">
+					<div class="menu-item" id="IconId1">
+						1
+					</div>
+					<div class="menu-item" id="IconId2">
+						2
+					</div>
+					<div class="menu-item" id="IconId3">3</div>
+					<div class="menu-item" id="IconId4">4</div>
+					<div class="menu-item" id="IconId5">5</div>
+				</div>
 				<div id="dcmap"></div>
 			</div>
 		</div>
