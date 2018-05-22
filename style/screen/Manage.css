@@ -3,7 +3,8 @@
 			 * 整体八等份，标题2份，安排3份，系统3份
 			 */
 			#manage-title{
-				height: calc(100% / 4);
+				padding: 15px 0px 15px 0px;
+				height: calc((100% / 8) * 3 - 30px);
 				width: 100%;
 				background: url(../../images/arrow.png) no-repeat;
 				background-size: cover;
@@ -33,8 +34,9 @@
 				font-size: 12px;
 			}
 			#schedule{
+				padding: 0px 50px 0px 50px;
 				height: calc((100% / 8) * 3);
-				width: 100%;
+				width: calc(100% - 100px);
 			}
 			#schedule ul{
 				width: 100%;
@@ -58,7 +60,7 @@
 				height: 100%;
 			}
 			#sys{
-				height: calc((100% / 8) * 3);
+				height: calc((100% / 8) * 2);
 				width: 100%;
 				display: flex;
 				justify-content: space-around;
@@ -68,7 +70,7 @@
 				display: flex;
 				justify-content:center;
 				align-items:center;
-				height: 30%;
+				height: 45%;
 				min-width: 120px;
 				border: dashed #5BDEFF 1px;
 				border-radius: 36px;
