@@ -75,10 +75,10 @@
 				color: #49D9FE;
 				font-size: 12px;
 				font-weight: bold;
+
 			}
 			#sys a:hover{
-				font-size: 16px;
-				color: red;
+				box-shadow:0px 0px 20px 3px #307ba6 inset;
 			}
 			.tt{
 				font-size: 16px;
