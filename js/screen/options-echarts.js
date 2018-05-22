@@ -137,8 +137,7 @@
 					splitLine:{
 						show:true,
 						lineStyle:{
-							color:'#204587',
-							opacity:0.7
+							opacity:0.2
 						}
 					}
 				},

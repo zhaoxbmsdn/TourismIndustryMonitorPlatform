@@ -70,7 +70,7 @@
 				top: 25%;
 				height: calc(25% - 12px);
 				width: calc(25% - 22px);
-				background-color: rgba(80,191,237,0.15);
+				background-color: rgba(80,191,237,0.05);
 			}
 			#publicopinion{
 				position:absolute;
@@ -184,12 +184,18 @@
 				position: absolute;
 				width: 42px;
 				height: 42px;
-				text-align: center;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				line-height: 40px;
 				background-color: rgba(80,191,237,.4);
 				border-radius: 30px;
 				visibility: visible;
 				transition: visibility .3s .3s;
+			}
+			.menu-base img{
+				height: 26px;
+				width:26px;
 			}
 			.menu-item{
 				position: absolute;
@@ -370,7 +376,9 @@
 			</div>
 			<div id="map-main">
 				<div id="map-menu">
-					<div class="menu-base">图层</div>
+					<div class="menu-base">
+						<img src="images/screen/layout.png" />
+					</div>
 					<div class="menu-item" id="IconId1">
 						<img src="images/screen/scenic.png"/>
 					</div>
