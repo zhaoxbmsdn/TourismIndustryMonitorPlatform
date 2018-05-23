@@ -705,7 +705,6 @@
 				return data;
 			}
 			var eData = manualData();
-			console.log(eData);
 			var date = [];
 			var dat = []
 			eData.forEach(function(item)
