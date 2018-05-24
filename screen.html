@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="style/screen/Manage.css" />
 		<link rel="stylesheet" href="style/screen/emergencyList.css" />
 		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="stylesheet" href="style/screen/map.css" />
 		<script type="text/javascript" src="js/screen/echarts-all.js"></script>
 		<script type="text/javascript" src="js/screen/china.js"></script>
 		<script type="text/javascript" src="js/screen/echarts-config.js"></script>
@@ -180,136 +181,6 @@
 				height: 0;
 				border-top: 18px solid #00d9f1;
 				border-right: 18px solid transparent;
-			}
-			/* 主屏标题 */
-			
-			#map-title {
-				width: 100%;
-				height: 56px;
-				text-align: center;
-				background: url(images/screen/map-title.png) no-repeat;
-				background-size: 99.5% 100%;
-			}
-			/* 地图内容区 */
-			
-			#map-main {
-				width: 100%;
-				height: calc(100% - 56px);
-			}
-			/* 地图图层菜单  */
-			
-			#map-menu {
-				position: absolute;
-				bottom: 2%;
-				left: 10px;
-				width: 48px;
-				height: 48px;
-				z-index: 99;
-				cursor: pointer;
-			}
-			/* 图层菜单栏标识  */
-			
-			.menu-base {
-				position: absolute;
-				width: 42px;
-				height: 42px;
-				background-color: rgba(80, 191, 237, .4);
-				border-radius: 30px;
-				box-shadow: 0 0 4px #09223b;
-				visibility: visible;
-				transition: visibility .3s;
-			}
-			/*图层图片定位，位置与图片大小相关。42/2 - 26/2*/
-			.menu-base img {
-				position: absolute;
-				left: 8px;
-				top:8px;
-				height: 26px;
-				width: 26px;
-			}
-			
-			.menu-item {
-				position: absolute;
-				width: 42px;
-				height: 42px;
-				left: 0;
-				border-radius: 21px;
-				background-color: rgba(80, 191, 237,.4);
-				color: white;
-				visibility: hidden;
-				transition: left .5s, visibility .3s;
-			}
-			.menu-item img{
-				opacity: .4;
-			}
-			/*增加图层提示文字*/
-			.menu-item span{
-				position: absolute;
-				left: 0px;
-				top:11px;
-				width: 42px;
-				height: 20px;
-				text-align: center;
-				line-height: 20px;
-				border-radius: 21px;
-				font-size: 8px;
-				font-weight: bold;
-				color: #eee;
-				visibility: hidden;
-				transition: top .5s,visibility .5s,color .5s; 
-			}
-			.menu-item img:hover {
-				opacity: 1;
-			}
-			.menu-item:hover{
-				background-color: rgba(80, 191, 237,1);
-			}
-			.menu-item:hover span{
-				top:-20px;
-				font-size: 14px;
-				color: #000;
-				visibility: visible;
-			}
-			
-			#map-menu:hover .menu-item {
-				visibility: visible;
-			}
-			
-			#map-menu:hover .menu-base {
-				visibility: hidden;
-			}
-			
-			#map-menu:hover #IconId1 {
-				z-index: 5;
-				left: 0px;
-			}
-			
-			#map-menu:hover #IconId2 {
-				left: 42px;
-			}
-			
-			#map-menu:hover #IconId3 {
-				z-index: 3;
-				left: 84px;
-			}
-			
-			#map-menu:hover #IconId4 {
-				left: 126px;
-			}
-			
-			#map-menu:hover #IconId5 {
-				left: 168px;
-			}
-			
-			#map-menu:hover #IconId6 {
-				left: 210px;
-			}
-			/* 地图显示区 */
-			
-			#dcmap {
-				z-index: 1;
-				width: 100%;
-				height: 100%;
 			}
 			/* 去除地图水印 */
 			
