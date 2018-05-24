@@ -17,8 +17,8 @@
 			
 			#map-menu {
 				position: absolute;
-				bottom: 2%;
-				left: 10px;
+				bottom: 20px;
+				left: 20px;
 				width: 48px;
 				height: 48px;
 				z-index: 99;
@@ -66,16 +66,18 @@
 			.menu-item span {
 				position: absolute;
 				left: 0px;
-				top: 11px;
-				width: 80px;
-				height: 20px;
+				top: -40px;
+				width: 252px;
+				height: 40px;
 				text-align: center;
-				line-height: 20px;
+				line-height: 40px;
 				border-radius: 21px;
 				font-size: 28px;
-				font-weight: bold;
-				color: #000;
+				font-weight: normal;
+				font-family:"仿宋";
+				color: gray;
 				visibility: hidden;
+				
 			}
 			
 			.menu-item img:hover {
@@ -104,17 +106,9 @@
 				left: 0px;
 			}
 			
-			#IconId1 span {
-				left: 252px;
-			}
-			
 			#map-menu:hover #IconId2 {
 				z-index: 5;
 				left: 42px;
-			}
-			
-			#IconId2 span {
-				left: 210px;
 			}
 			
 			#map-menu:hover #IconId3 {
@@ -122,16 +116,8 @@
 				left: 84px;
 			}
 			
-			#IconId3 span {
-				left: 168px;
-			}
-			
 			#map-menu:hover #IconId4 {
 				z-index: 3;
-				left: 126px;
-			}
-			
-			#IconId4 span {
 				left: 126px;
 			}
 			
@@ -140,17 +126,33 @@
 				left: 168px;
 			}
 			
-			#IconId5 span {
-				left: 84px;
-			}
-			
 			#map-menu:hover #IconId6 {
 				z-index: 1;
 				left: 210px;
 			}
 			
+			#IconId1 span {
+				left: 0px;
+			}
+			
+			#IconId2 span {
+				left: -42px;
+			}
+			
+			#IconId3 span {
+				left: -84px;
+			}
+			
+			#IconId4 span {
+				left: -126px;
+			}
+			
+			#IconId5 span {
+				left: -168px;
+			}
+			
 			#IconId6 span {
-				left: 42px;
+				left: -210px;
 			}
 			/* 地图显示区 */
 			
