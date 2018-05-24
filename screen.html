@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -7,21 +8,23 @@
 		<link rel="stylesheet" href="style/screen/Manage.css" />
 		<link rel="stylesheet" href="style/screen/emergencyList.css" />
 		<link rel="shortcut icon" href="/favicon.ico" />
-		<script type="text/javascript" src="js/screen/echarts-all.js" ></script>
-		<script type="text/javascript" src="js/screen/china.js" ></script>
-		<script type="text/javascript" src="js/screen/echarts-config.js" ></script>
+		<script type="text/javascript" src="js/screen/echarts-all.js"></script>
+		<script type="text/javascript" src="js/screen/china.js"></script>
+		<script type="text/javascript" src="js/screen/echarts-config.js"></script>
 		<!-- 主屏标题的svg -->
-		<script type="text/javascript" src="js/screen/iconfont.js" ></script>
-		
-		<script type="text/javascript" src="js/chaomap/include-leaflet.js" ></script>
+		<script type="text/javascript" src="js/screen/iconfont.js"></script>
+
+		<script type="text/javascript" src="js/chaomap/include-leaflet.js"></script>
 		<script type="text/javascript" src="js/chaomap/iclient9-leaflet.js"></script>
-		<script type="text/javascript" src="js/screen/apiv2.0.min.js" ></script>
+		<script type="text/javascript" src="js/screen/apiv2.0.min.js"></script>
 		<style>
-			*{
+			* {
 				margin: 0;
 				padding: 0;
 			}
-			html,body{
+			
+			html,
+			body {
 				width: 100%;
 				height: 100%;
 				min-height: 900px;
@@ -30,15 +33,17 @@
 				max-width: 1920px;
 			}
 			/* echarts容器大小设置 */
-			.main{
+			
+			.main {
 				height: calc(100% - 28px);
 				width: 100%;
 			}
-			body{
+			
+			body {
 				/* 
 				 * 通过relative限制子元素：10个absolute布局div；
 				 */
-				position: relative;  
+				position: relative;
 				/*
 				 *	让背景图片居中显示 
 				 */
@@ -48,133 +53,152 @@
 				/**
 				 * 不显示滚动条
 				 */
-				overflow:hidden;
+				overflow: hidden;
 			}
 			/* chart的半透明背景边框和内发光特效  */
-			.cover{
-				border: solid 1px rgba(80,191,237,0.35);
-				box-shadow:0px 0px 250px #354f66 inset;
+			
+			.cover {
+				border: solid 1px rgba(80, 191, 237, 0.35);
+				box-shadow: 0px 0px 250px #354f66 inset;
 			}
 			/* 
 			 * css页面布局
 			 * 16等分  
 			 */
 			/* 左上角天气预报  */
-			#forecast{
+			
+			#forecast {
 				height: calc(25% - 10px);
 				width: calc(25% - 10px);
 				left: 10px;
 				top: 0;
-				position:absolute;
+				position: absolute;
 				background-color: transparent;
 			}
-			#newsinfluence{
-				position:absolute;
+			
+			#newsinfluence {
+				position: absolute;
 				left: 10px;
 				top: 25%;
 				height: calc(25% - 12px);
 				width: calc(25% - 22px);
-				background-color: rgba(80,191,237,0.05);
+				background-color: rgba(80, 191, 237, 0.05);
 			}
-			#publicopinion{
-				position:absolute;
+			
+			#publicopinion {
+				position: absolute;
 				left: 10px;
 				top: 50%;
 				height: calc(25% - 12px);
 				width: calc(25% - 22px);
-				background-color: rgba(80,191,237,0.05);
+				background-color: rgba(80, 191, 237, 0.05);
 			}
-			#ticketsales{
-				position:absolute;
+			
+			#ticketsales {
+				position: absolute;
 				left: 10px;
 				top: 75%;
 				height: calc(25% - 12px);
 				width: calc(25% - 22px);
-				background-color: rgba(80,191,237,0.05);
+				background-color: rgba(80, 191, 237, 0.05);
 			}
-			#map{
-				position:absolute;
+			
+			#map {
+				position: absolute;
 				left: 25%;
 				height: calc(75% - 10px);
 				width: calc(50% - 10px);
 				background-color: transparent;
 			}
-			#touristflows{
-				position:absolute;
+			
+			#touristflows {
+				position: absolute;
 				top: 75%;
 				left: 25%;
 				height: calc(25% - 12px);
 				width: calc(25% - 12px);
-				background-color: rgba(80,191,237,0.05);
+				background-color: rgba(80, 191, 237, 0.05);
 			}
-			#carflows{
-				position:absolute;
+			
+			#carflows {
+				position: absolute;
 				top: 75%;
 				left: 50%;
 				height: calc(25% - 12px);
 				width: calc(25% - 12px);
-				background-color: rgba(80,191,237,0.05);
+				background-color: rgba(80, 191, 237, 0.05);
 			}
-			#innermanage{
-				position:absolute;
+			
+			#innermanage {
+				position: absolute;
 				top: 0;
 				left: 75%;
 				height: calc(25% - 10px);
 				width: calc(25% - 10px);
 				background-color: transparent;
 			}
-			#emergencylist{
-				position:absolute;
+			
+			#emergencylist {
+				position: absolute;
 				top: 25%;
 				left: 75%;
 				height: calc(25% - 12px);
 				width: calc(25% - 12px);
 				background-color: transparent;
 			}
-			#tourism{
-				position:absolute;
+			
+			#tourism {
+				position: absolute;
 				top: 50%;
 				left: 75%;
 				height: calc(50% - 12px);
 				width: calc(25% - 12px);
-				background-color: rgba(80,191,237,0.05);
+				background-color: rgba(80, 191, 237, 0.05);
 			}
-			.triangle-title{
+			
+			.triangle-title {
 				height: 24px;
 				padding: 2px;
 				background: transparent;
 			}
-			.triangle-title span{
+			
+			.triangle-title span {
 				display: inline-block;
-				vertical-align: top;  /* 水平对齐 */
-				font-size: 13px;  /* 刚好17px*/
+				vertical-align: top;
+				/* 水平对齐 */
+				font-size: 13px;
+				/* 刚好17px*/
 				color: #00ffff;
 			}
 			/**
 			 * 标题三角形
 			 */
-			.triangle-title div { 
+			
+			.triangle-title div {
 				display: inline-block;
-				width: 0; 
-				height: 0; 
-				border-top: 18px solid #00d9f1; 
+				width: 0;
+				height: 0;
+				border-top: 18px solid #00d9f1;
 				border-right: 18px solid transparent;
 			}
 			/* 主屏标题 */
-			#map-title{
+			
+			#map-title {
 				width: 100%;
 				height: 56px;
 				text-align: center;
 				background: url(images/screen/map-title.png) no-repeat;
-				background-size:99.5% 100%;
+				background-size: 99.5% 100%;
 			}
 			/* 地图内容区 */
-			#map-main{
+			
+			#map-main {
 				width: 100%;
 				height: calc(100% - 56px);
 			}
 			/* 地图图层菜单  */
-			#map-menu{
+			
+			#map-menu {
 				position: absolute;
 				bottom: 2%;
 				left: 10px;
@@ -184,97 +208,138 @@
 				cursor: pointer;
 			}
 			/* 图层菜单栏标识  */
-			.menu-base{
+			
+			.menu-base {
 				position: absolute;
 				width: 42px;
 				height: 42px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				line-height: 40px;
-				background-color: rgba(80,191,237,.4);
+				background-color: rgba(80, 191, 237, .4);
 				border-radius: 30px;
-				box-shadow: 0 0 4px #09223b; 
+				box-shadow: 0 0 4px #09223b;
 				visibility: visible;
 				transition: visibility .3s;
 			}
-			.menu-base img{
+			/*图层图片定位，位置与图片大小相关。42/2 - 26/2*/
+			.menu-base img {
+				position: absolute;
+				left: 8px;
+				top:8px;
 				height: 26px;
-				width:26px;
+				width: 26px;
 			}
-			.menu-item{
+			
+			.menu-item {
 				position: absolute;
 				width: 42px;
 				height: 42px;
 				left: 0;
-				border-radius: 30px;
-				background-color: rgb(80,191,237);
+				border-radius: 21px;
+				background-color: rgba(80, 191, 237,.4);
 				color: white;
-				opacity: .4;
 				visibility: hidden;
-				transition: left .5s,visibility .3s;
+				transition: left .5s, visibility .3s;
 			}
-			.menu-item:hover{
+			.menu-item img{
+				opacity: .4;
+			}
+			/*增加图层提示文字*/
+			.menu-item span{
+				position: absolute;
+				left: 0px;
+				top:11px;
+				width: 42px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				border-radius: 21px;
+				font-size: 8px;
+				font-weight: bold;
+				color: #eee;
+				visibility: hidden;
+				transition: top .5s,visibility .5s,color .5s; 
+			}
+			.menu-item img:hover {
 				opacity: 1;
 			}
-			#map-menu:hover .menu-item{
+			.menu-item:hover{
+				background-color: rgba(80, 191, 237,1);
+			}
+			.menu-item:hover span{
+				top:-20px;
+				font-size: 14px;
+				color: #000;
 				visibility: visible;
 			}
-			#map-menu:hover .menu-base{
+			
+			#map-menu:hover .menu-item {
+				visibility: visible;
+			}
+			
+			#map-menu:hover .menu-base {
 				visibility: hidden;
 			}
-			#map-menu:hover #IconId1{
+			
+			#map-menu:hover #IconId1 {
 				z-index: 5;
 				left: 0px;
 			}
-			#map-menu:hover #IconId2{
+			
+			#map-menu:hover #IconId2 {
 				left: 42px;
 			}
-			#map-menu:hover #IconId3{
-				z-index:3;
+			
+			#map-menu:hover #IconId3 {
+				z-index: 3;
 				left: 84px;
 			}
-			#map-menu:hover #IconId4{
+			
+			#map-menu:hover #IconId4 {
 				left: 126px;
 			}
-			#map-menu:hover #IconId5{
+			
+			#map-menu:hover #IconId5 {
 				left: 168px;
 			}
-			#map-menu:hover #IconId6{
+			
+			#map-menu:hover #IconId6 {
 				left: 210px;
 			}
 			/* 地图显示区 */
-			#dcmap{
+			
+			#dcmap {
 				z-index: 1;
 				width: 100%;
 				height: 100%;
 			}
 			/* 去除地图水印 */
-			.anchorBL{
-				display:none;
-			} 
-			/* svg字体样式 */
-			.icon {
-			   width: 2em; height: 2em;
-			   vertical-align: -1.9em;
-			   fill: currentColor;
-			   overflow: hidden;
+			
+			.anchorBL {
+				display: none;
 			}
-
+			/* svg字体样式 */
+			
+			.icon {
+				width: 2em;
+				height: 2em;
+				vertical-align: -1.9em;
+				fill: currentColor;
+				overflow: hidden;
+			}
 		</style>
 	</head>
-	<body >
+
+	<body>
 		<div id="forecast">
 			<div id="top">
 				<div id="w_today" class="t">
 					<div id="ww">
 						<div id="w_img">
-							<img src="images/images_weather/ircon_yellow/06.png"/>	
+							<img src="images/images_weather/ircon_yellow/06.png" />
 						</div>
 						<div id="w_info">
 							<span id="w_tpt">28℃</span>
 							<ul id="w_ww">
-								<li >
+								<li>
 									<span id="w_today_weath">晴转多云</span>
 									<span id="w_today_wind">南风微风</span>
 								</li>
@@ -285,36 +350,40 @@
 					<div id="wa">
 						<ul>
 							<li>
-								<div class="f_d"><p>pm2.5 : </p></div>
+								<div class="f_d">
+									<p>pm2.5 : </p>
+								</div>
 								<div><span id="wa_pm25">44 良</span></div>
 							</li>
 							<li>
-								<div class="f_d"><p>Q3 : </p></div>
+								<div class="f_d">
+									<p>Q3 : </p>
+								</div>
 								<div><span id="wa_q3">40</span></div>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<ul id="w_tomorrow" class="t t_u">
-						<li></li>
-						<li class="c_l"><span id="w_tomorrow_date">06月01日</span></li>
-						<li class="c_l" id="w_tomorrow_week">星期四</li>
-						<li class="c_l" id="w_c_img"><img id="w_tomorrow_icon" src="images/images_weather/ircon_blue/06.png"/></li>
-						<li class="c_l" id="w_tomorrow_range">21℃~31℃</li>
-						<li class="c_l" id="w_tomorrow_weath">小雨</li>
-						<li class="c_l" id="w_tomorrow_wind">南风微风</li>
+					<li></li>
+					<li class="c_l"><span id="w_tomorrow_date">06月01日</span></li>
+					<li class="c_l" id="w_tomorrow_week">星期四</li>
+					<li class="c_l" id="w_c_img"><img id="w_tomorrow_icon" src="images/images_weather/ircon_blue/06.png" /></li>
+					<li class="c_l" id="w_tomorrow_range">21℃~31℃</li>
+					<li class="c_l" id="w_tomorrow_weath">小雨</li>
+					<li class="c_l" id="w_tomorrow_wind">南风微风</li>
 				</ul>
 				<ul id="w_third_day" class="t t_u">
 					<li></li>
 					<li class="d_l" id="w_third_date">06月02日</li>
 					<li class="d_l" id="w_third_week">星期四</li>
-					<li class="d_l" id="w_d_img"><img id="w_third_icon" src="images/images_weather/ircon_blue/05.png"/></li>
+					<li class="d_l" id="w_d_img"><img id="w_third_icon" src="images/images_weather/ircon_blue/05.png" /></li>
 					<li class="d_l" id="w_third_range">21℃~31℃</li>
 					<li class="d_l" id="w_third_weath">小雨</li>
 					<li class="d_l" id="w_third_wind">南风微风</li>
 				</ul>
 				<a id="w_more" class="t" href="http://www.baidu.com" target="_blank">
-					<span >更多天气···</span>
+					<span>更多天气···</span>
 				</a>
 			</div>
 			<div id="bottom">
@@ -325,100 +394,111 @@
 				</div>
 				<div id="b_aqi_txt" class="c_b">
 					<span>AQI指数 :</span>
-				</div>			
+				</div>
 				<div id="b_aq_img">
 					<div id="bai_bubble">
 						<div id="id_bubble"><span id="id_bubble_aqi">优</span></div>
 					</div>
-					<div id="bai_band"><img id="id_band" height="25px" width="233px" src="images/images_weather/colorband.png"/></div>
+					<div id="bai_band"><img id="id_band" height="25px" width="233px" src="images/images_weather/colorband.png" /></div>
 				</div>
 				<div id="b_di_txt" class="c_b">
 					<span class="c_tips">舒适度指数</span>
 				</div>
 				<div id="b_tip_txt" class="c_b">
-					<span >温馨提示 :</span>
+					<span>温馨提示 :</span>
 				</div>
 				<div id="b_tips" class="c_b">
 					<span id="b_tips_text">敏感人群症状易加剧，应避免高强度户外锻炼，外出时做好防护措施。</span>
 				</div>
 			</div>
-			</div>
+		</div>
 		<div id="newsinfluence" class="cover">
-				<div class="triangle-title"><div></div><span>新闻影响力</span></div>
-				<div class="main" id="newsMain"></div>
+			<div class="triangle-title">
+				<div></div><span>新闻影响力</span></div>
+			<div class="main" id="newsMain"></div>
 		</div>
 		<div id="publicopinion" class="cover">
-			<div class="triangle-title"><div></div><span>舆论</span></div>
+			<div class="triangle-title">
+				<div></div><span>舆论</span></div>
 			<div class="main" id="publicMain"></div>
 		</div>
 		<div id="ticketsales" class="cover">
-			<div class="triangle-title"><div></div><span>售票</span></div>
+			<div class="triangle-title">
+				<div></div><span>售票</span></div>
 			<div class="main" id="ticketMain"></div>
 		</div>
 		<div id="map">
 			<div id="map-title">
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-lvzhuanhuan"></use>
+					<use xlink:href="#icon-lvzhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-youzhuanhuan"></use>
+					<use xlink:href="#icon-youzhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-chanzhuanhuan"></use>
+					<use xlink:href="#icon-chanzhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-yezhuanhuan"></use>
+					<use xlink:href="#icon-yezhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-jianzhuanhuan"></use>
+					<use xlink:href="#icon-jianzhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-cezhuanhuan"></use>
+					<use xlink:href="#icon-cezhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-pingzhuanhuan"></use>
+					<use xlink:href="#icon-pingzhuanhuan"></use>
 				</svg>
 				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-taizhuanhuan"></use>
+					<use xlink:href="#icon-taizhuanhuan"></use>
 				</svg>
 			</div>
 			<div id="map-main">
 				<div id="map-menu">
 					<div class="menu-base">
-						<img src="images/screen/layout.png" title="图层"/>
+						<img src="images/screen/layout.png" />
 					</div>
-					<div class="menu-item" id="IconId1" title="景点">
-						<img src="images/screen/scenic.png"/>
+					<div class="menu-item" id="IconId1" title="旅游七要素">
+						<span>要素</span>
+						<img src="images/screen/scenic.png" />
 					</div>
-					<div class="menu-item" id="IconId2" title="酒店">
-						<img src="images/screen/hotel.png"/>
+					<div class="menu-item" id="IconId2" title="公共设施">
+						<span>设施</span>
+						<img src="images/screen/hotel.png" />
 					</div>
-					<div class="menu-item" id="IconId3" title="监控">
-						<img src="images/screen/monitor.png"/>
+					<div class="menu-item" id="IconId3" title="监控点位">
+						<span>监控</span>
+						<img src="images/screen/monitor.png" />
 					</div>
-					<div class="menu-item" id="IconId4" title="巡逻队">
-						<img src="images/screen/patrol.png"/>
+					<div class="menu-item" id="IconId4" title="巡逻队轨迹">
+						<span>巡逻</span>
+						<img src="images/screen/patrol.png" />
 					</div>
-					<div class="menu-item" id="IconId5" title="团队游">
-						<img src="images/screen/group.png"/>
+					<div class="menu-item" id="IconId5" title="团队游客轨迹">
+						<span>团队</span>
+						<img src="images/screen/group.png" />
 					</div>
 					<div class="menu-item" id="IconId6" title="SOS">
-						<img src="images/screen/scenic.png"/>
+						<span>SOS</span>
+						<img src="images/screen/scenic.png" />
 					</div>
 				</div>
 				<div id="dcmap"></div>
 			</div>
 		</div>
 		<div id="touristflows" class="cover">
-			<div class="triangle-title"><div></div><span>游客数量</span></div>
+			<div class="triangle-title">
+				<div></div><span>游客数量</span></div>
 			<div class="main" id="touristMain"></div>
 		</div>
 		<div id="carflows" class="cover">
-			<div class="triangle-title"><div></div><span>自驾游</span></div>
+			<div class="triangle-title">
+				<div></div><span>自驾游</span></div>
 			<div class="main" id="carMain"></div>
 		</div>
-		<div id="innermanage" >	
-			<div id="manage-title" >
+		<div id="innermanage">
+			<div id="manage-title">
 				<span class="s_time">
 					15:57
 				</span>
@@ -426,7 +506,7 @@
 					2018年2月27日  星期二
 				</span>
 			</div>
-			<div id="schedule" >
+			<div id="schedule">
 				<div class="t_style">
 					<ul>
 						<li>
@@ -436,7 +516,7 @@
 							<span class="tt">联系电话 :</span>
 						</li>
 						<li>
-							<span class="tt">联系人员 :</span>				
+							<span class="tt">联系人员 :</span>
 						</li>
 					</ul>
 				</div>
@@ -449,132 +529,156 @@
 							<span class="content">15982250438</span>
 						</li>
 						<li>
-							<span class="content">赵小波</span>					
+							<span class="content">赵小波</span>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div id="sys">
-				<a  href="http://www.baidu.com" target="_blank">电子门票系统</a>
-				<a  href="http://www.baidu.com" target="_blank">百度</a>
-				<a  href="http://www.baidu.com" target="_blank">百度</a>
+				<a href="http://www.baidu.com" target="_blank">电子门票系统</a>
+				<a href="http://www.baidu.com" target="_blank">百度</a>
+				<a href="http://www.baidu.com" target="_blank">百度</a>
 			</div>
 		</div>
 		<div id="emergencylist" class="cover">
 			<div class="pageRoll" id="leftPage"></div>
 			<div id="mainframe">
-					<ul>
-						<li class="item labSelect" id="expert" style="color:#56ddff">
-							<span class="font">专家</span>
-						</li>
-						<li class="item labNormal" id="material" style="color:white">
-							<span class="font">救援物资</span>
-						</li>
-						<li class="item labNormal" id="incident" style="color:white">
-							<span class="font">应急事件</span>
-						</li>
-						<li class="item labNormal" id="plan" style="color:white">
-							<span class="font">应急预案</span>
-						</li>
-					</ul>
-					<table id="table" cellspacing="0">
-						<thead>
-							<tr>
-								<td >序号</td><td>名称</td><td>职称</td><td>工作单位</td><td>擅长领域</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="interval">
-								<td class="cell" title="1">1</td><td class="cell" title="邓德智">邓德智</td><td class="cell" title="暂无">暂无</td><td class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</td><td class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</td>
-							</tr>
-							<tr class="">
-								<td class="cell " title="2">2</td><td class="cell" title="王方">王方</td><td class="cell" title="副教授">副教授</td><td class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</td><td class="cell" title="旅游管理研究">旅游管理研..</td>
-							</tr>
-							<tr class="interval">
-								<td class="cell" title="3">3</td><td class="cell" title="傅林放">傅林放</td><td class="cell" title="副教授">副教授</td><td class="cell" title="浙江四海方圆律师事务所">浙江四海方..</td><td class="cell" title="法律咨询">法律咨询</td>	
-							</tr>
-							<tr>
-								<td class="cell" title="4">4</td><td class="cell" title="刘晖">刘晖</td><td class="cell" title="副教授">副教授</td><td class="cell" title="浙江省休闲学会">浙江省休闲..</td><td class="cell" title="旅游管理研究、民族旅游研究">旅游管理研..</td>
-							</tr>
-						</tbody>
-					</table>
+				<ul>
+					<li class="item labSelect" id="expert" style="color:#56ddff">
+						<span class="font">专家</span>
+					</li>
+					<li class="item labNormal" id="material" style="color:white">
+						<span class="font">救援物资</span>
+					</li>
+					<li class="item labNormal" id="incident" style="color:white">
+						<span class="font">应急事件</span>
+					</li>
+					<li class="item labNormal" id="plan" style="color:white">
+						<span class="font">应急预案</span>
+					</li>
+				</ul>
+				<table id="table" cellspacing="0">
+					<thead>
+						<tr>
+							<td>序号</td>
+							<td>名称</td>
+							<td>职称</td>
+							<td>工作单位</td>
+							<td>擅长领域</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="interval">
+							<td class="cell" title="1">1</td>
+							<td class="cell" title="邓德智">邓德智</td>
+							<td class="cell" title="暂无">暂无</td>
+							<td class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</td>
+							<td class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</td>
+						</tr>
+						<tr class="">
+							<td class="cell " title="2">2</td>
+							<td class="cell" title="王方">王方</td>
+							<td class="cell" title="副教授">副教授</td>
+							<td class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</td>
+							<td class="cell" title="旅游管理研究">旅游管理研..</td>
+						</tr>
+						<tr class="interval">
+							<td class="cell" title="3">3</td>
+							<td class="cell" title="傅林放">傅林放</td>
+							<td class="cell" title="副教授">副教授</td>
+							<td class="cell" title="浙江四海方圆律师事务所">浙江四海方..</td>
+							<td class="cell" title="法律咨询">法律咨询</td>
+						</tr>
+						<tr>
+							<td class="cell" title="4">4</td>
+							<td class="cell" title="刘晖">刘晖</td>
+							<td class="cell" title="副教授">副教授</td>
+							<td class="cell" title="浙江省休闲学会">浙江省休闲..</td>
+							<td class="cell" title="旅游管理研究、民族旅游研究">旅游管理研..</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="pageRoll" id="rightPage"></div>
 		</div>
 		<div id="tourism" class="cover">
-			<div class="triangle-title"><div></div><span>旅游资源区域分布</span></div>
+			<div class="triangle-title">
+				<div></div><span>旅游资源区域分布</span></div>
 			<div class="main" id="tourismMain"></div>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
 	<script>
-			var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
-		    var map, url = host + "/iserver/services/map-china400/rest/maps/China";
-		    /* 通过DOM ID初始化地图实例 ，用对象字面量进行配置 */
-		    map = L.map('dcmap', {
-		        center: [28.5590629,100.347585],
-		        maxZoom: 18,
-		        zoom: 12,
-		        attributionControl:false,
-		        scrollWheelZoom:true,  //鼠标滚轮缩放
-		        tap:false,    //移动端缩放,
-		        doubleClickZoom:false,   //双击缩放,
-		        zoomControl:true
-		    });
-		    /*SuperMap iServer 的 REST 地图服务的图层*/
-		    L.supermap.tiledMapLayer(url).addTo(map);
-			//点位图层组
-		   	var markerLayer = L.layerGroup();
-		    
-		    var circle = L.circle([100,28], 50000, {
-		     	color: 'yellow',
-		        fillColor: '#f03',
-		     	fillOpacity: 0.5
-		    }).addTo(map);
-			var item ={
-				LAYER:'tourism',
-				LONGITUDE:28.5590629,
-				LATITUDE:100.347585
+		var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
+		var map, url = host + "/iserver/services/map-china400/rest/maps/China";
+		/* 通过DOM ID初始化地图实例 ，用对象字面量进行配置 */
+		map = L.map('dcmap', {
+			center: [28.5590629, 100.347585],
+			maxZoom: 18,
+			zoom: 12,
+			attributionControl: false,
+			scrollWheelZoom: true, //鼠标滚轮缩放
+			tap: false, //移动端缩放,
+			doubleClickZoom: false, //双击缩放,
+			zoomControl: true
+		});
+		/*SuperMap iServer 的 REST 地图服务的图层*/
+		L.supermap.tiledMapLayer(url).addTo(map);
+		//点位图层组
+		var markerLayer = L.layerGroup();
+
+		var circle = L.circle([100, 28], 50000, {
+			color: 'yellow',
+			fillColor: '#f03',
+			fillOpacity: 0.5
+		}).addTo(map);
+		var item = {
+			LAYER: 'tourism',
+			LONGITUDE: 28.5590629,
+			LATITUDE: 100.347585
+		}
+		//添加点位标记（类别：旅游要素tourism，监控monitor，公共设施facility，SOS，团队轨迹group，巡逻队轨迹patrol）
+		function addMarker(item) {
+			console.log("新增点位");
+			var icon, marker;
+			switch(item.LAYER) {
+				case "tourism":
+					icon = L.icon({
+						iconUrl: 'images/screen/group.png',
+						iconSize: [42, 42],
+						iconAnchor: [21, 38]
+					});
+					marker = L.marker([item.LONGITUDE, item.LATITUDE], {
+						icon: icon
+					});
+					break;
+				case "monitor":
+					break;
+				case "facility":
+					break;
+				case "SOS":
+					break;
+				case "group":
+					break;
+				case "monitor":
+					break;
 			}
-			//添加点位标记（类别：旅游要素tourism，监控monitor，公共设施facility，SOS，团队轨迹group，巡逻队轨迹patrol）
-	    	function addMarker(item){
-	    		console.log("新增点位");
-	    		var icon,marker;
-	    		switch(item.LAYER)
-				{
-					case "tourism":
-						icon = L.icon({
-			    			iconUrl:'images/screen/group.png',
-			    			iconSize:[42,42],
-			    			iconAnchor:[21,38]
-			    		});
-			    		marker = L.marker([item.LONGITUDE,item.LATITUDE],{icon:icon});
-						break;
-					case "monitor":
-						break;
-					case "facility":
-						break;
-					case "SOS":
-						break;
-					case "group":
-						break;
-					case "monitor":
-						break;
-				}
-	    		markerLayer.addLayer(marker).addTo(map);
-	    	}
-	    	function removeMarker(){
-	    		console.log("删除");
-	    		markerLayer.clearLayers();
-	    	}
-	    	
-	    	var list = document.getElementsByClassName('menu-item');
-	    	for(var j =0;j<list.length;j++)
-	    	{
-	    		list[j].addEventListener('click',function(){
-	    			removeMarker();
-	    			addMarker(item);
-	    		});
-	    	}
+			markerLayer.addLayer(marker).addTo(map);
+		}
+
+		function removeMarker() {
+			console.log("删除");
+			markerLayer.clearLayers();
+		}
+
+		var list = document.getElementsByClassName('menu-item');
+		for(var j = 0; j < list.length; j++) {
+			list[j].addEventListener('click', function(e) {
+				console.log(e.currentTarget.title)
+				removeMarker();
+				addMarker(item);
+			});
+		}
 	</script>
+
 </html>
