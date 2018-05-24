@@ -61,10 +61,10 @@
             inputScript("http://cdn.bootcss.com/elasticsearch/13.0.1/elasticsearch.min.js");
         }
         if (!inArray(excludes, 'iclient9-leaflet')) {
-            inputScript("../../dist/iclient9-leaflet.js");
+            inputScript("js/chaomap/iclient9-leaflet.js");
         }
         if (inArray(includes, 'iclient9-leaflet-css')) {
-            inputCSS("../../dist/iclient9-leaflet.min.css");
+            inputCSS("js/chaomap/iclient9-leaflet.css");
         }
         if (inArray(includes, 'leaflet.heat')) {
             inputScript("http://cdn.bootcss.com/leaflet.heat/0.2.0/leaflet-heat.js");

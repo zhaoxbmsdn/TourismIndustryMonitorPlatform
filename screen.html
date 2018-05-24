@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="js/screen/iconfont.js" ></script>
 		
 		<script type="text/javascript" src="js/chaomap/include-leaflet.js" ></script>
-		<script type="text/javascript" src="js/chaomap/iclient-leaflet-9.0.0-742.js"></script>
+		<script type="text/javascript" src="js/chaomap/iclient9-leaflet.js"></script>
 		<script type="text/javascript" src="js/screen/apiv2.0.min.js" ></script>
 		<style>
 			*{
@@ -215,7 +215,6 @@
 				transition: left .5s,visibility .3s;
 			}
 			.menu-item:hover{
-				color: red;
 				opacity: 1;
 			}
 			#map-menu:hover .menu-item{
@@ -241,6 +240,9 @@
 			#map-menu:hover #IconId5{
 				left: 168px;
 			}
+			#map-menu:hover #IconId6{
+				left: 210px;
+			}
 			/* 地图显示区 */
 			#dcmap{
 				z-index: 1;
@@ -261,7 +263,7 @@
 
 		</style>
 	</head>
-	<body>
+	<body >
 		<div id="forecast">
 			<div id="top">
 				<div id="w_today" class="t">
@@ -383,21 +385,24 @@
 			<div id="map-main">
 				<div id="map-menu">
 					<div class="menu-base">
-						<img src="images/screen/layout.png" />
+						<img src="images/screen/layout.png" title="图层"/>
 					</div>
-					<div class="menu-item" id="IconId1">
+					<div class="menu-item" id="IconId1" title="景点">
 						<img src="images/screen/scenic.png"/>
 					</div>
-					<div class="menu-item" id="IconId2">
-						<img src="images/screen/scenic.png"/>
+					<div class="menu-item" id="IconId2" title="酒店">
+						<img src="images/screen/hotel.png"/>
 					</div>
-					<div class="menu-item" id="IconId3">
-						<img src="images/screen/scenic.png"/>
+					<div class="menu-item" id="IconId3" title="监控">
+						<img src="images/screen/monitor.png"/>
 					</div>
-					<div class="menu-item" id="IconId4">
-						<img src="images/screen/scenic.png"/>
+					<div class="menu-item" id="IconId4" title="巡逻队">
+						<img src="images/screen/patrol.png"/>
 					</div>
-					<div class="menu-item" id="IconId5">
+					<div class="menu-item" id="IconId5" title="团队游">
+						<img src="images/screen/group.png"/>
+					</div>
+					<div class="menu-item" id="IconId6" title="SOS">
 						<img src="images/screen/scenic.png"/>
 					</div>
 				</div>
@@ -503,39 +508,73 @@
 	</body>
 	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
 	<script>
-	    var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
-	    var map, url = host + "/iserver/services/map-china400/rest/maps/China";
-	    /* 通过DOM ID初始化地图实例 ，用对象字面量进行配置 */
-	    map = L.map('dcmap', {
-	        center: [33, 114],
-	        maxZoom: 18,
-	        zoom: 6,
-	        attributionControl:false,
-	        scrollWheelZoom:true,  //鼠标滚轮缩放
-	        tap:false,    //移动端缩放,
-	        doubleClickZoom:true,   //双击缩放,
-	        zoomControl:false
-	    });
-	    /*SuperMap iServer 的 REST 地图服务的图层*/
-	    L.supermap.tiledMapLayer(url).addTo(map);
-	    
-	    
-	    var circle = L.circle([33, 114], 50000, {
-	     	color: 'yellow',
-	        fillColor: '#f03',
-	     	fillOpacity: 0.5
-	    }).addTo(map);
-	    var latlngs = [
-		    [45.51, -122.68],
-		    [37.77, -122.43],
-		    [34.04, -118.2]
-		];
-		var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-		// zoom the map to the polyline
-		map.fitBounds(polyline.getBounds());
-		
-		function addMarker(item){
-			
-		}
+			var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
+		    var map, url = host + "/iserver/services/map-china400/rest/maps/China";
+		    /* 通过DOM ID初始化地图实例 ，用对象字面量进行配置 */
+		    map = L.map('dcmap', {
+		        center: [28.5590629,100.347585],
+		        maxZoom: 18,
+		        zoom: 12,
+		        attributionControl:false,
+		        scrollWheelZoom:true,  //鼠标滚轮缩放
+		        tap:false,    //移动端缩放,
+		        doubleClickZoom:false,   //双击缩放,
+		        zoomControl:true
+		    });
+		    /*SuperMap iServer 的 REST 地图服务的图层*/
+		    L.supermap.tiledMapLayer(url).addTo(map);
+			//点位图层组
+		   	var markerLayer = L.layerGroup();
+		    
+		    var circle = L.circle([100,28], 50000, {
+		     	color: 'yellow',
+		        fillColor: '#f03',
+		     	fillOpacity: 0.5
+		    }).addTo(map);
+			var item ={
+				LAYER:'tourism',
+				LONGITUDE:28.5590629,
+				LATITUDE:100.347585
+			}
+			//添加点位标记（类别：旅游要素tourism，监控monitor，公共设施facility，SOS，团队轨迹group，巡逻队轨迹patrol）
+	    	function addMarker(item){
+	    		console.log("新增点位");
+	    		var icon,marker;
+	    		switch(item.LAYER)
+				{
+					case "tourism":
+						icon = L.icon({
+			    			iconUrl:'images/screen/group.png',
+			    			iconSize:[42,42],
+			    			iconAnchor:[21,38]
+			    		});
+			    		marker = L.marker([item.LONGITUDE,item.LATITUDE],{icon:icon});
+						break;
+					case "monitor":
+						break;
+					case "facility":
+						break;
+					case "SOS":
+						break;
+					case "group":
+						break;
+					case "monitor":
+						break;
+				}
+	    		markerLayer.addLayer(marker).addTo(map);
+	    	}
+	    	function removeMarker(){
+	    		console.log("删除");
+	    		markerLayer.clearLayers();
+	    	}
+	    	
+	    	var list = document.getElementsByClassName('menu-item');
+	    	for(var j =0;j<list.length;j++)
+	    	{
+	    		list[j].addEventListener('click',function(){
+	    			removeMarker();
+	    			addMarker(item);
+	    		});
+	    	}
 	</script>
 </html>
