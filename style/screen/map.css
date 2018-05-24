@@ -4,7 +4,7 @@
 				width: 100%;
 				height: 56px;
 				text-align: center;
-				background: url(images/screen/map-title.png) no-repeat;
+				background: url(../../images/screen/map-title.png) no-repeat;
 				background-size: 99.5% 100%;
 			}
 			/* 地图内容区 */
@@ -80,7 +80,7 @@
 				
 			}
 			
-			.menu-item img:hover {
+			.menu-item:hover img {
 				opacity: 1;
 			}
 			
