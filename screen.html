@@ -486,12 +486,14 @@
 		map = L.map('dcmap', {
 			center: [28.5590629, 100.347585],
 			maxZoom: 18,
+			minZoom:8,
 			zoom: 12,
 			attributionControl: false,
 			scrollWheelZoom: true, //鼠标滚轮缩放
 			tap: false, //移动端缩放,
 			doubleClickZoom: false, //双击缩放,
-			zoomControl: true
+			zoomControl: true,
+			maxBounds:[[24.5590629, 110.347585],[30.5590629, 90.347585]]
 		});
 		/*SuperMap iServer 的 REST 地图服务的图层*/
 		L.supermap.tiledMapLayer(url).addTo(map);
@@ -551,5 +553,4 @@
 			});
 		}
 	</script>
-
 </html>
