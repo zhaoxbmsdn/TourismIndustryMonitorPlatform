@@ -17,7 +17,7 @@
 
 		<script type="text/javascript" src="js/chaomap/include-leaflet.js"></script>
 		<script type="text/javascript" src="js/chaomap/iclient9-leaflet.js"></script>
-		<script type="text/javascript" src="js/screen/apiv2.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
 		<style>
 			* {
 				margin: 0;
@@ -184,8 +184,20 @@
 			}
 			/* 去除地图水印 */
 			
-			.anchorBL {
+			.leaflet-popup-tip-container {
 				display: none;
+			}
+			.leaflet-popup-content{
+				margin: 0;
+				line-height: 12px;
+			}
+			.leaflet-popup{
+				margin: 0;
+			}
+			.leaflet-popup-content-wrapper{
+				text-align: center;
+				background:transparent;
+				padding: 5px;
 			}
 			/* svg字体样式 */
 			
@@ -330,27 +342,27 @@
 					<div class="menu-base">
 						<img src="images/screen/layout.png" />
 					</div>
-					<div class="menu-item" id="IconId1" title="旅游七要素">
+					<div class="menu-item" id="IconId1" title="旅游七要素" data-layer="resource" onclick="clickItem(this)">
 						<span>要素</span>
 						<img src="images/screen/scenic.png" />
 					</div>
-					<div class="menu-item" id="IconId2" title="公共设施">
+					<div class="menu-item" id="IconId2" title="公共设施" data-layer="pubFacility" onclick="clickItem(this)">
 						<span>设施</span>
 						<img src="images/screen/hotel.png" />
 					</div>
-					<div class="menu-item" id="IconId3" title="监控点位">
+					<div class="menu-item" id="IconId3" title="监控点位" data-layer="monitor" onclick="clickItem(this)">
 						<span>监控</span>
 						<img src="images/screen/monitor.png" />
 					</div>
-					<div class="menu-item" id="IconId4" title="巡逻队轨迹">
+					<div class="menu-item" id="IconId4" title="巡逻队轨迹" data-layer="patrol" onclick="clickItem(this)">
 						<span>巡逻</span>
 						<img src="images/screen/patrol.png" />
 					</div>
-					<div class="menu-item" id="IconId5" title="团队游客轨迹">
+					<div class="menu-item" id="IconId5" title="团队游客轨迹" data-layer="group" onclick="clickItem(this)">
 						<span>团队</span>
 						<img src="images/screen/group.png" />
 					</div>
-					<div class="menu-item" id="IconId6" title="SOS">
+					<div class="menu-item" id="IconId6" title="SOS" data-layer="sos" onclick="clickItem(this)">
 						<span>SOS</span>
 						<img src="images/screen/scenic.png" />
 					</div>
@@ -479,77 +491,9 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
+	<script type="text/javascript" src="js/screen/screen-gismap.js"></script>
 	<script>
-		var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
-		var map, url = host + "/iserver/services/map-china400/rest/maps/China";
-		/* 通过DOM ID初始化地图实例 ，用对象字面量进行配置 */
-		map = L.map('dcmap', {
-			center: [28.5590629, 100.347585],
-			maxZoom: 18,
-			zoom: 12,
-			attributionControl: false,
-			scrollWheelZoom: true, //鼠标滚轮缩放
-			tap: false, //移动端缩放,
-			doubleClickZoom: false, //双击缩放,
-			zoomControl: true
-		});
-		/*SuperMap iServer 的 REST 地图服务的图层*/
-		L.supermap.tiledMapLayer(url).addTo(map);
-		//点位图层组
-		var markerLayer = L.layerGroup();
-
-		var circle = L.circle([100, 28], 50000, {
-			color: 'yellow',
-			fillColor: '#f03',
-			fillOpacity: 0.5
-		}).addTo(map);
-		var item = {
-			LAYER: 'tourism',
-			LONGITUDE: 28.5590629,
-			LATITUDE: 100.347585
-		}
-		//添加点位标记（类别：旅游要素tourism，监控monitor，公共设施facility，SOS，团队轨迹group，巡逻队轨迹patrol）
-		function addMarker(item) {
-			console.log("新增点位");
-			var icon, marker;
-			switch(item.LAYER) {
-				case "tourism":
-					icon = L.icon({
-						iconUrl: 'images/screen/group.png',
-						iconSize: [42, 42],
-						iconAnchor: [21, 38]
-					});
-					marker = L.marker([item.LONGITUDE, item.LATITUDE], {
-						icon: icon
-					});
-					break;
-				case "monitor":
-					break;
-				case "facility":
-					break;
-				case "SOS":
-					break;
-				case "group":
-					break;
-				case "monitor":
-					break;
-			}
-			markerLayer.addLayer(marker).addTo(map);
-		}
-
-		function removeMarker() {
-			console.log("删除");
-			markerLayer.clearLayers();
-		}
-
-		var list = document.getElementsByClassName('menu-item');
-		for(var j = 0; j < list.length; j++) {
-			list[j].addEventListener('click', function(e) {
-				console.log(e.currentTarget.title)
-				removeMarker();
-				addMarker(item);
-			});
-		}
+		
 	</script>
 
 </html>
