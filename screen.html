@@ -493,7 +493,81 @@
 	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
 	<script type="text/javascript" src="js/screen/screen-gismap.js"></script>
 	<script>
+<<<<<<< HEAD
 		
-	</script>
+=======
+		var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
+		var map, url = host + "/iserver/services/map-china400/rest/maps/China";
+		/* 通过DOM ID初始化地图实例 ，用对象字面量进行配置 */
+		map = L.map('dcmap', {
+			center: [28.5590629, 100.347585],
+			maxZoom: 18,
+			minZoom:8,
+			zoom: 12,
+			attributionControl: false,
+			scrollWheelZoom: true, //鼠标滚轮缩放
+			tap: false, //移动端缩放,
+			doubleClickZoom: false, //双击缩放,
+			zoomControl: true,
+			maxBounds:[[24.5590629, 110.347585],[30.5590629, 90.347585]]
+		});
+		/*SuperMap iServer 的 REST 地图服务的图层*/
+		L.supermap.tiledMapLayer(url).addTo(map);
+		//点位图层组
+		var markerLayer = L.layerGroup();
 
+		var circle = L.circle([100, 28], 50000, {
+			color: 'yellow',
+			fillColor: '#f03',
+			fillOpacity: 0.5
+		}).addTo(map);
+		var item = {
+			LAYER: 'tourism',
+			LONGITUDE: 28.5590629,
+			LATITUDE: 100.347585
+		}
+		//添加点位标记（类别：旅游要素tourism，监控monitor，公共设施facility，SOS，团队轨迹group，巡逻队轨迹patrol）
+		function addMarker(item) {
+			console.log("新增点位");
+			var icon, marker;
+			switch(item.LAYER) {
+				case "tourism":
+					icon = L.icon({
+						iconUrl: 'images/screen/group.png',
+						iconSize: [42, 42],
+						iconAnchor: [21, 38]
+					});
+					marker = L.marker([item.LONGITUDE, item.LATITUDE], {
+						icon: icon
+					});
+					break;
+				case "monitor":
+					break;
+				case "facility":
+					break;
+				case "SOS":
+					break;
+				case "group":
+					break;
+				case "monitor":
+					break;
+			}
+			markerLayer.addLayer(marker).addTo(map);
+		}
+
+		function removeMarker() {
+			console.log("删除");
+			markerLayer.clearLayers();
+		}
+
+		var list = document.getElementsByClassName('menu-item');
+		for(var j = 0; j < list.length; j++) {
+			list[j].addEventListener('click', function(e) {
+				console.log(e.currentTarget.title)
+				removeMarker();
+				addMarker(item);
+			});
+		}
+>>>>>>> 02a088f4c8908e755ab04012370c79308471c3ac
+	</script>
 </html>
