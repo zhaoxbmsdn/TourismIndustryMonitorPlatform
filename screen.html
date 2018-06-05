@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="js/screen/echarts-config.js"></script>
 		<!-- 主屏标题的svg -->
 		<script type="text/javascript" src="js/screen/iconfont.js"></script>
-
+		<!-- 超图js -->
 		<script type="text/javascript" src="js/chaomap/include-leaflet.js"></script>
 		<script type="text/javascript" src="js/chaomap/iclient9-leaflet.js"></script>
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
@@ -182,22 +182,13 @@
 				border-top: 18px solid #00d9f1;
 				border-right: 18px solid transparent;
 			}
-			/* 去除地图水印 */
-			
+			/* 整体修改leaflet的popup */
+			/* 去除小三角 */
 			.leaflet-popup-tip-container {
 				display: none;
 			}
-			.leaflet-popup-content{
-				margin: 0;
-				line-height: 12px;
-			}
-			.leaflet-popup{
-				margin: 0;
-			}
-			.leaflet-popup-content-wrapper{
-				text-align: center;
-				background:transparent;
-				padding: 5px;
+			.leaflet-tooltip{
+				padding: 3px;
 			}
 			/* svg字体样式 */
 			
