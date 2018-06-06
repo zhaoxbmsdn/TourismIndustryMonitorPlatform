@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/echarts-all.js" ></script>
+		<style>
+			html,body{
+				margin: 0;
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+			#plan{
+				height: 100%;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="plan"></div>
+	</body>
+	<script>
+		var plan = echarts.init(document.getElementById("plan"));
+		option = {
+			color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
+		    xAxis: {
+		        type: 'category',
+		        data: ['一级预警', '二级预警', '三级预警', '四级预警']
+		    },
+		    yAxis: {
+		        type: 'value'
+		    },
+		    series: [{
+		        data: [120, 200, 150, 80],
+		        type: 'bar'
+		    }]
+		};
+		plan.setOption(option);
+		window.onresize = function(){
+			plan.resize();
+		}
+	</script>
+</html>

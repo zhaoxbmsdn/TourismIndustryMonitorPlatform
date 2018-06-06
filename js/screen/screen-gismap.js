@@ -16,15 +16,30 @@
 		//点位图层组
 		var overlayGroup = L.layerGroup();
 		map.addEventListener("dblclick",function(){
+			//监测是否有图层存在
+			if(overlayGroup.toGeoJSON().features.length ===0 ) return;
+			toggleFade(document.getElementById("map-tooltip"),"双击时，还原图层信息")
 			//双击时，恢复原图层情况
 			overlayGroup.eachLayer(function(layer){
 				layer.setOpacity(1);
 				layer.openTooltip();
 			});
 		})
+		/**
+		 * 确保element元素的style特性，设置了visible,opacity；
+		 * 其层叠样式中，包含有transition；
+		 */
+		function toggleFade(element,comment){
+			element.style.visibility="visible";
+			element.style.opacity="1";
+			element.innerHTML=comment;
+			setTimeout(function(){
+				element.style.visibility="hidden";
+				element.style.opacity="0";
+			},1500);
+		}
 		//轨迹点图层（全局控制）
-		var layerList = [];  
-		
+		var layerList = [];
 		//调用客户端弹出窗
 	    function ShowMedia(msg) {
 	        jsObj.showMediaMsg(msg);
@@ -86,6 +101,7 @@
 	        var marker = null;
 	        var size = [42, 42];
 	        var ancher = [21,38];   //图像图标与实际坐标点位置的锚准
+	        var markerClickFunction = null;
 	        switch(item.LAYER)
 	        {
 	            case "resource":
@@ -116,7 +132,7 @@
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
 	                marker.addEventListener("click",function(){
-	                    ShowMedia(item.MAIN_URL);
+	                    //ShowMedia(item.MAIN_URL);
 	                });
 	                break;
 	            case "patrol":
@@ -131,7 +147,7 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
-	                marker.addEventListener("click",function(){
+	                markerClickFunction=function(){
 	                    $.ajax({
 	                        url:"http://localhost:8080/rest/gisGetPatrolPath",
 	                        data:{"id":item.ID},
@@ -177,7 +193,7 @@
 	
 	                        }
 	                    });
-	                });
+	                };
 	                break;
 	            case "group":
 	                myIcon = L.icon({
@@ -191,7 +207,7 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
-	                marker.addEventListener("click",function(){
+	                markerClickFunction=function(){
 	                    $.ajax({
 	                        url:"http://localhost:8080/rest/gisGetGroupPath",
 	                        data:{"id":item.ID},
@@ -238,7 +254,7 @@
 	                            map.flyToBounds(pointList);
 	                        }
 	                    });
-	                });
+	                };
 	                break;
 	            case "pubFacility":
 	                myIcon = L.icon({
@@ -265,6 +281,9 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
+					markerClickFunction = function(){
+						
+					}
 	                break;
 	            default:
 	                myIcon = L.icon({
@@ -279,31 +298,44 @@
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
 	        }
+	        if(markerClickFunction == null){
+		        markerClickFunction = function(){
+
+		        };
+	        }
 	        marker.bindTooltip(item.NAME,{
 	        	direction:"bottom"
 	        });
 	        //添加至覆盖物容器
 	        overlayGroup.addLayer(marker);
+	       	var html = 
+	                createDiv(createSpan("名称")+createSpan(item.NAME))+
+	                createDiv(createSpan("经度")+createSpan(item.LONGITUDE))+
+	                createDiv(createSpan("纬度")+createSpan(item.LATITUDE))+
+	                createDiv(createSpan("类别")+createSpan(item.TYPE))+
+	                createDiv(createSpan("地址")+createSpan(item.ADDRESS))+
+	                createDiv(createSpan("分类")+createSpan(item.GROUP))+
+	                createDiv(createSpan("联系人")+createSpan(item.LINKMAN))+
+	                createDiv(createSpan("状态")+createSpan(item.STATE))+
+	                createDiv(createSpan("简介")+createSpan(item.INTRODUCTION))+
+	                createDiv(createSpan("联系电话")+createSpan(item.LINKPHONE));
 	        //点位点击时，添加该点位的popup
 	        marker.addEventListener("click",function(){
-	        	var rootNode = document.createElement("div");
-	        	var popup = L.popup({
-	        		closeButton:false,
-		            autoPan:false,
-		            closeOnClick:true,
-		            offset:[0,-12]
-	        	}).setLatLng(marker.getLatLng()).setContent(
-	        		"<div>"+item.NAME+"</div>"+"<div>纬度："+
-	        		item.LATITUDE+"</div><div>经度："+
-	        		item.LONGITUDE+"</div>"
-	        	);
-	        	popup.openOn(map);
-	        	overlayGroup.eachLayer(function(layer){
-	        		if(layer===marker) return;
-	        		layer.setOpacity(0);
-	        	});
-	        	map.flyTo(marker.getLatLng());
-	        })
+	        		var rootNode = document.createElement("div");
+		        	var popup = L.popup({
+		        		closeButton:false,
+			            autoPan:false,
+			            closeOnClick:true,
+			            offset:[0,-12],
+			            maxWidth:500
+		        	}).setLatLng(marker.getLatLng()).setContent(html);
+		        	popup.openOn(map);
+	        		overlayGroup.eachLayer(function(layer){
+		        		if(layer===marker) return;
+		        		layer.setOpacity(0);  //隐藏图层信息
+		        	});
+		        	map.flyTo(marker.getLatLng());
+	        });
 	        marker.addEventListener("mouseover",function(){
 	            marker.setIcon(hoverIcon);
 	        });
@@ -311,7 +343,34 @@
 	            marker.setIcon(myIcon);
 	        });
 	    }
-		
+		function createSpan(content,className){
+	        var html = "<span";
+	        if(arguments.length == 2)
+	        {
+	            html +=" class='"+className+"'";
+	        }
+	        html += ">";
+	        if(content === null || content === undefined)
+	        {
+	            content = " ";
+	        }
+	        html += content + "</span>";
+	        return html;
+	    }
+	function createDiv(content,className){
+        var html = "<div";
+        if(arguments.length == 2)
+        {
+            html +=" class='"+className+"'";
+        }
+        html += ">";
+        if(content === null || content === undefined)
+        {
+            content = " ";
+        }
+        html += content + "</div>";
+        return html;
+    }
 		    /**
      *   author: meizz
      *	 用于格式化Date样式

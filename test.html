@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>捕捉图形绘制</title>
-</head>
-<body style=" margin: 0;overflow: hidden;background: #fff;width: 100%;height:100%;position: absolute;top: 0;">
-<div id="map" style="width: 100%;height:100%"></div>
-<script type="text/javascript" include="leaflet.pm" src="http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/examples/leaflet/../../dist/include-leaflet.js"></script>
-<script type="text/javascript">
-    var host = window.isLocal ? window.server : "http://support.supermap.com.cn:8090";
-    var map, url = host+"/iserver/services/map-china400/rest/maps/China";
-    map = L.map('map', {
-        center: [33, 114],
-        zoom: 4
-    });
-    L.supermap.tiledMapLayer(url).addTo(map);
-    var options = {
-        position: 'topleft',
-        drawMarker: true,
-        drawPolygon: true,
-        drawPolyline: true,
-        editPolygon: true,
-        deleteLayer: true
-    };
-    map.pm.addControls(options);
-</script>
-</body>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>css</title>
+		<style>
+			html,
+			body {
+				margin: 0;
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+			.leaflet-popup-content{
+				position: absolute;
+				left: 50%;
+				top: 30%;
+				width: 300px;
+				font-size: 12px;
+				border: 1px solid salmon;
+				color: #565656;
+			}
+			.map-detail-title{
+				font-size: 19px;
+				border-bottom: 1px solid #ccc;
+			}
+			.map-detail-block{
+				background-color: seashell;
+				line-height: 44px;
+				height: 40px;
+				border: 1px red solid;
+			}
+			.map-detail-icon{
+				display: inline-block;
+				color: white;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				border-radius: 50%;
+				overflow: hidden;
+				background-color: green;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="leaflet-popup-content">
+			<div class="map-detail-title"><span>欢乐中国行</span></div>
+			<div class="map-detail-block"><span>经度</span><span>100.288129</span></div>
+			<div class="map-detail-block"><span>纬度</span><span>28.49441</span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">类</span><span>hahahhaha</span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">地址</span><span> </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">分类</span><span> </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">联系人</span><span> </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">状态</span><span> </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">简介</span><span> </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">联系电话</span><span> </span></div>
+		</div>
+	</body>
+
+	</script>
+	</body>
+
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/screen/echarts.min.js" ></script>
+		<style>
+			html,body{
+				margin: 0;
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+			#complaint{
+				height: 100%;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="complaint"></div>
+	</body>
+	<script>
+		var complaint = echarts.init(document.getElementById("complaint"));
+		option = {
+			title:{
+				text:'单位：条',
+				left:'10%',
+				top:'5%'
+			},
+			color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
+			dataZoom:[{
+				type:'inside',
+				start:60,
+				end:100
+			}],
+		    xAxis: {
+		        type: 'category'
+		    },
+		    yAxis: {
+		        type: 'value'
+		    },
+		    series: [{
+		        data: [
+		        	["一月",123],
+		        	["二月",212],
+		        	["三月",42],
+		        	["四月",72],
+		        	["五月",192],
+		        	["六月",52],
+		        	["七月",12],
+		        	["八月",92]
+		        ],
+		        type: 'bar'
+		    }]
+		};
+		complaint.setOption(option);
+		window.onresize = function(){
+			complaint.resize();
+		}
+	</script>
+</html>
