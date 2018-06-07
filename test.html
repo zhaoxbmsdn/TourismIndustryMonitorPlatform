@@ -27,12 +27,14 @@
 			}
 			.map-detail-block{
 				background-color: seashell;
-				line-height: 44px;
+				line-height: 40px;
 				height: 40px;
 				border: 1px red solid;
+				vertical-align: middle;
 			}
 			.map-detail-icon{
 				display: inline-block;
+				vertical-align: middle;
 				color: white;
 				width: 20px;
 				height: 20px;
@@ -41,6 +43,11 @@
 				border-radius: 50%;
 				overflow: hidden;
 				background-color: green;
+				text-overflow: clip;
+			}
+			.map-detail-span{
+				width:30px;
+				vertical-align: middle;
 			}
 		</style>
 	</head>
@@ -50,13 +57,13 @@
 			<div class="map-detail-title"><span>欢乐中国行</span></div>
 			<div class="map-detail-block"><span>经度</span><span>100.288129</span></div>
 			<div class="map-detail-block"><span>纬度</span><span>28.49441</span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">类</span><span>hahahhaha</span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">地址</span><span> </span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">分类</span><span> </span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">联系人</span><span> </span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">状态</span><span> </span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">简介</span><span> </span></div>
-			<div class="map-detail-block"><span class="map-detail-icon">联系电话</span><span> </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">类</span><span class="map-detail-span">川菜</span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">地址</span><span class="map-detail-span">剑南大道</span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">分类</span><span class="map-detail-span">饭店</span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">联系人</span><span class="map-detail-span">赵钱孙 </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">状态</span><span class="map-detail-span">开业 </span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">简介</span><span class="map-detail-span">这个饭店的菜做的非常好，物美价廉</span></div>
+			<div class="map-detail-block"><span class="map-detail-icon">联系电话</span><span class="map-detail-span"> 15982250438</span></div>
 		</div>
 	</body>
 
