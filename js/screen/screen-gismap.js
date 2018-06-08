@@ -381,22 +381,23 @@
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
 					inside =createDiv(createSpan(item.NAME)+createSpan("报表","map-detail-button map-detail-chart")+createSpan("基本信息","map-detail-button map-detail-base"),"map-detail-title")+
+	       			createDiv(null,"map-detail-echarts","visibility:hidden;opacity:0;height:0px;")+
 	       			createDiv(
 	       				createDiv(createDiv(createSpan("经度","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LONGITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.LONGITUDE,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.LATITUDE,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.STATE,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.LINKMAN,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.ADDRESS,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
-	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame")+
-	       			createDiv(null,"map-detail-echarts map-detail-echarts-none");
+	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame","visibility:visible;opacity:1;height:243px;");
+	       			
 	                break;
 	            default:
 	                myIcon = L.icon({
@@ -436,8 +437,12 @@
 		        	map.flyTo(marker.getLatLng());
 		        	if(item.LAYER !=="sos") return;
 		        	document.querySelector(".map-detail-chart").addEventListener('click',function(){
-		        		document.querySelector(".map-detail-echarts").className = "map-detail-echarts map-detail-echarts-display";
-	       				document.querySelector(".map-detail-frame").className = "map-detail-frame map-detail-none";
+		        		document.querySelector(".map-detail-frame").style.height="0px";
+		        		document.querySelector(".map-detail-echarts").style.height="350px";
+		        		document.querySelector(".map-detail-frame").style.visibility="hidden";
+	       				document.querySelector(".map-detail-frame").style.opacity=0;
+	       				document.querySelector(".map-detail-echarts").style.visibility="visible";
+		        		document.querySelector(".map-detail-echarts").style.opacity="1";
 	       					var echart = echarts.init(document.querySelector(".map-detail-echarts"));
 		       				option = {
 								color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
@@ -448,16 +453,26 @@
 							    yAxis: {
 							        type: 'value'
 							    },
+							    grid:{
+							    	left:'7%',
+							    	right:'5%'
+							    },
 							    series: [{
 							        data: [120, 200, 150, 80],
 							        type: 'bar'
 							    }]
 							};
 							echart.setOption(option);
+						
 		       		});
+		       		
 		       		document.querySelector(".map-detail-base").addEventListener('click',function(){
-		       			document.querySelector(".map-detail-echarts").className = "map-detail-echarts map-detail-none";
-	       				document.querySelector(".map-detail-frame").className = "map-detail-frame map-detail-frame-display";
+		       			document.querySelector(".map-detail-echarts").style.height="0px";
+		       			document.querySelector(".map-detail-frame").style.height="243px";
+		        		document.querySelector(".map-detail-echarts").style.visibility="hidden";
+		        		document.querySelector(".map-detail-echarts").style.opacity="0";
+	       				document.querySelector(".map-detail-frame").style.visibility="visible";
+	       				document.querySelector(".map-detail-frame").style.opacity=1;
 		       		});
 	        });
 	        marker.addEventListener("mouseover",function(){

@@ -200,15 +200,16 @@
 				overflow: hidden;
 			}
 			.map-detail-outer{
-				width: 500px;
+				width: 400px;
 			}
 			.map-detail-title{
 				font-size: 19px;
 				border-bottom: 1px solid #ccc;
 			}
 			.map-detail-block{
-				line-height: 30px;
-				height: 30px;
+				position: relative;
+				line-height: 25px;
+				height: 25px;
 				vertical-align: middle;
 				border-bottom: 1px dashed #ccc;
 			}
@@ -223,58 +224,48 @@
 				width: 20px;
 				height: 20px;
 				text-align: center;
-				line-height: 20px;
+				line-height: 18px;
 				border-radius: 50%;
 				overflow: hidden;
 				background-color: rgba(80, 191, 237, 1);
 				text-overflow: clip;
 			}
 			.map-detail-left{
-				float: left;
+				position: absolute;
+				left: 0px;
 			}
 			.map-detail-right{
-				float: right;
+				position: absolute;
+				right: 0px;
 			}
 
 			.map-detail-span{
+				vertical-align: middle;
+			}
+			.map-detail-value{
 				vertical-align: middle;
 			}
 			.map-detail-button{
 				margin: 0px 5px;
 				padding: 0px 5px;
 				float: right;
-				color: coral;
+				color: white;
 				font-size: 16px;
 				cursor: pointer;
 				background-color: #ccc;
 				border-radius: 5px;
+				transition: background-color .3s;
 			}
 			.map-detail-button:hover{
 				background-color: greenyellow;
 			}
-			.map-detail-none{
-				display: none;
-				opacity: 0;
-				height: 0px;
-			}
-			.map-detail-echarts-display{
-				display: block;
-				opacity: 1;
-				height: 350px;
-			}
+
 			.map-detail-frame{
 				padding: 0px 15px;
-				opacity: 1;
-				transition: opacity 1s;
+				transition:height .5s,opacity .3s cubic-bezier(0.1,0.1,0.1,1),visibility .3s cubic-bezier(0.1,0.1,0.1,1);
 			}
 			.map-detail-echarts{
-				opacity: ;
-				height: ;
-				transition: opacity 1s,height 1s;
-			}
-			.map-detail-frame-display{
-				display: block;
-				opacity: 1;
+				transition: height .5s;
 			}
 		</style>
 	</head>
