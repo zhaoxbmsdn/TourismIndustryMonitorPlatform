@@ -52,6 +52,7 @@
 				layerList.forEach(function (layer) {layer.removeFrom(map);});
 				layerList = [];
 			}
+			map.closePopup();
 			//请求对应类型的图层信息
 			$.ajax({
 	            url:"http://localhost:8080/rest/gisGetLayer",
@@ -101,7 +102,6 @@
 	        var marker = null;
 	        var size = [42, 42];
 	        var ancher = [21,38];   //图像图标与实际坐标点位置的锚准
-	        var markerClickFunction = null;
 	        var inside ='';
 	        switch(item.LAYER)
 	        {
@@ -188,7 +188,24 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
-	                markerClickFunction=function(){
+	                inside =createDiv(createSpan(item.NAME),"map-detail-title")+createDiv(
+					       				createDiv(createDiv(createSpan("经度","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.LONGITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.LEADER,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.PHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createDiv(createSpan("队员数","map-detail-span"),"map-detail-left")+
+					       						  createDiv(createSpan(item.PERSONNUMBER,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
+					       				createDiv(item.REMARK,"map-detail-brief"),"map-detail-frame");
+	                marker.addEventListener("click",function(){
 	                    $.ajax({
 	                        url:"http://localhost:8080/rest/gisGetPatrolPath",
 	                        data:{"id":item.ID},
@@ -229,12 +246,13 @@
 	                            }
 	                            map.addEventListener("click",removeMarker);
 	                            map.flyToBounds(pointList);
+	                           	
 	                        },
 	                        error:function(){
 	
 	                        }
 	                    });
-	                };
+	                });
 	                break;
 	            case "group":
 	                myIcon = L.icon({
@@ -248,7 +266,27 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
-	                markerClickFunction=function(){
+	                inside =createDiv(createSpan(item.NAME),"map-detail-title")+
+	       			createDiv(
+	       				createDiv(createDiv(createSpan("经度","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LONGITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("分组","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.GROUP,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
+	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame");
+	                marker.addEventListener("click",function(){
 	                    $.ajax({
 	                        url:"http://localhost:8080/rest/gisGetGroupPath",
 	                        data:{"id":item.ID},
@@ -295,7 +333,7 @@
 	                            map.flyToBounds(pointList);
 	                        }
 	                    });
-	                };
+	                });
 	                break;
 	            case "pubFacility":
 	                myIcon = L.icon({
@@ -309,6 +347,26 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
+	                inside =createDiv(createSpan(item.NAME),"map-detail-title")+
+	       			createDiv(
+	       				createDiv(createDiv(createSpan("经度","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LONGITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("分组","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.GROUP,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
+	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame");
 	                break;
 	            case "sos":
 	                myIcon = L.icon({
@@ -322,14 +380,12 @@
 	                    iconAnchor:[24,38]
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
-					inside =createDiv(createSpan(item.NAME)+createSpan("报表","map-detail-chart"),"map-detail-title")+
+					inside =createDiv(createSpan(item.NAME)+createSpan("报表","map-detail-button map-detail-chart")+createSpan("基本信息","map-detail-button map-detail-base"),"map-detail-title")+
 	       			createDiv(
 	       				createDiv(createDiv(createSpan("经度","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.LONGITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
@@ -355,11 +411,6 @@
 	                });
 	                marker = L.marker(point,{icon:myIcon});  // 创建标注
 	        }
-	        if(markerClickFunction == null){
-		        markerClickFunction = function(){
-
-		        };
-	        }
 	        marker.bindTooltip(item.NAME,{
 	        	direction:"bottom"
 	        });
@@ -371,10 +422,10 @@
 	        marker.addEventListener("click",function(){
 	        		var rootNode = document.createElement("div");
 		        	var popup = L.popup({
-		        		closeButton:false,
+		        		closeButton:true,
 			            autoPan:false,
 			            closeOnClick:true,
-			            offset:[0,-12],
+			            offset:[0,-20],
 			            maxWidth:500
 		        	}).setLatLng(marker.getLatLng()).setContent(html);
 		        	popup.openOn(map);
@@ -383,25 +434,30 @@
 		        		layer.setOpacity(0);  //隐藏图层信息
 		        	});
 		        	map.flyTo(marker.getLatLng());
+		        	if(item.LAYER !=="sos") return;
 		        	document.querySelector(".map-detail-chart").addEventListener('click',function(){
 		        		document.querySelector(".map-detail-echarts").className = "map-detail-echarts map-detail-echarts-display";
-	       				document.querySelector(".map-detail-frame").className = "map-detail-frame map-detail-echarts-none";
-	       				var echart = echarts.init(document.querySelector(".map-detail-echarts"));
-	       				option = {
-							color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
-						    xAxis: {
-						        type: 'category',
-						        data: ['一级预警', '二级预警', '三级预警', '四级预警']
-						    },
-						    yAxis: {
-						        type: 'value'
-						    },
-						    series: [{
-						        data: [120, 200, 150, 80],
-						        type: 'bar'
-						    }]
-						};
-						echart.setOption(option);
+	       				document.querySelector(".map-detail-frame").className = "map-detail-frame map-detail-none";
+	       					var echart = echarts.init(document.querySelector(".map-detail-echarts"));
+		       				option = {
+								color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
+							    xAxis: {
+							        type: 'category',
+							        data: ['一级预警', '二级预警', '三级预警', '四级预警']
+							    },
+							    yAxis: {
+							        type: 'value'
+							    },
+							    series: [{
+							        data: [120, 200, 150, 80],
+							        type: 'bar'
+							    }]
+							};
+							echart.setOption(option);
+		       		});
+		       		document.querySelector(".map-detail-base").addEventListener('click',function(){
+		       			document.querySelector(".map-detail-echarts").className = "map-detail-echarts map-detail-none";
+	       				document.querySelector(".map-detail-frame").className = "map-detail-frame map-detail-frame-display";
 		       		});
 	        });
 	        marker.addEventListener("mouseover",function(){
@@ -425,11 +481,15 @@
 	        html += content + "</span>";
 	        return html;
 	    }
-	function createDiv(content,className){
+	function createDiv(content,className,style){
         var html = "<div";
         if(arguments.length == 2)
         {
             html +=" class='"+className+"'";
+        }
+        if(arguments.length == 3)
+        {
+        	html +=" class='"+className+"'"+" style='"+style+"'";
         }
         html += ">";
         if(content === null || content === undefined)

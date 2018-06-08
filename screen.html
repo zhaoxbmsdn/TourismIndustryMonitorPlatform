@@ -235,14 +235,12 @@
 			.map-detail-right{
 				float: right;
 			}
-			.map-detail-frame{
-				padding: 0px 15px;
-				height: 350px;
-			}
+
 			.map-detail-span{
 				vertical-align: middle;
 			}
-			.map-detail-chart{
+			.map-detail-button{
+				margin: 0px 5px;
 				padding: 0px 5px;
 				float: right;
 				color: coral;
@@ -251,15 +249,32 @@
 				background-color: #ccc;
 				border-radius: 5px;
 			}
-			.map-detail-chart:hover{
+			.map-detail-button:hover{
 				background-color: greenyellow;
 			}
-			.map-detail-echarts-none{
+			.map-detail-none{
 				display: none;
+				opacity: 0;
+				height: 0px;
 			}
 			.map-detail-echarts-display{
 				display: block;
+				opacity: 1;
 				height: 350px;
+			}
+			.map-detail-frame{
+				padding: 0px 15px;
+				opacity: 1;
+				transition: opacity 1s;
+			}
+			.map-detail-echarts{
+				opacity: ;
+				height: ;
+				transition: opacity 1s,height 1s;
+			}
+			.map-detail-frame-display{
+				display: block;
+				opacity: 1;
 			}
 		</style>
 	</head>
