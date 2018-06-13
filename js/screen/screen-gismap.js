@@ -128,7 +128,7 @@
 	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(stateConvert(item.STATE),"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
@@ -164,17 +164,13 @@
 	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(stateConvert(item.STATE),"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("品牌","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.BRAND,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("设备标识","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.CODE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("分组","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.GROUP,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
-	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame");
+	       						  createDiv(createSpan(item.GROUPS,"map-detail-span"),"map-detail-right"),"map-detail-block"),"map-detail-frame");
 	                break;
 	            case "patrol":
 	                myIcon = L.icon({
@@ -194,7 +190,7 @@
 					       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
 					       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 					       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-					       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+					       						  createDiv(createSpan(stateConvert(item.STATE),"map-detail-span"),"map-detail-right"),"map-detail-block")+
 					       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
 					       						  createDiv(createSpan(item.LEADER,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 					       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
@@ -272,20 +268,14 @@
 	       						  createDiv(createSpan(item.LONGITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.LATITUDE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("分组","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.GROUP,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
-	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame");
+	       						  createDiv(createSpan(stateConvert(item.STATE),"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("团队编号","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.CODE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("大巴编号","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.BUS_CODE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("团队行程时间段","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.ROUTE_TIME_RANGE,"map-detail-span"),"map-detail-right"),"map-detail-block"),"map-detail-frame");
 	                marker.addEventListener("click",function(){
 	                    $.ajax({
 	                        url:"http://localhost:8080/rest/gisGetGroupPath",
@@ -356,17 +346,13 @@
 	       				createDiv(createDiv(createSpan("类别","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.TYPE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.STATE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKMAN,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(stateConvert(item.STATE),"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       				createDiv(createDiv(createSpan("设施编号","map-detail-span"),"map-detail-left")+
+	       						  createDiv(createSpan(item.CODE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.LINKPHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(item.PHONE,"map-detail-span"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("地址","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createDiv(createSpan("分组","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.GROUP,"map-detail-span"),"map-detail-right"),"map-detail-block")+
-	       				createDiv(createSpan("简介","map-detail-icon")+createSpan("简介","map-detail-span"),"map-detail-block")+
-	       				createDiv(item.INTRODUCTION,"map-detail-brief"),"map-detail-frame");
+	       						  createDiv(createSpan(item.ADDRESS,"map-detail-span"),"map-detail-right"),"map-detail-block"),"map-detail-frame");
 	                break;
 	            case "sos":
 	                myIcon = L.icon({
@@ -388,7 +374,7 @@
 	       				createDiv(createDiv(createSpan("纬度","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.LATITUDE,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("状态","map-detail-span"),"map-detail-left")+
-	       						  createDiv(createSpan(item.STATE,"map-detail-value"),"map-detail-right"),"map-detail-block")+
+	       						  createDiv(createSpan(stateConvert(item.STATE),"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系人","map-detail-span"),"map-detail-left")+
 	       						  createDiv(createSpan(item.LINKMAN,"map-detail-value"),"map-detail-right"),"map-detail-block")+
 	       				createDiv(createDiv(createSpan("联系电话","map-detail-span"),"map-detail-left")+
@@ -496,6 +482,19 @@
 	        html += content + "</span>";
 	        return html;
 	    }
+		
+	function stateConvert(state){
+		switch (state)
+		{
+			case 1:
+				return "正常";
+			break;
+			case 0:
+				return "异常";
+			default:
+				return "未知";
+		}
+	}
 	function createDiv(content,className,style){
         var html = "<div";
         if(arguments.length == 2)
