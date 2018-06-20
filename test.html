@@ -5,6 +5,13 @@
 		<meta charset="UTF-8">
 		<title>css</title>
 		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			button{
+				outline: none;
+			}
 			html,
 			body {
 				margin: 0;
@@ -12,56 +19,250 @@
 				width: 100%;
 				overflow: hidden;
 			}
-			.base{
-				display: block;
-				background-color: yellow;
-				width: 60px;
-				height: 30px;
+			
+			 .cn-wrapper {
+				font-size: 1em;
+				width: 26em;
+				height: 26em;
+				overflow: hidden;
+				position: fixed;
+				z-index: 10;
+				bottom: -13em;
+				left: 50%;
+				border-radius: 50%;
+				margin-left: -13em;
+				transform: scale(0.1);  /* 定义缩放 0.1*/
+				-ms-transform: scale(0.1);  /* 定义缩放 0.1*/
+				-moz-transform: scale(0.1);  /* 定义缩放 0.1*/
+				-webkit-transform: scale(0.1);  /* 定义缩放 0.1*/
+				-o-transform: scale(0.1);  /* 定义缩放 0.1*/
+				transition: all .3s ease;
 			}
-			.chart{
-				display: block;
-				width: 60px;
-				height: 30px;
-				background-color: red;
-			}
-			.frame{
-				display: block;
-				height: 300px;
-				width: 50px;
-				background-color: blue;
-			}
-			.echarts{
-				display: none;
-				height: 70px;
-				width: 200px;
-				background-color: green;
-			}
-			.base:hover{
-				background-color: red;
-			}
-			.base:hover .frame{
-				
-				background-color: gray;
+			/* class applied to the container via JavaScript that will scale the navigation up */
+			
+			 .opened-nav {
+				border-radius: 50%;
+				transform: scale(1);
 			}
 			
-			.chart:hover .echarts{
-				display: block;
+			.cn-button {
+				border: none;
+				background: none;
+				color: white;
+				text-align: Center;
+				font-size: 1.5em;
+				padding-bottom: 1em;
+				height: 3.5em;
+				width: 3.5em;
+				background-color: #111;
+				position: fixed;
+				left: 50%;
+				margin-left: -1.75em;
+				bottom: -1.75em;
+				border-radius: 50%;
+				cursor: pointer;
+				z-index: 11
 			}
-			.chart:hover .frame{
-				display: none;
+			
+			.cn-button:hover,
+			.cn-button:active,
+			.cn-button:focus {
+				background-color: #222;
+			}
+			
+			.cn-overlay {
+				width: 100% height:100%;
+				background-color: rgba(0, 0, 0, 0.6);
+				position: fixed;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				opacity: 0;
+				transition: all .3s ease;
+				z-index: 2;
+				pointer-events: none;
+			}
+/* Class added to the overlay via JavaScript to show it when navigation is open */
+			.cn-overlay.on-overlay {
+				pointer-events: auto;
+				opacity: 1;
+			}
+			
+			.cn-wrapper li {
+				position: absolute;
+				font-size: 1.5em;
+				width: 10em;
+				height: 10em;
+				transform-origin: right bottom;
+				overflow: hidden;
+				left: 50%;
+				margin-top: -1.3em;
+				margin-left: -10em;
+				transition: border .3s ease;
+			}
+			.cn-wrapper li a {
+				display: block;
+				font-size: 1.18em;
+				height: 14.5em;
+				width: 14.5em;
+				position: fixed;
+				/* fix the "displacement" bug in webkit browsers when using tab key */
+				bottom: -7.25em;
+				right: -7.25em;
+				border-radius: 50%;
+				text-decoration: none;
+				color: #fff;
+				padding-top: 1.8em;
+				text-align: center;
+				transform: skew(-50deg) rotate(-70deg) scale(1);
+				transition: opacity 0.3s, color 0.3s;
+			}
+			.cn-wrapper li a span {
+				font-size: 1.1em;
+				opacity: 0.7;
+			}
+			/* for a central angle x, the list items must be skewed by 90-x degrees
+in our case x=40deg so skew angle is 50deg
+items should be rotated by x, minus (sum of angles - 180)2s (for this demo) */
+			
+			 .cn-wrapper li:first-child {
+				transform: rotate(-10deg) skew(50deg);
+				-ms-transform: rotate(-10deg) skew(50deg);
+				-webkit-transform: rotate(-10deg) skew(50deg);
+				-moz-transform: rotate(-10deg) skew(50deg);
+				-o-transform: rotate(-10deg) skew(50deg);
+			}
+			
+			 .cn-wrapper li:nth-child(2) {
+				transform: rotate(30deg) skew(50deg);
+				-ms-transform: rotate(30deg) skew(50deg);
+				-webkit-transform: rotate(30deg) skew(50deg);
+				-moz-transform: rotate(30deg) skew(50deg);
+				-o-transform: rotate(30deg) skew(50deg);
+			}
+			
+			 .cn-wrapper li:nth-child(3) {
+				transform: rotate(70deg) skew(50deg);
+				-ms-transform: rotate(70deg) skew(50deg);
+				-webkit-transform: rotate(70deg) skew(50deg);
+				-moz-transform: rotate(70deg) skew(50deg);
+				-o-transform: rotate(70deg) skew(50deg);
+			}
+			
+			 .cn-wrapper li:nth-child(4) {
+				transform: rotate(110deg) skew(50deg);
+				-ms-transform: rotate(110deg) skew(50deg);
+				-webkit-transform: rotate(110deg) skew(50deg);
+				-moz-transform: rotate(110deg) skew(50deg);
+				-o-transform: rotate(110deg) skew(50deg);
+			}
+			 .cn-wrapper li:nth-child(5) {
+				transform: rotate(150deg) skew(50deg);
+				-ms-transform: rotate(150deg) skew(50deg);
+				-webkit-transform: rotate(150deg) skew(50deg);
+				-moz-transform: rotate(150deg) skew(50deg);
+				-o-transform: rotate(150deg) skew(50deg);
+			}
+			
+			 .cn-wrapper li:nth-child(odd) a {
+				background-color: #a11313;
+				background-color: hsla(0, 88%, 63%, 1);
+			}
+			
+			 .cn-wrapper li:nth-child(even) a {
+				background-color: #a61414;
+				background-color: hsla(0, 88%, 65%, 1);
+			}
+			/* active style */
+			
+			 .cn-wrapper li.active a {
+				background-color: #b31515;
+				background-color: hsla(0, 88%, 70%, 1);
+			}
+			/* hover style */
+			
+			 .cn-wrapper li:not(.active) a:hover,
+			 .cn-wrapper li:not(.active) a:active,
+			 .cn-wrapper li:not(.active) a:focus {
+				background-color: #b31515;
+				background-color: hsla(0, 88%, 70%, 1);
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="leaflet-popup-content">
-			<div><span class="base">1</span><span class="chart">2</span></div>
-			<div class="frame"></div>
-			<div class="echarts"></div>
+		<div id="">
+			<button class="cn-button" id="cn-button">+</button>
+		<div class="cn-wrapper" id="cn-wrapper">
+			<ul>
+				<li>
+					<a href="#"><span class="icon-picture">1111</span></a>
+				</li>
+				<li>
+					<a href="#"><span class="icon-headphones">2222</span></a>
+				</li>
+				<li>
+					<a href="#"><span class="icon-home"></span>333</a>
+				</li>
+				<li>
+					<a href="#"><span class="icon-facetime-video">444</span></a>
+				</li>
+				<li>
+					<a href="#"><span class="icon-envelope-alt">555</span></a>
+				</li>
+			</ul>
 		</div>
+		<div id="cn-overlay" class="cn-overlay"></div>
+		</div>
+		
 	</body>
 	<script>
-	
+		(function() {
+
+			var button = document.getElementById('cn-button'),
+				wrapper = document.getElementById('cn-wrapper'),
+				overlay = document.getElementById('cn-overlay');
+
+			//open and close menu when the button is clicked
+			var open = false;
+			button.addEventListener('click', handler, false);
+			wrapper.addEventListener('click', cnhandle, false);
+
+			function cnhandle(e) {
+				console.log("cnhandle");
+				e.stopPropagation();
+			}
+
+			function handler(e) {
+				console.log("handle")
+				if(!e) var e = window.event;
+				e.stopPropagation(); //so that it doesn't trigger click event on document
+
+				if(!open) {
+					openNav();
+				} else {
+					closeNav();
+				}
+			}
+
+			function openNav() {
+				open = true;
+				button.innerHTML = "-";
+				overlay.className="cn-overlay on-overlay";
+				wrapper.className="cn-wrapper opened-nav";
+			}
+
+			function closeNav() {
+				console.log("close");
+				open = false;
+				button.innerHTML = "+";
+				overlay.className="cn-overlay";
+				wrapper.className="cn-wrapper";
+			}
+			document.addEventListener('click', closeNav);
+
+		})();
 	</script>
 	</body>
 
