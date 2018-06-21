@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				position: relative;
+				display: inline-block;
+				list-style: none;
+			}
+			ul{
+				transform: scale(0.1);
+			}
+			#map-menu:hover{
+			}
+			#map-menu:hover ul {
+				transform: scale(1);
+			}
+			
+			#map-menu:hover .menu-base {
+				visibility: hidden;
+				box-shadow: none;
+			}
+			#map-menu {
+				position: absolute;
+				bottom: 20px;
+				left: 20px;
+				width: 48px;
+				height: 48px;
+				z-index: 99;
+				cursor: pointer;
+				transform: scale(1);
+			}
+			/* 图层菜单栏标识  */
+			
+			.menu-base {
+				position: absolute;
+				width: 42px;
+				height: 42px;
+				background-color: rgba(80, 191, 237, .4);
+				border-radius: 30px;
+				box-shadow: 0 0 4px #09223b;
+				visibility: visible;
+				transition: visibility .3s, box-shadow .1s;
+			}
+			/*图层图片定位，位置与图片大小相关。42/2 - 26/2*/
+			
+			.menu-base img {
+				position: absolute;
+				left: 8px;
+				top: 8px;
+				height: 26px;
+				width: 26px;
+			}
+			.menu-item {
+				width: 42px;
+				height: 42px;
+				left: 0;
+				border-radius: 21px;
+				background-color: rgba(80, 191, 237, .4);
+				color: white;
+			}
+			.menu-item:hover{
+				transform: scale(1.5);
+				margin: 0 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="map-menu">
+			<div class="menu-base">
+				<img src="images/screen/layout.png" />
+			</div>
+			<ul>
+				<li class="menu-item" id="IconId1" title="旅游七要素" data-layer="resource" onclick="clickItem(this)">
+					<span>要素</span>
+					<img src="images/screen/scenic.png" />
+				</li>
+				<li class="menu-item" id="IconId2" title="公共设施" data-layer="pubFacility" onclick="clickItem(this)">
+					<span>设施</span>
+					<img src="images/screen/hotel.png" />
+				</li>
+				<li class="menu-item" id="IconId3" title="监控点位" data-layer="monitor" onclick="clickItem(this)">
+					<span>监控</span>
+					<img src="images/screen/monitor.png" />
+				</li>
+				<li class="menu-item" id="IconId4" title="巡逻队轨迹" data-layer="patrol" onclick="clickItem(this)">
+					<span>巡逻</span>
+					<img src="images/screen/patrol.png" />
+				</li>
+				<li class="menu-item" id="IconId5" title="团队游客轨迹" data-layer="group" onclick="clickItem(this)">
+					<span>团队</span>
+					<img src="images/screen/group.png" />
+				</li>
+				<li class="menu-item" id="IconId6" title="SOS" data-layer="sos" onclick="clickItem(this)">
+					<span>SOS</span>
+					<img src="images/screen/scenic.png" />
+				</li>
+			</ul>
+			<div id="dcmap"></div>
+		</div>
+	</body>
+
+</html>

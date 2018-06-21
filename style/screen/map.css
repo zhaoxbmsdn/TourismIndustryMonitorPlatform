@@ -14,146 +14,73 @@
 				height: calc(100% - 56px);
 			}
 			/* 地图图层菜单  */
-			
+			#map-base{
+				position: absolute;
+			}
 			#map-menu {
 				position: absolute;
-				bottom: 20px;
-				left: 20px;
-				width: 48px;
-				height: 48px;
+				padding: 5px 0px 15px 0px;
+				bottom: 0px;
+				left: 25%;
+				width: 50%;
+				border-radius: 10px 10px 0px 0px;
+				text-align: center;
+				height: 42px;
 				z-index: 99;
 				cursor: pointer;
+				background-color: rgba(0, 5, 5, 0.5);
 			}
-			/* 图层菜单栏标识  */
-			
-			.menu-base {
-				position: absolute;
+			#map-menu li{
+				position: relative;
+				display: inline-block;
+				list-style: none;
+			}
+				
+			.menu-item img{
 				width: 42px;
 				height: 42px;
-				background-color: rgba(80, 191, 237, .4);
-				border-radius: 30px;
-				box-shadow: 0 0 4px #09223b;
-				visibility: visible;
-				transition: visibility .3s, box-shadow .1s;
-			}
-			/*图层图片定位，位置与图片大小相关。42/2 - 26/2*/
-			
-			.menu-base img {
-				position: absolute;
-				left: 8px;
-				top: 8px;
-				height: 26px;
-				width: 26px;
-			}
-			
-			.menu-item {
-				position: absolute;
-				width: 42px;
-				height: 42px;
-				left: 0;
 				border-radius: 21px;
-				background-color: rgba(80, 191, 237, .4);
+				background-color: rgba(80, 191, 237, 1);
 				color: white;
-				visibility: hidden;
-				transition: left .5s, visibility .3s;
-			}
-			
-			.menu-item img {
-				opacity: .4;
+				transition: all .2s;
+				-webkit-box-reflect: below 1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(255, 255, 255, .5)));
 			}
 			/*增加图层提示文字*/
 			
 			.menu-item span {
+				display: none;
 				position: absolute;
-				left: 0px;
-				top: -40px;
-				width: 252px;
-				height: 40px;
+				padding: 5px 0px;
+				bottom: 70px;
+				width: 100%;
 				text-align: center;
-				line-height: 40px;
 				border-radius: 21px;
-				font-size: 28px;
+				font-size: 12px;
 				font-weight: normal;
 				font-family:"仿宋";
-				color: gray;
-				visibility: hidden;
-				
+				color: #000000;
+				background-color: #222;
+				transition: all .2s cubic-bezier(0.1,0.1,0.1,0.1);
 			}
-			
-			.menu-item:hover img {
-				opacity: 1;
-			}
-			
-			.menu-item:hover {
-				background-color: rgba(80, 191, 237, 1);
-			}
-			
 			.menu-item:hover span {
-				visibility: visible;
+				display: block;
+				color: #fff;
 			}
 			
-			#map-menu:hover .menu-item {
-				visibility: visible;
+			.menu-item:hover img{
+				-webkit-box-reflect:below 1px linear-gradient(transparent,transparent 50%,rgba(0,0,0,0));
+				background-color: rgba(80, 191, 237, 1);
+				transform: scale(1.7);
+				margin: 0 25px;
+			}
+			#map-menu li:hover +li img,
+			#map-menu li.prev img{
+				-webkit-box-reflect:below 1px linear-gradient(transparent,transparent 50%,rgba(0,0,0,0));
+				transform: scale(1.5);
+				margin: 0 10px;
 			}
 			
-			#map-menu:hover .menu-base {
-				visibility: hidden;
-				box-shadow: none;
-			}
-			
-			#map-menu:hover #IconId1 {
-				z-index: 6;
-				left: 0px;
-			}
-			
-			#map-menu:hover #IconId2 {
-				z-index: 5;
-				left: 42px;
-			}
-			
-			#map-menu:hover #IconId3 {
-				z-index: 4;
-				left: 84px;
-			}
-			
-			#map-menu:hover #IconId4 {
-				z-index: 3;
-				left: 126px;
-			}
-			
-			#map-menu:hover #IconId5 {
-				z-index: 2;
-				left: 168px;
-			}
-			
-			#map-menu:hover #IconId6 {
-				z-index: 1;
-				left: 210px;
-			}
-			
-			#IconId1 span {
-				left: 0px;
-			}
-			
-			#IconId2 span {
-				left: -42px;
-			}
-			
-			#IconId3 span {
-				left: -84px;
-			}
-			
-			#IconId4 span {
-				left: -126px;
-			}
-			
-			#IconId5 span {
-				left: -168px;
-			}
-			
-			#IconId6 span {
-				left: -210px;
-			}
+
 			/* 地图显示区 */
 			
 			#dcmap {
