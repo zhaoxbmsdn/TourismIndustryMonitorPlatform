@@ -401,7 +401,12 @@
 				</svg>
 			</div>
 			<div id="map-main">
-				<div id="map-menu">
+				<div id="map-base" class="component-show">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<div id="map-menu" class="component-off">
 					<ul>
 						<li class="menu-item" id="IconId1" title="旅游七要素" data-layer="resource" onclick="clickItem(this)">
 							<span>要素</span>
@@ -490,7 +495,7 @@
 							<a href="#"><span class="icon-headphones">2222</span></a>
 						</li>
 						<li>
-							<a href="#"><span class="icon-home"></span>333</a>
+							<a href="#"><span class="icon-home">333</span></a>
 						</li>
 						<li>
 							<a href="#"><span class="icon-facetime-video">444</span></a>
@@ -573,8 +578,7 @@
 	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
 	<script type="text/javascript" src="js/screen/screen-gismap.js"></script>
 	<script>
-				(function() {
-
+	(function() {
 			var button = document.getElementById('cn-button'),
 				wrapper = document.getElementById('cn-wrapper'),
 				overlay = document.getElementById('cn-overlay');
@@ -611,12 +615,26 @@
 			function closeNav() {
 				console.log("close");
 				open = false;
-				button.innerHTML = "+";
+				button.innerHTML = "常用系统";
 				overlay.className="cn-overlay";
 				wrapper.className="cn-wrapper";
 			}
-			document.addEventListener('click', closeNav);
-
+			document.getElementById("innermanage").addEventListener('click', closeNav);
+			
+			function openMenu(e){
+				console.log("menu show");
+				e.stopPropagation();
+				document.getElementById("map-menu").className="component-show";
+				document.getElementById("map-base").className="component-off";
+			}
+			function closeMenu(e){
+				console.log("menu off");
+				e.stopPropagation();
+				document.getElementById("map-base").className="component-show";
+				document.getElementById("map-menu").className="component-off";
+			}
+			document.getElementById("map-base").addEventListener('click',openMenu,true);
+			document.getElementById("dcmap").addEventListener("click",closeMenu);
 		})();
 	</script>
 </html>

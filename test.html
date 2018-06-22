@@ -1,268 +1,260 @@
-<!DOCTYPE html>
 <html>
 
 	<head>
-		<meta charset="UTF-8">
-		<title>css</title>
+		<title>拖动分页</title>
+		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 		<style>
-			*{
-				padding: 0;
-				margin: 0;
-			}
-			button{
-				outline: none;
-			}
-			html,
 			body {
-				margin: 0;
-				height: 100%;
-				width: 100%;
+				border: 0px;
+				margin: 0px;
 				overflow: hidden;
-				font-size: 16px;  
+				background-color: transparent;
 			}
 			
-			 .cn-wrapper {
-				font-size: 1em;
-				width: 26em;
-				height: 26em;
-				overflow: hidden;
-				position: fixed;
-				z-index: 10;
-				bottom: -13em;
-				left: 50%;
-				border-radius: 50%;
-				margin-left: -13em;
-				transform: scale(0.1);  /* 定义缩放 0.1*/
-				-ms-transform: scale(0.1);  /* 定义缩放 0.1*/
-				-moz-transform: scale(0.1);  /* 定义缩放 0.1*/
-				-webkit-transform: scale(0.1);  /* 定义缩放 0.1*/
-				-o-transform: scale(0.1);  /* 定义缩放 0.1*/
-				transition: all .3s ease;
-			}
-			/* class applied to the container via JavaScript that will scale the navigation up */
-			
-			 .opened-nav {
-				transform: scale(1);
-			}
-			
-			.cn-button {
-				border: none;
-				background: none;
-				color: white;
-				text-align: Center;
-				font-size: 1.5em;
-				padding-bottom: 1em;
-				height: 3.5em;
-				width: 3.5em;
-				background-color: #111;
-				position: fixed;
-				left: 50%;
-				margin-left: -1.75em;
-				bottom: -1.75em;
-				border-radius: 50%;
-				cursor: pointer;
-				z-index: 11
-			}
-			
-			.cn-button:hover,
-			.cn-button:active,
-			.cn-button:focus {
-				background-color: #222;
-			}
-			
-			.cn-overlay {
-				width: 100% height:100%;
-				background-color: rgba(0, 0, 0, 0.6);
-				position: fixed;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				opacity: 0;
-				transition: all .3s ease;
-				z-index: 2;
-				pointer-events: none;
-			}
-/* Class added to the overlay via JavaScript to show it when navigation is open */
-			.cn-overlay.on-overlay {
-				pointer-events: auto;
-				opacity: 1;
-			}
-			
-			.cn-wrapper li {
+			.page {
 				position: absolute;
-				font-size: 1em;
-				width: 13em;
-				height: 13em;
-				transform-origin: right bottom;
-				overflow: hidden;
-				left: 50%;
-				margin-left: -13em;
-				transition: border .3s ease;
+				width: 700px;
+				border: 1px solid #999;
+				background-color: #000;
+				left: 425px;
+				margin-left: -350px;
+				cursor: default;
+				z-index: 0;
 			}
-			.cn-wrapper li a {
-				display: block;
-				font-size: 1em;
-				height: 24em;
-				width: 26em;
-				position: fixed;
-				/* fix the "displacement" bug in webkit browsers when using tab key */
-				bottom: -13em;
-				right: -13em;
-				border-radius: 50%;
+			
+			ul {
+				height: 320px;
+				list-style: none;
+				margin: 40px 50px 0px;
+				padding: 0px;
+			}
+			
+			li {
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				font-size: 14px;
+				text-align: left;
+				border-bottom: 1px dashed #999;
+			}
+			
+			a {
 				text-decoration: none;
-				color: #fff;
-				padding-top: 2em;
+				color: #999;
+			}
+			
+			a:hover {
+				font-weight: bold;
+			}
+			
+			li span {
+				float: right;
+				color: #999;
+			}
+			
+			.tip {
+				display: block;
+				width: 100%;
+				font-size: 12px;
+				color: #999;
 				text-align: center;
-				transform: skew(-50deg) rotate(-70deg) scale(1);
-				transition: opacity 0.3s, color 0.3s;
-			}
-			.cn-wrapper li a span {
-				font-size: 1.1em;
-				opacity: 0.7;
-			}
-			/* for a central angle x, the list items must be skewed by 90-x degrees
-in our case x=40deg so skew angle is 50deg
-items should be rotated by x, minus (sum of angles - 180)2s (for this demo) */
-			
-			 .cn-wrapper li:first-child {
-				transform: rotate(-10deg) skew(50deg);
-				-ms-transform: rotate(-10deg) skew(50deg);
-				-webkit-transform: rotate(-10deg) skew(50deg);
-				-moz-transform: rotate(-10deg) skew(50deg);
-				-o-transform: rotate(-10deg) skew(50deg);
-			}
-			
-			 .cn-wrapper li:nth-child(2) {
-				transform: rotate(30deg) skew(50deg);
-				-ms-transform: rotate(30deg) skew(50deg);
-				-webkit-transform: rotate(30deg) skew(50deg);
-				-moz-transform: rotate(30deg) skew(50deg);
-				-o-transform: rotate(30deg) skew(50deg);
-			}
-			
-			 .cn-wrapper li:nth-child(3) {
-				transform: rotate(70deg) skew(50deg);
-				-ms-transform: rotate(70deg) skew(50deg);
-				-webkit-transform: rotate(70deg) skew(50deg);
-				-moz-transform: rotate(70deg) skew(50deg);
-				-o-transform: rotate(70deg) skew(50deg);
-			}
-			
-			 .cn-wrapper li:nth-child(4) {
-				transform: rotate(110deg) skew(50deg);
-				-ms-transform: rotate(110deg) skew(50deg);
-				-webkit-transform: rotate(110deg) skew(50deg);
-				-moz-transform: rotate(110deg) skew(50deg);
-				-o-transform: rotate(110deg) skew(50deg);
-			}
-			 .cn-wrapper li:nth-child(5) {
-				transform: rotate(150deg) skew(50deg);
-				-ms-transform: rotate(150deg) skew(50deg);
-				-webkit-transform: rotate(150deg) skew(50deg);
-				-moz-transform: rotate(150deg) skew(50deg);
-				-o-transform: rotate(150deg) skew(50deg);
-			}
-			
-			 .cn-wrapper li:nth-child(odd) a {
-				background-color: #a11313;
-				background-color: hsla(0, 88%, 63%, 1);
-			}
-			
-			 .cn-wrapper li:nth-child(even) a {
-				background-color: #a61414;
-				background-color: hsla(0, 88%, 65%, 1);
-			}
-			/* active style */
-			
-			 .cn-wrapper li.active a {
-				background-color: #b31515;
-				background-color: hsla(0, 88%, 70%, 1);
-			}
-			/* hover style */
-			
-			 .cn-wrapper li:not(.active) a:hover,
-			 .cn-wrapper li:not(.active) a:active,
-			 .cn-wrapper li:not(.active) a:focus {
-				background-color: #b31515;
-				background-color: hsla(0, 88%, 70%, 1);
+				margin: 10px 0px 20px;
 			}
 		</style>
 	</head>
 
-	<body>
-		<div id="">
-			<button class="cn-button" id="cn-button">+</button>
-		<div class="cn-wrapper" id="cn-wrapper">
-			<ul>
-				<li>
-					<a href="#"><span class="icon-picture">1111</span></a>
-				</li>
-				<li>
-					<a href="#"><span class="icon-headphones">2222</span></a>
-				</li>
-				<li>
-					<a href="#"><span class="icon-home"></span>333</a>
-				</li>
-				<li>
-					<a href="#"><span class="icon-facetime-video">444</span></a>
-				</li>
-				<li>
-					<a href="#"><span class="icon-envelope-alt">555</span></a>
-				</li>
-			</ul>
-		</div>
-		<div id="cn-overlay" class="cn-overlay"></div>
-		</div>
-		
-	</body>
-	<script>
-		(function() {
-
-			var button = document.getElementById('cn-button'),
-				wrapper = document.getElementById('cn-wrapper'),
-				overlay = document.getElementById('cn-overlay');
-
-			//open and close menu when the button is clicked
-			var open = false;
-			button.addEventListener('click', handler, false);
-			wrapper.addEventListener('click', cnhandle, false);
-
-			function cnhandle(e) {
-				console.log("cnhandle");
-				e.stopPropagation();
+	<body onselectstart="return false;">
+			<script>
+			function id(obj) {
+				return document.getElementById(obj);
 			}
-
-			function handler(e) {
-				console.log("handle")
-				if(!e) var e = window.event;
-				e.stopPropagation(); //so that it doesn't trigger click event on document
-
-				if(!open) {
-					openNav();
-				} else {
-					closeNav();
+			var page;
+			var lm, mx;
+			var md = false;
+			var sh = 0;
+			var en = false;
+			window.onload = function() {
+				page = document.getElementsByTagName("div");
+				if(page.length > 0) {
+					page[0].style.zIndex = 2;
+				}
+				for(i = 0; i < page.length; i++) {
+					page[i].className = "page";
+					page[i].innerHTML += "<span class=\"tip\">第 " + (i + 1) + "/" + page.length + " 页 提示：左右拖拽翻页</span>";
+					page[i].id = "page" + i;
+					page[i].i = i;
+					page[i].onmousedown = function(e) {
+						if(!en) {
+							if(!e) {
+								e = e || window.event;
+							}
+							lm = this.offsetLeft;
+							mx = (e.pageX) ? e.pageX : e.x;
+							this.style.cursor = "w-resize";
+							md = true;
+							if(document.all) {
+								this.setCapture();
+							} else {
+								window.captureEvents(Event.MOUSEMOVE | Event.MOUSEUP);
+							}
+						}
+					}
+					page[i].onmousemove = function(e) {
+						if(md) {
+							en = true;
+							if(!e) {
+								e = e || window.event;
+							}
+							var ex = (e.pageX) ? e.pageX : e.x;
+							this.style.left = ex - (mx - lm) + 350;
+							if(this.offsetLeft < 75) {
+								var cu = (this.i == 0) ? page.length - 1 : this.i - 1;
+								page[sh].style.zIndex = 0;
+								page[cu].style.zIndex = 1;
+								this.style.zIndex = 2;
+								sh = cu;
+							}
+							if(this.offsetLeft > 75) {
+								var cu = (this.i == page.length - 1) ? 0 : this.i + 1;
+								page[sh].style.zIndex = 0;
+								page[cu].style.zIndex = 1;
+								this.style.zIndex = 2;
+								sh = cu;
+							}
+						}
+					}
+					page[i].onmouseup = function() {
+						this.style.cursor = "default";
+						md = false;
+						if(document.all) {
+							this.releaseCapture();
+						} else {
+							window.releaseEvents(Event.MOUSEMOVE | Event.MOUSEUP);
+						}
+						flyout(this);
+					}
 				}
 			}
 
-			function openNav() {
-				open = true;
-				button.innerHTML = "-";
-				overlay.className="cn-overlay on-overlay";
-				wrapper.className="cn-wrapper opened-nav";
+			function flyout(obj) {
+				if(obj.offsetLeft < 75) {
+					if((obj.offsetLeft + 350 - 20) > -275) {
+						obj.style.left = obj.offsetLeft + 350 - 20;
+						window.setTimeout("flyout(id('" + obj.id + "'));", 0);
+					} else {
+						obj.style.left = -275;
+						obj.style.zIndex = 0;
+						flyin(id(obj.id));
+					}
+				}
+				if(obj.offsetLeft > 75) {
+					if((obj.offsetLeft + 350 + 20) < 1125) {
+						obj.style.left = obj.offsetLeft + 350 + 20;
+						window.setTimeout("flyout(id('" + obj.id + "'));", 0);
+					} else {
+						obj.style.left = 1125;
+						obj.style.zIndex = 0;
+						flyin(id(obj.id));
+					}
+				}
 			}
 
-			function closeNav() {
-				console.log("close");
-				open = false;
-				button.innerHTML = "+";
-				overlay.className="cn-overlay";
-				wrapper.className="cn-wrapper";
+			function flyin(obj) {
+				if(obj.offsetLeft < 75) {
+					if((obj.offsetLeft + 350 + 20) < 425) {
+						obj.style.left = obj.offsetLeft + 350 + 20;
+						window.setTimeout("flyin(id('" + obj.id + "'));", 0);
+					} else {
+						obj.style.left = 425;
+						en = false;
+					}
+				}
+				if(obj.offsetLeft > 75) {
+					if((obj.offsetLeft + 350 - 20) > 425) {
+						obj.style.left = obj.offsetLeft + 350 - 20;
+						window.setTimeout("flyin(id('" + obj.id + "'));", 0);
+					} else {
+						obj.style.left = 425;
+						en = false;
+					}
+				}
 			}
-			document.addEventListener('click', closeNav);
-
-		})();
-	</script>
+		</script>
+		<div>
+			<ul>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>东方之珠</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>啊！爱人</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>宁静温泉</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>你的样子</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>恋曲1980</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>恋曲1980</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>恋曲2000</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>亚细亚的孤儿</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>童年</a>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<ul>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>弹唱词</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>飞车</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>东方之珠</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>滚滚红尘</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>光阴的故事</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>之乎者也</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>现象七十二变</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>乡愁四韵</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>穿过你的黑发我的手</a>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<ul>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>大兵歌</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>黄色面孔</a>
+				</li>
+				<li><span>2009-4-29 02:16</span>
+					<a href=#>台北红玫瑰</a>
+				</li>
+			</ul>
+		</div>
 	</body>
 
 </html>

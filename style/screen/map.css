@@ -16,20 +16,52 @@
 			/* 地图图层菜单  */
 			#map-base{
 				position: absolute;
+				bottom: 0px;
+				left: 30%;
+				width: 40%;
+				height: 16px;
+				background-color:rgba(5, 5, 5, 0.5);
+				z-index: 9;
+				border-radius: 10px 10px 0px 0px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: visibility .5s,opacity .5s;
+			}
+			.component-show{
+				visibility: visible;
+				opacity: 1;
+			}
+			.component-off{
+				opacity: 0;
+				visibility: hidden;
+			}
+			#map-base span{
+				margin-top: 2px;
+				height: 2px;
+				width: 150px;
+				background-color: #eee;
+			}
+			#map-base:hover{
+				background-color:rgba(0, 5, 5, 0.5);
 			}
 			#map-menu {
 				position: absolute;
-				padding: 5px 0px 15px 0px;
+				padding: 2px 0px 1px 0px;
 				bottom: 0px;
-				left: 25%;
-				width: 50%;
+				left: 30%;
+				width: 40%;
 				border-radius: 10px 10px 0px 0px;
 				text-align: center;
 				height: 42px;
-				z-index: 99;
+				z-index: 8;
 				cursor: pointer;
 				background-color: rgba(0, 5, 5, 0.5);
+				transition: visibility .5s,opacity .5s;
 			}
+			
 			#map-menu li{
 				position: relative;
 				display: inline-block;
@@ -37,47 +69,43 @@
 			}
 				
 			.menu-item img{
-				width: 42px;
-				height: 42px;
-				border-radius: 21px;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
 				background-color: rgba(80, 191, 237, 1);
 				color: white;
 				transition: all .2s;
 				-webkit-box-reflect: below 1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(255, 255, 255, .5)));
 			}
-			/*增加图层提示文字*/
-			
-			.menu-item span {
-				display: none;
-				position: absolute;
-				padding: 5px 0px;
-				bottom: 70px;
-				width: 100%;
-				text-align: center;
-				border-radius: 21px;
-				font-size: 12px;
-				font-weight: normal;
-				font-family:"仿宋";
-				color: #000000;
-				background-color: #222;
-				transition: all .2s cubic-bezier(0.1,0.1,0.1,0.1);
-			}
-			.menu-item:hover span {
-				display: block;
-				color: #fff;
-			}
-			
 			.menu-item:hover img{
 				-webkit-box-reflect:below 1px linear-gradient(transparent,transparent 50%,rgba(0,0,0,0));
-				background-color: rgba(80, 191, 237, 1);
-				transform: scale(1.7);
-				margin: 0 25px;
+				transform: scale(1.5);
+				margin: 0 15px;
 			}
 			#map-menu li:hover +li img,
 			#map-menu li.prev img{
 				-webkit-box-reflect:below 1px linear-gradient(transparent,transparent 50%,rgba(0,0,0,0));
-				transform: scale(1.5);
+				transform: scale(1.3);
 				margin: 0 10px;
+			}
+			/*增加图层提示文字*/
+			.menu-item span {
+				display: none;
+				position: absolute;
+				padding: 5px 0px;
+				bottom: 50px;
+				width: 100%;
+				text-align: center;
+				border-radius: 21px;
+				font-size: 14px;
+				font-weight: normal;
+				color: #000000;
+				background-color: #222;
+				transition: all .4s cubic-bezier(0.1,0.1,0.1,0.1);
+			}
+			.menu-item:hover span {
+				display: block;
+				color: #fff;
 			}
 			
 

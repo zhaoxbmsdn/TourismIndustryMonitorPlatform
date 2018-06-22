@@ -29,16 +29,16 @@
 				position: absolute;
 				z-index: 11;
 				left: 50%;
-				margin-left: -1.75em;
+				margin-left: -3em;
 				bottom: 0;
-				border-radius: 1.75em 1.75em 0 0;
+				border-radius: 6em 0 0 0;
 				border: none;
 				background: none;
 				color: white;
 				text-align: Center;
-				font-size: 1.5em;
-				height: 1.75em;
-				width: 3.5em;
+				font-size: 1em;
+				height: 6em;
+				width: 6em;
 				background-color: #111;
 				cursor: pointer;
 			}
@@ -79,6 +79,7 @@
 				left: 50%;
 				margin-left: -13em;
 				transition: border .3s ease;
+				background-color: yellow;
 			}
 			.cn-wrapper li a {
 				display: block;
@@ -144,26 +145,9 @@ items should be rotated by x, minus (sum of angles - 180)2s (for this demo) */
 				-o-transform: rotate(144deg) skew(54deg);
 			}
 			
-			 .cn-wrapper li:nth-child(odd) a {
+			 .cn-wrapper li a {
 				background-color: #a11313;
 				background-color: hsla(0, 88%, 63%, 1);
 			}
-			
-			 .cn-wrapper li:nth-child(even) a {
-				background-color: #a61414;
-				background-color: hsla(0, 88%, 65%, 1);
-			}
+
 			/* active style */
-			
-			 .cn-wrapper li.active a {
-				background-color: #b31515;
-				background-color: hsla(0, 88%, 70%, 1);
-			}
-			/* hover style */
-			
-			 .cn-wrapper li:not(.active) a:hover,
-			 .cn-wrapper li:not(.active) a:active,
-			 .cn-wrapper li:not(.active) a:focus {
-				background-color: #b31515;
-				background-color: hsla(0, 88%, 70%, 1);
-			}
