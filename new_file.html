@@ -1,50 +1,78 @@
-<!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>AJAX跨域请求测试</title>
-  <meta charset="UTF-8">
-</head>
+<!doctype html>
+<title>javascript无缝滚动</title>
+<meta charset="utf-8" />
+<meta name="keywords" content="javascript无缝滚动" />
+<meta name="description" content="javascript无缝滚动" />
+<style type="text/css">
+  h1 {
+    font: 400 16px/1 "Microsoft YaHei", KaiTi_GB2312, SimSun
+  }
+  #marquee {
+    position: relative;
+    width: 400px;
+    overflow: hidden;
+    border: 10px solid #8080C0;
+  }
+  #marquee img {
+    border: 0px;
+  }
+  #marquee dl,
+  #marquee dt,
+  #marquee dd,
+  #marquee a {
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  #marquee dl {
+    width: 1000%;
+    height: 150px;
+  }
+</style>
+<script type="text/javascript">
+var Marquee = function(id) {
+  try {
+    document.execCommand("BackgroundImageCache", false, true);
+  } catch(e) {};
+  var container = document.getElementById(id),
+    original = container.getElementsByTagName("dt")[0],
+    clone = container.getElementsByTagName("dd")[0],
+    speed = arguments[1] || 10;
+  clone.innerHTML = original.innerHTML;
+  container.scrollLeft = clone.offsetLeft
+  var rolling = function() {
+    if(container.scrollLeft == 0) {
+      container.scrollLeft = clone.offsetLeft;
+    } else {
+      container.scrollLeft--;
+    }
+  }
+  var timer = setInterval(rolling, speed) //设置定时器
+  container.onmouseover = function() {
+      clearInterval(timer)
+  } //鼠标移到marquee上时，清除定时器，停止滚动
+  container.onmouseout = function() {
+      timer = setInterval(rolling, speed)
+  } //鼠标移开时重设定时器
+}
+window.onload = function() {
+  Marquee("marquee");
+}
+</script>
 <body>
-  <input type="text" id="urlid" style="width: 1000px;"/>
-  <input type='button' value='开始测试' onclick='crossDomainRequest()' />
-  
-  <div id="content"></div>
-
-  <script type="text/javascript">
-    //<![CDATA[
-    var xhr = new XMLHttpRequest();
-    var html="";
-    var url='http://www.tuniu.com/papi/tour/comment/product?page=3&productId=210482837&selectedType=22&stamp=068724003717263241524735152646';
-    function crossDomainRequest() {
-    	var url = document.getElementById("urlid").value;
-      document.getElementById("content").innerHTML = "开始……";
-      if (xhr) {
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = handler;
-        xhr.send();
-      } else {
-        document.getElementById("content").innerHTML = "不能创建 XMLHttpRequest";
-      }
-    }
-    function handler(evtXHR) {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          var response = xhr.responseText;
-          var data = JSON.parse(xhr.responseText);
-          data.data.list.forEach(function(element){
-          		html +=element.content +"<br/>";
-          });
-          document.getElementById("content").innerHTML = html;
-        } else {
-          document.getElementById("content").innerHTML = "不允许跨域请求。";
-        }
-      }
-      else {
-        document.getElementById("content").innerHTML += "<br/>执行状态 readyState：" + xhr.readyState;
-      }
-    }
-    //]]>
-  </script>
-
+<h1>javascript无缝滚动(向右滚动)</h1>
+<div id="marquee">
+  <dl>
+    <dt>
+      <a href="###"><img src="img/o_s017.jpg" alt="javascript无缝滚动"/></a>
+      <a href="###"><img src="img/o_s018.jpg" alt="javascript无缝滚动"/></a>
+      <a href="###"><img src="img/o_s019.jpg" alt="javascript无缝滚动"/></a>
+      <a href="###"><img src="img/o_s020.jpg" alt="javascript无缝滚动"/></a>
+      <a href="###"><img src="img/o_s021.jpg" alt="javascript无缝滚动"/></a>
+      <a href="###"><img src="img/o_s022.jpg" alt="javascript无缝滚动"/></a>
+      <a href="###"><img src="img/o_s023.jpg" alt="javascript无缝滚动"/></a>
+    </dt>
+    <dd></dd>
+  </dl>
+</div>
 </body>
-</html>

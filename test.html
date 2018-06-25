@@ -70,9 +70,9 @@
 			}
 			var page;
 			var lm, mx;
-			var md = false;
+			var md = false;  //mousedown标识符
 			var sh = 0;
-			var en = false;
+			var en = false;  //移动启用标识符
 			window.onload = function() {
 				page = document.getElementsByTagName("div");
 				if(page.length > 0) {
@@ -88,10 +88,10 @@
 							if(!e) {
 								e = e || window.event;
 							}
-							lm = this.offsetLeft;
+							lm = this.offsetLeft;  //左外边距
 							mx = (e.pageX) ? e.pageX : e.x;
 							this.style.cursor = "w-resize";
-							md = true;
+							md = true;  //开启移动
 							if(document.all) {
 								this.setCapture();
 							} else {
@@ -125,7 +125,7 @@
 					}
 					page[i].onmouseup = function() {
 						this.style.cursor = "default";
-						md = false;
+						md = false;  //鼠标放下，不再移动
 						if(document.all) {
 							this.releaseCapture();
 						} else {
@@ -137,7 +137,8 @@
 			}
 
 			function flyout(obj) {
-				if(obj.offsetLeft < 75) {
+				console.log("flyout");
+				if(obj.offsetLeft < 75) {   //距离不够时，先往外走
 					if((obj.offsetLeft + 350 - 20) > -275) {
 						obj.style.left = obj.offsetLeft + 350 - 20;
 						window.setTimeout("flyout(id('" + obj.id + "'));", 0);
@@ -160,6 +161,7 @@
 			}
 
 			function flyin(obj) {
+				console.log("flyin");
 				if(obj.offsetLeft < 75) {
 					if((obj.offsetLeft + 350 + 20) < 425) {
 						obj.style.left = obj.offsetLeft + 350 + 20;
