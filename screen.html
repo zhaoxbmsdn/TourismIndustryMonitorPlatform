@@ -526,8 +526,8 @@
 					</li>
 				</ul>
 				<div id="table">
-					<div class="pageRoll" style="z-index: 0; cursor: default;">
-						<div class="pageRoll-border"></div>
+					<div class="table-cover" style="z-index: 0; cursor: default;">
+						<div class="table-cover-border"></div>
 					</div>
 					<div id="header">
 						<ul>
@@ -600,74 +600,119 @@
 var md = false;  //鼠标按下标识符
 var downY=0;  //记录鼠标按下时的屏幕点位
 var translateOffset = 0;  //平移偏移量，默认为0 每次操作结束时记录
-var lineHight = document.querySelector(".interval").offsetHeight;  //每次平移
-var ullen = document.getElementById("container").children.length;  //获取表格行数
-
-
+var lineHeight = 0;  //保存每行的高度（也用于规范行的停靠位置）
+var maxOffset =0;   //最大的下拉偏移值(判断是否可以继续上翻)
 
 document.getElementById("table").addEventListener("mousedown",function(){
-	document.querySelector(".pageRoll").style.zIndex=11;
+	document.querySelector(".table-cover").style.zIndex=11;
 })
 
-document.querySelector(".pageRoll").addEventListener("mousedown",function(e){
+document.querySelector(".table-cover").addEventListener("mousedown",function(e){
+	/*  操作前，设置好对应的值*/
+	lineHeight = document.getElementById("container").offsetHeight/4;
+    maxOffset = -(document.getElementById("container").children.length-4)*lineHeight; //减去表格可以显示的最大行数
 	md=true;
     downY = e.clientY;  //记录当前位置
     this.style.cursor="pointer";
 });
-document.querySelector(".pageRoll").addEventListener("mousemove",function(e){
+document.querySelector(".table-cover").addEventListener("mousemove",function(e){
 	if(md){
-    		//计算鼠标平移量
+    	//计算鼠标平移量
         var y = e.clientY-downY;
-        var offset = y+translateOffset;  
-        if(offset<=0){
-        		document.getElementById("container").style.transform="translateY("+offset+"px)";
-        }
+        var offset = y+translateOffset;
+        //应该总是允许在移动时，各种操作
+        document.getElementById("container").style.transform="translateY("+offset+"px)";
    }
 });
-document.querySelector(".pageRoll").addEventListener("mouseup",function(e){
-
-	//平移结束后，规范显示表格
+document.querySelector(".table-cover").addEventListener("mouseup",function(e){
 	if(md){
-		var y = e.clientY-downY;  //当前点偏移
+		var y = e.clientY-downY;  //当前点偏移（正值：下拉；负值：上翻；）
 		var offset = y+translateOffset;  //更新最新的translateOffset值
-		console.log("up offset: "+offset);
-		if(offset<=0){
-        		document.getElementById("container").style.transform="translateY("+offset+"px)";
-        		translateOffset = offset;
+		if(offset<=0 && offset>=maxOffset){
+				if(offset%lineHeight==0){
+					document.getElementById("container").style.transform="translateY("+offset+"px)";
+        			translateOffset = offset;
+				}
+				else{
+					//计算最接近offset的正确边框值
+					var value = (Math.round(offset/lineHeight))*lineHeight;
+					flyTo(offset,value,100);
+					translateOffset = value;
+				}
+        		
         }
-		else{
+		else if(offset >0){
+			//使其慢慢接近0
+			flyTo(offset,0,2);
 			translateOffset = 0;
-			document.getElementById("container").style.transform="translateY("+translateOffset+"px)";
+		}
+		else if(offset < maxOffset){
+			flyTo(offset,maxOffset,2);
+			translateOffset = maxOffset;
 		}
 	    md = false;
 	    downY=0;
-	    	this.style.cursor="default";
-	    document.querySelector(".pageRoll").style.zIndex=0;
+	    this.style.cursor="default";
+	    document.querySelector(".table-cover").style.zIndex=0;
 	}
 
 });
-document.querySelector(".pageRoll").addEventListener("mouseout",function(e){
+document.querySelector(".table-cover").addEventListener("mouseout",function(e){
 	if(md){
-		var y = e.clientY-downY;  //当前点偏移
+		var y = e.clientY-downY;  //当前点偏移（正值：下拉；负值：上翻；）
 		var offset = y+translateOffset;  //更新最新的translateOffset值
-		console.log("up offset: "+offset);
-		if(offset<=0){
-        		document.getElementById("container").style.transform="translateY("+offset+"px)";
-        		translateOffset = offset;
+		if(offset<=0 && offset>=maxOffset){
+				if(offset%lineHeight==0){
+					document.getElementById("container").style.transform="translateY("+offset+"px)";
+        			translateOffset = offset;
+				}
+				else{
+					var value = (Math.round(offset/lineHeight))*lineHeight;
+					flyTo(offset,value,10);
+					translateOffset = value;
+				}
+        		
         }
-		else{
+		else if(offset >0){
+			//使其慢慢接近0
+			flyTo(offset,0,2);
 			translateOffset = 0;
-			document.getElementById("container").style.transform="translateY("+translateOffset+"px)";
+		}
+		else if(offset < maxOffset){
+			flyTo(offset,maxOffset,2);
+			translateOffset = maxOffset;
 		}
 	    md = false;
 	    downY=0;
-	    	this.style.cursor="default";
-	    document.querySelector(".pageRoll").style.zIndex=0;
+	    this.style.cursor="default";
+	    document.querySelector(".table-cover").style.zIndex=0;
 	}
 });
-//然后一个规范后的偏移量，每次偏移应该是一个lineHeight单位
-function formatOffset(y,lineHeight){
-	
+//对输入的offset，不断调整，直至接近lineHeight。左接近还是右接近？
+/**
+ * 
+ * @param {Object} offset
+ * @param {Object} value
+ * @param {Object} timesnap
+ */
+function flyTo(offset,value,timesnap){
+	if(offset -value >0){
+		offset--;
+		document.getElementById("container").style.transform="translateY("+offset+"px)";
+		setTimeout(function(){
+			flyTo(offset,value);
+		},timesnap);
+	}
+	else if(offset -value <0){
+		offset++;
+		document.getElementById("container").style.transform="translateY("+offset+"px)";
+		setTimeout(function(){
+			flyTo(offset,value);
+		},timesnap);
+	}
+	else{
+		document.getElementById("container").style.transform="translateY("+offset+"px)";
+	}
 }
 
 	(function() {

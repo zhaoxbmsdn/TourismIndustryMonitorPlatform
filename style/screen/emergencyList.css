@@ -8,67 +8,19 @@
 				overflow: hidden;
 				user-select: none;
 			}
-			.pageRoll {
+			.table-cover {
 				position: absolute;
 				width: 100%;
 				height: 100%;
 				background-color: transparent;
 			}
-			.pageRoll-border{
+			.table-cover-border{
 				position: absolute;
 				top:31px;
 				width: calc(100% - 2px);
 				height: calc((100% - 31px) / 4);
 				border: 1px solid red;
 				pointer-events:none;  /* 指定该元素可以被鼠标事件穿透*/
-			}
-			#leftPage {
-				float:left;
-				top:45%;
-				left: 4%;
-				width: 11px;
-				height: 50px;
-				background: url(../../images/images_list/pageLeft.png);
-
-			}
-			#rightPage {
-				float: right;
-				top:45%;
-				right: 4%;
-				width: 11px;
-				height: 50px;
-				background: url(../../images/images_list/pageRight.png);
-			}
-			
-			#leftPage:hover{
-				background: url(../../images/images_list/pageLeftL.png);
-				animation: shine 1.5s infinite;
-			}
-			#rightPage:hover{
-				background: url(../../images/images_list/pageRightL.png);
-				animation: shine 1.5s infinite;
-			}
-			/*
-			 *  定义动画样式
-			 * 	从0 - 50 - 100   效果：  正常-放大-正常
-			 */
-			@keyframes shine{
-			    0%,100%{
-			        transform:scale(1);
-			        -moz-transform:scale(1);
-			        -o-transform:scale(1);
-			        -webkit-transform:scale(1);
-			        -ms-transform:scale(1);
-			        opacity:0.3
-			    }
-			    50%{
-			        transform:scale(1.5);
-			        -moz-transform:scale(1.5);
-			        -o-transform:scale(1.5);
-			        -webkit-transform:scale(1.5);
-			        -ms-transform:scale(1.5);
-			        opacity:1
-			    }
 			}
 			#mainframe ul{
 				/* 去除列表默认的小圆点图标 */

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			html,body{
+				height: 100%;
+				width:100%;
+			}
+			div{
+				height: 100%;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="view"></div>
+	</body>
+	<script>
+		var each = function(obj) {
+			var str = '{<br>', key, arr = [];
+			
+			for (key in obj) {
+				arr.push(key + ': "' + obj[key] + '"');
+			}
+			
+			str = str + arr.join(",<br>") + '<br>}';
+			
+			return str;
+		};
+
+		var domEvent = document.getElementById("view");
+		document.body.addEventListener("mousemove",function(e){
+			console.log("mousemove");
+			//domEvent.innerHTML= each(e);
+		});
+		document.body.addEventListener("mousedown",function(e){
+			console.log("mousedown");
+			//domEvent.innerHTML= each(e);
+		});
+		document.body.addEventListener("mousewheel",function(e){
+			//domEvent.innerHTML= each(e);
+		});
+		document.body.addEventListener("mouseup",function(e){
+			console.log("mouseup");
+			//domEvent.innerHTML= each(e);
+		});
+		document.body.addEventListener("click",function(e){
+			e.stopPropagation();
+			console.log("click");
+			//domEvent.innerHTML= each(e);
+		});
+	</script>
+</html>
