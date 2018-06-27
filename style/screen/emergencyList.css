@@ -1,12 +1,26 @@
-/* 包括标签和列表 */
+/*
+	大屏主界面：列表模块样式
+*/
 			
 			#mainframe {
 				width: 100%;
 				height: 100%;
+				overflow: hidden;
+				user-select: none;
 			}
 			.pageRoll {
 				position: absolute;
-				cursor: pointer;
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+			}
+			.pageRoll-border{
+				position: absolute;
+				top:31px;
+				width: calc(100% - 2px);
+				height: calc((100% - 31px) / 4);
+				border: 1px solid red;
+				pointer-events:none;  /* 指定该元素可以被鼠标事件穿透*/
 			}
 			#leftPage {
 				float:left;
@@ -56,19 +70,20 @@
 			        opacity:1
 			    }
 			}
-			
-			
-			#mainframe	ul {
+			#mainframe ul{
 				/* 去除列表默认的小圆点图标 */
 				list-style: none;
+			}
+			/* 标签栏 */
+			.list-lab {
 				height: 15%;
 				display: flex;
 				justify-content: space-around;
 				background-color: #09223b;
-
+				font-size:13px;
 			}
-			
-			#mainframe ul li {
+			/* 标签栏样式 */
+			.list-lab li {
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -76,6 +91,8 @@
 				width: 24%;
 				/* 定义鼠标样式 */
 				cursor: pointer;
+				user-select: none;
+				height: calc(100% - 2px);
 			}
 			
 			/* 选中标签时的样式
@@ -97,8 +114,9 @@
 				/* 字体颜色为白色 */
 				/*background: #56ddff;*/
 			}
-			
-			#mainframe table {
+			/* 表格 */
+			#table {
+				position: relative;
 				width: 100%;
 				height: 85%;
 				/* 字体颜色  */
@@ -107,26 +125,56 @@
 				font-size: 13px;
 				/* 水平居中  */
 				text-align: center;
-				/* 固定表布局样式 */
-				table-layout: fixed;
-			}
-			
-			#mainframe tr td{
 				cursor: default;
+			}
+			#table ul{
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				background-color: rgba(10, 43, 73, 1);;
 			}
 			
 			/*
 			 *   针对表头设置
 			 */
-			#mainframe thead td{
+			#header li{
 				height: 31px;
 				color:#56ddff;,
 				font-weight: normal;
 			}
+
+			/*
+			 *	设置第一列的宽度
+			 */
+			.first-li{
+				width:60px;
+			}
+			/**
+			 *   设置其他列的宽度
+			 */
+			.cell{
+				width: calc((100% - 60px) / 4);
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+			/**
+			 * 表内容的高度;暂定为4行
+			 */
+			#body{
+				height: calc(100% - 31px);
+				overflow: hidden;
+			}
+			#container{
+				height: 100%;
+			}
+			#body ul{
+				height: calc(100% / 4);
+			}
+			
 			/**
 			 *  表格间隔取色
 			 */
-			.interval{
+			#mainframe .interval{
 				background-color: #09223b;
 			}
 			
@@ -145,4 +193,9 @@
 			}
 			#mainframe tbody tr td:hover{
 				color: white;
+			}
+			/* 标签悬浮时，字体样式改变 */
+			#mainframe .item:hover{
+				border-bottom: 2px solid #56ddff;
+				color:#56ddff;
 			}

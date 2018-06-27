@@ -509,9 +509,9 @@
 			</div>
 		</div>
 		<div id="emergencylist" class="cover">
-			<div class="pageRoll" id="leftPage"></div>
+			
 			<div id="mainframe">
-				<ul>
+				<ul class="list-lab">
 					<li class="item labSelect" id="expert" style="color:#56ddff">
 						<span class="font">专家</span>
 					</li>
@@ -525,49 +525,67 @@
 						<span class="font">应急预案</span>
 					</li>
 				</ul>
-				<table id="table" cellspacing="0">
-					<thead>
-						<tr>
-							<td>序号</td>
-							<td>名称</td>
-							<td>职称</td>
-							<td>工作单位</td>
-							<td>擅长领域</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="interval">
-							<td class="cell" title="1">1</td>
-							<td class="cell" title="邓德智">邓德智</td>
-							<td class="cell" title="暂无">暂无</td>
-							<td class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</td>
-							<td class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</td>
-						</tr>
-						<tr class="">
-							<td class="cell " title="2">2</td>
-							<td class="cell" title="王方">王方</td>
-							<td class="cell" title="副教授">副教授</td>
-							<td class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</td>
-							<td class="cell" title="旅游管理研究">旅游管理研..</td>
-						</tr>
-						<tr class="interval">
-							<td class="cell" title="3">3</td>
-							<td class="cell" title="傅林放">傅林放</td>
-							<td class="cell" title="副教授">副教授</td>
-							<td class="cell" title="浙江四海方圆律师事务所">浙江四海方..</td>
-							<td class="cell" title="法律咨询">法律咨询</td>
-						</tr>
-						<tr>
-							<td class="cell" title="4">4</td>
-							<td class="cell" title="刘晖">刘晖</td>
-							<td class="cell" title="副教授">副教授</td>
-							<td class="cell" title="浙江省休闲学会">浙江省休闲..</td>
-							<td class="cell" title="旅游管理研究、民族旅游研究">旅游管理研..</td>
-						</tr>
-					</tbody>
-				</table>
+				<div id="table">
+					<div class="pageRoll" style="z-index: 0; cursor: default;">
+						<div class="pageRoll-border"></div>
+					</div>
+					<div id="header">
+						<ul>
+							<li class="first-li">序号</li>
+							<li class="cell">名称</li>
+							<li class="cell">职称</li>
+							<li class="cell">工作单位</li>
+							<li class="cell">擅长领域</li>
+						</ul>
+					</div>
+					<div id="body">
+						<div id="container" style="transform: translateY(0px);">
+							<ul class="interval">
+								<li class="first-li" title="1">1</li>
+								<li class="cell" title="邓德智">邓德智</li>
+								<li class="cell" title="暂无">暂无</li>
+								<li class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</li>
+								<li class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</li>
+							</ul>
+							<ul >
+								<li class="first-li" title="2">2</li>
+								<li class="cell" title="王方">王方</li>
+								<li class="cell" title="副教授">副教授</li>
+								<li class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</li>
+								<li class="cell" title="旅游管理研究">旅游管理研..</li>
+							</ul>
+							<ul class="interval">
+								<li class="first-li" title="3">3</li>
+								<li class="cell" title="邓德智">邓德智</li>
+								<li class="cell" title="暂无">暂无</li>
+								<li class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</li>
+								<li class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</li>
+							</ul>
+							<ul >
+								<li class="first-li" title="4">4</li>
+								<li class="cell" title="王方">王方</li>
+								<li class="cell" title="副教授">副教授</li>
+								<li class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</li>
+								<li class="cell" title="旅游管理研究">旅游管理研..</li>
+							</ul>
+							<ul class="interval">
+								<li class="first-li" title="5">5</li>
+								<li class="cell" title="邓德智">邓德智</li>
+								<li class="cell" title="暂无">暂无</li>
+								<li class="cell" title="教育部全国高校教师网络培训中心">教育部全国..</li>
+								<li class="cell" title="旅游企业经营管理、导游管理和旅游教育">旅游企业经..</li>
+							</ul>
+							<ul >
+								<li class="first-li" title="6">6</li>
+								<li class="cell" title="王方">王方</li>
+								<li class="cell" title="副教授">副教授</li>
+								<li class="cell" title="浙江旅游职业学院组织部部长">浙江旅游职..</li>
+								<li class="cell" title="旅游管理研究">旅游管理研..</li>
+							</ul>
+						</div>
+					</div>
 			</div>
-			<div class="pageRoll" id="rightPage"></div>
+			</div>
 		</div>
 		<div id="tourism" class="cover">
 			<div class="triangle-title">
@@ -578,6 +596,80 @@
 	<script type="text/javascript" src="js/screen/options-echarts.js"></script>
 	<script type="text/javascript" src="js/screen/screen-gismap.js"></script>
 	<script>
+
+var md = false;  //鼠标按下标识符
+var downY=0;  //记录鼠标按下时的屏幕点位
+var translateOffset = 0;  //平移偏移量，默认为0 每次操作结束时记录
+var lineHight = document.querySelector(".interval").offsetHeight;  //每次平移
+var ullen = document.getElementById("container").children.length;  //获取表格行数
+
+
+
+document.getElementById("table").addEventListener("mousedown",function(){
+	document.querySelector(".pageRoll").style.zIndex=11;
+})
+
+document.querySelector(".pageRoll").addEventListener("mousedown",function(e){
+	md=true;
+    downY = e.clientY;  //记录当前位置
+    this.style.cursor="pointer";
+});
+document.querySelector(".pageRoll").addEventListener("mousemove",function(e){
+	if(md){
+    		//计算鼠标平移量
+        var y = e.clientY-downY;
+        var offset = y+translateOffset;  
+        if(offset<=0){
+        		document.getElementById("container").style.transform="translateY("+offset+"px)";
+        }
+   }
+});
+document.querySelector(".pageRoll").addEventListener("mouseup",function(e){
+
+	//平移结束后，规范显示表格
+	if(md){
+		var y = e.clientY-downY;  //当前点偏移
+		var offset = y+translateOffset;  //更新最新的translateOffset值
+		console.log("up offset: "+offset);
+		if(offset<=0){
+        		document.getElementById("container").style.transform="translateY("+offset+"px)";
+        		translateOffset = offset;
+        }
+		else{
+			translateOffset = 0;
+			document.getElementById("container").style.transform="translateY("+translateOffset+"px)";
+		}
+	    md = false;
+	    downY=0;
+	    	this.style.cursor="default";
+	    document.querySelector(".pageRoll").style.zIndex=0;
+	}
+
+});
+document.querySelector(".pageRoll").addEventListener("mouseout",function(e){
+	if(md){
+		var y = e.clientY-downY;  //当前点偏移
+		var offset = y+translateOffset;  //更新最新的translateOffset值
+		console.log("up offset: "+offset);
+		if(offset<=0){
+        		document.getElementById("container").style.transform="translateY("+offset+"px)";
+        		translateOffset = offset;
+        }
+		else{
+			translateOffset = 0;
+			document.getElementById("container").style.transform="translateY("+translateOffset+"px)";
+		}
+	    md = false;
+	    downY=0;
+	    	this.style.cursor="default";
+	    document.querySelector(".pageRoll").style.zIndex=0;
+	}
+});
+//然后一个规范后的偏移量，每次偏移应该是一个lineHeight单位
+function formatOffset(y,lineHeight){
+	
+}
+
 	(function() {
 			var button = document.getElementById('cn-button'),
 				wrapper = document.getElementById('cn-wrapper'),
