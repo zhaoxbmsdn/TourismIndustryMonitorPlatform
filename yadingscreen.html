@@ -19,73 +19,113 @@
 			}
 			
 			body {
-				background-image: url(images/background-all.jpg);
+				background-color: #eee; 
 			}
 			
 			.layout {
 				position: absolute;
 				margin: 30px 15px;
-				width: calc(50% - 30px);
-				height: calc(50% - 60px);
-			}
-			
-			#incident {
-				left: 0;
-				top: 0;
-				background-color: yellow;
 			}
 			
 			#plan {
+				width: calc(50% - 30px);
+				height: calc(50% - 60px);
+				left: 0;
+				top: 0;
+				background-color: #fff;
+			}
+			
+			#incident {
+				width: calc(50% - 30px);
+				height: calc(50% - 60px);
 				left: 50%;
 				top: 0;
-				background-color: deepskyblue;
+				background-color: #fff;
 			}
 			
 			#news {
+				width: calc(62.5% - 30px);
+				height: calc(50% - 60px);
 				left: 0;
 				top: calc(50% - 15px);
-				background-color: greenyellow;
 			}
 			
 			#opinion {
-				left: 50%;
+				width: calc(37.5% - 30px);
+				height: calc(50% - 60px);
+				left: 62.5%;
 				top: calc(50% - 15px);
-				background-color: mistyrose;
+				background-color: #fff;
 			}
-			#fans{
+			
+			#fans {
 				position: absolute;
 				left: 0;
-				width: 33%;
+				width: 40%;
 				height: 100%;
-				background-color: darkcyan;
 			}
-			#influence{
+			
+			#influence {
 				position: absolute;
-				left: 33%;
-				width: 67%;
+				left: calc(40% + 30px);
+				width: calc(60% - 30px);
 				height: 100%;
-				background-color: cyan;
+				background-color: #fff;
 			}
-			#weixin{
-				position: absolute;
+			
+			#weixin {
+				margin: 0 0 30px 0;
+				padding: 0 0 0 30px;
+				position: relative;
+				width: calc(100% - 30px);
+				height:calc(50% - 15px);
+				background-color: #fff;
+			}
+			
+			#weibo {
 				width: 100%;
-				height: 50%;
+				padding: 0 0 0 30px;
+				position: relative;
+				width: calc(100% - 30px);
+				height: calc(50% - 15px);
+				background-color: #fff;
 			}
-			#weibo{
+			
+			.fans-icon {
 				position: absolute;
-				width: 100%;
-				top: 50%;
-				height: 50%;
+				top:calc(50% - 43px);
+				padding: 7px;
+				left: 30px;
+				width: 72px;
+				height: 72px;
 			}
-			.fans-icon{
-				float: left;
-				width: 86px;
+			
+			.fans-label {
+				position: absolute;
+				top:calc(50% - 43px);
+				left: 116px;
+				width: calc(100% - 116px);
 				height: 86px;
 			}
-			.fans-label{
-				float: left;
-				width: calc(100% - 86px);
-				height: 86px;
+			.fans-label .num{
+				display: block;
+				font-size: 40px;
+			}
+			i{
+				display: block;
+				height: 72px;
+				width: 72px;
+				border-radius: 50%;
+				
+			}
+			#weixin i{
+				background-image: url(images/wechat.png);
+			}
+			#weibo i{
+				background-image: url(images/weibo.png);
+			}
+			#fans span{
+				color: gray;
 			}
 		</style>
 	</head>
@@ -100,8 +140,8 @@
 						<i></i>
 					</div>
 					<div class="fans-label">
-						<strong class="num"></strong>
-						<span></span>
+						<strong class="num">8888</strong>
+						<span>微信关注人数</span>
 					</div>
 				</div>
 				<div id="weibo">
@@ -109,8 +149,8 @@
 						<i></i>
 					</div>
 					<div class="fans-label">
-						<strong class="num"></strong>
-						<span></span>
+						<strong class="num">8888</strong>
+						<span>微博粉丝数</span>
 					</div>
 				</div>
 			</div>
@@ -118,19 +158,19 @@
 		</div>
 		<div id="opinion" class="layout"></div>
 	</body>
-	<script type="text/javascript" src="js/echarts-all.js" ></script>
+	<script type="text/javascript" src="js/echarts-all.js"></script>
 	<script>
 		var publicOpinion = echarts.init(document.getElementById("opinion"));
 		var raderColor = ['#00d9f1', '#f6cac0', '#99f5c0'];
 		var publicOpinionOption = {
-			backgroundColor:{},
-			title:{
-				text:'亚丁景区舆情统计',
-				top:'top',
-				left:'center',
-				textStyle:{
-					color:'#ccc',
-					fontSize:'22'
+			backgroundColor: {},
+			title: {
+				text: '亚丁景区舆情统计',
+				top: 'top',
+				left: 'center',
+				textStyle: {
+					color: '#000',
+					fontSize: '22'
 				}
 			},
 			grid: {
@@ -147,7 +187,7 @@
 				axisLabel: {
 					show: true,
 					textStyle: {
-						color: 'white'
+						color: '#000'
 					}
 				},
 				axisTick: {
@@ -170,7 +210,7 @@
 				axisLabel: {
 					show: true,
 					textStyle: {
-						color: '#eee'
+						color: '#fff'
 					}
 				},
 				axisTick: {
@@ -269,209 +309,309 @@
 			}]
 		});
 
-
 		var plan = echarts.init(document.getElementById("plan"));
-	    option = {
-	    	backgroundColor:{
-				color:'deepskyblue'
-			},
-	        title:{
-				text:'应急预案种类统计',
-				top:'top',
-				left:'center',
-				textStyle:{
-					color:'#ccc',
-					fontSize:'22'
+		option = {
+			color:['#f6cac0'],
+			backgroundColor: {},
+			title: {
+				text: '应急预案种类统计',
+				top: 'top',
+				left: 'center',
+				textStyle: {
+					color: '#000',
+					fontSize: '22'
 				}
 			},
-	        color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
-	        grid: {
+			grid: {
 				show: false,
 				top: '15%',
-				left: '5%',
-				right: '5%',
+				left: '15%',
+				right: '15%',
 				bottom: '15%'
 			},
-	        xAxis: {
-	            type: 'category',
-	            data: ['一级预警', '二级预警', '三级预警', '四级预警'],
-	            axisLabel:{
-	                color:"#fff"
-	            }
-	        },
-	        yAxis: {
-	            type: 'value',
-	            axisLabel:{
-	                color:"#fff"
-	            }
-	        },
-	        series: [{
-	            data: [120, 200, 150, 80],
-	            type: 'bar'
-	        }]
-	    };
-	    plan.setOption(option);
+			xAxis: {
+				type: 'category',
+				data: ['一级预警', '二级预警', '三级预警', '四级预警'],
+				axisLabel: {
+					color: "#000"
+				}
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					color: "#000"
+				}
+			},
+			series: [{
+				data: [120, 210, 150, 80],
+				type: 'bar',
+				barWidth:'20%'
+			}]
+		};
+		plan.setOption(option);
 
-		 var newsInfluence = echarts.init(document.getElementById("influence"));
-		
-		    var raderColor = ['#00d9f1','#f6cac0','#99f5c0'];   //数据面积区域填充颜色数组
-		    var raderFrameLineColor = 'rgb(37,85,135)';         //雷达图直径线和分割线颜色
-		    var raderLegendRadius = 5;//雷达图图例大小
-		    var newsInfluenceOption = {
-		    backgroundColor:{},
-		        color:['#00d9f1','#f6cac0','#99f5c0'],
-		        textStyle:{
-		            color:'#eee'
-		        },
-		        //雷达坐标系
-		        radar:{
-		            center:['50%','50%'],
-		            radius:'55%',
-		            shape:'circle',
-		            splitNumber:5,
-		            nameGap:4,
-		            //刻度线，直径线
-		            axisLine:{
-		                show:true,
-		                lineStyle:{
-		                    color:raderFrameLineColor,
-		                    opacity: 0.5,
-		                    width:1
-		                }
-		            },
-		            axisLabel:{
-		                show:false,
-		                inside:true,
-		                textStyle:{
-		                    color: '#eee',
-		                    fontSize:8
-		                }
-		            },
-		            axisTick:{show:false},
-		            //分割线，圆形线
-		            splitLine:{
-		                show:true,
-		                lineStyle:{
-		                    //分割线的颜色
-		                    color:raderFrameLineColor,
-		                    shadowOffsetX: 0,
-		                    shadowOffsetY: 0,
-		                    shadowColor: '#00a7e6',
-		                    shadowBlur:10,
-		                    width:1,
-		                    opacity: 0.7,
-		                }
-		            },
-		            splitArea:{
-		                show:true,
-		                //填充区域的颜色
-		                areaStyle: {
-		                    color: ['rgb(10,34,61)']
-		                }
-		            },
-		            indicator:[
-		                {name:'点赞量',max:1000,min:0},
-		                {name:'阅读量',max:1000,min:0},
-		                {name:'转发量',max:1000,min:0}
-		            ]
-		        },
-		        //图例
-		        legend:{
-		            show:true,
-		            type:'plain',
-		            right:'5%',
-		            bottom:'5%',
-		            orient:'vertical',
-		            textStyle:{color:'white'},
-		            icon:'circle',
-		            itemWidth:raderLegendRadius,
-		            itemHeight:raderLegendRadius
-		        },
-		        //系列
-		        series:[
-		            {
-		                name:'radarData',
-		                type:'radar',
-		                symbol:'none'
-		            }]
-		    };
-		
-		    /*
+		var newsInfluence = echarts.init(document.getElementById("influence"));
+
+		var raderColor = ['#00d9f1', '#f6cac0', '#99f5c0']; //数据面积区域填充颜色数组
+		var raderFrameLineColor = '#000'; //雷达图直径线和分割线颜色
+		var raderLegendRadius = 5; //雷达图图例大小
+		var newsInfluenceOption = {
+			backgroundColor: {},
+			title: {
+				text: '运营情况统计',
+				top: 'top',
+				left: 'center',
+				textStyle: {
+					color: '#000',
+					fontSize: '22'
+				}
+			},
+			color: ['#00d9f1', '#f6cac0', '#99f5c0'],
+			textStyle: {
+				color: '#000'
+			},
+			//雷达坐标系
+			radar: {
+				center: ['50%', '55%'],
+				radius: '70%',
+				shape: 'circle',
+				splitNumber: 5,
+				nameGap: 10,
+				startAngle:30,
+				//刻度线，直径线
+				axisLine: {
+					show: true,
+					lineStyle: {
+						color: raderFrameLineColor,
+						opacity: 1,
+						width: 1
+					}
+				},
+				axisLabel: {
+					show: false,
+					inside: true,
+					textStyle: {
+						color: '#fff',
+						fontSize: 12
+					}
+				},
+				axisTick: {
+					show: false
+				},
+				//分割线，圆形线
+				splitLine: {
+					show: true,
+					lineStyle: {
+						//分割线的颜色
+						color: raderFrameLineColor,
+						shadowOffsetX: 0,
+						shadowOffsetY: 0,
+						shadowColor: '#fff',
+						shadowBlur: 10,
+						width: 1,
+						opacity: 0.7,
+					}
+				},
+				splitArea: {
+					show: true,
+					//填充区域的颜色
+					areaStyle: {
+						color: ['#fff']
+					}
+				},
+				indicator: [{
+						name: '点赞量',
+						max: 1000,
+						min: 0
+					},
+					{
+						name: '阅读量',
+						max: 1000,
+						min: 0
+					},
+					{
+						name: '转发量',
+						max: 1000,
+						min: 0
+					}
+				]
+			},
+			//图例
+			legend: {
+				show: true,
+				type: 'plain',
+				right: '5%',
+				bottom: 'center',
+				orient: 'vertical',
+				textStyle: {
+					fontSize:16,
+					color: '#000'
+				},
+				selectedMode:'single',
+				icon: 'circle'
+			},
+			//系列
+			series: [{
+				name: 'radarData',
+				type: 'radar',
+				symbol: 'none'
+			}]
+		};
+
+		/*
 		 *  测试数据
 		 */
-		    var dData = [];
-		    dData.push(['新浪',{'阅读数':600,'点赞数':200,'转发量':200}]);
-		    dData.push(['腾讯',{'阅读数':300,'点赞数':800,'转发量':300}]);
-		    dData.push(['电商',{'阅读数':600,'点赞数':1000,'转发量':700}]);
-		    function setRadarData(arr){
-		        var d = [];
-		        arr.forEach(function(item,index,array){
-		            d.push({
-		                'name':item[0],
-		                'value':(function(){
-		                    var a =[];
-		                    for(var i in item[1])
-		                    {
-		                        a.push(item[1][i]);
-		                    }
-		                    return a;
-		                })(),
-		                'lineStyle':{
-		                    'normal':{
-		                        'color':raderColor[index],
-		                        'opacity':0.1   //弱化边界线的存在
-		                    }
-		                },
-		                'areaStyle':{
-		                    'normal':{
-		                        'color':raderColor[index],
-		                        'opacity':0.4
-		                    }
-		                }
-		            });
-		        });
-		        return d;
-		    }
-		
-		    function setIndicator (arr)
-		    {
-		        var data = [];
-		        arr.forEach(function(element)
-		            {
-		                data.push({
-		                    name:element,
-		                    color:'#eee',
-		                    max:1000,
-		                    min:0
-		                });
-		            }
-		        );
-		        return data;
-		    }
-		    /*
-		     * 绘制框架,构造一个原型的雷达图，拥有三个维度（新闻条数、阅读数及转发量）
-		     */
-		    newsInfluence.setOption(newsInfluenceOption);
-		    newsInfluence.setOption({
-		        legend:{
-		            data:dData.map(function(item,index,array){
-		                return item[0]
-		            })
-		        },
-		        series:[{
-		            data:setRadarData(dData)
-		        }]
-		    });
+		var dData = [];
+		dData.push(['新浪', {
+			'阅读数': 600,
+			'点赞数': 200,
+			'转发量': 200
+		}]);
+		dData.push(['腾讯', {
+			'阅读数': 300,
+			'点赞数': 800,
+			'转发量': 300
+		}]);
+		dData.push(['电商', {
+			'阅读数': 600,
+			'点赞数': 1000,
+			'转发量': 700
+		}]);
+
+		function setRadarData(arr) {
+			var d = [];
+			arr.forEach(function(item, index, array) {
+				d.push({
+					'name': item[0],
+					'value': (function() {
+						var a = [];
+						for(var i in item[1]) {
+							a.push(item[1][i]);
+						}
+						return a;
+					})(),
+					'lineStyle': {
+						'normal': {
+							'color': raderColor[index],
+							'opacity': 1 //弱化边界线的存在
+						}
+					},
+					'areaStyle': {
+						'normal': {
+							'color': raderColor[index],
+							'opacity': 0.8
+						}
+					}
+				});
+			});
+			return d;
+		}
+
+		function setIndicator(arr) {
+			var data = [];
+			arr.forEach(function(element) {
+				data.push({
+					name: element,
+					color: '#fff',
+					max: 1000,
+					min: 0
+				});
+			});
+			return data;
+		}
+		/*
+		 * 绘制框架,构造一个原型的雷达图，拥有三个维度（新闻条数、阅读数及转发量）
+		 */
+		newsInfluence.setOption(newsInfluenceOption);
+		newsInfluence.setOption({
+			legend: {
+				data: dData.map(function(item, index, array) {
+					return item[0]
+				})
+			},
+			series: [{
+				data: setRadarData(dData)
+			}]
+		});
+
+		var incident = echarts.init(document.getElementById("incident"));
+		var incidentOption = {
+			backgroundColor: {},
+			title: {
+				text: '应急事件统计',
+				subtext: '设备编号',
+				top: 'top',
+				left: 'center',
+				textStyle: {
+					color: '#000',
+					fontSize: '22'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "设备编号：{b} <br/>事件统计： {c} (单位/件)"
+			},
+			legend: {
+				x: 'right',
+				y: 'center',
+				orient: 'vertical',
+				data: ['7143QMC99B1528', '7143QMC99B1519', '7143QMC99B1557', '7143QMC99B1560', '7143QMC99B1509', '7143QMC99B1561', '7143QMC99B1558', '7143QMC99B1527']
+			},
+			calculable: true,
+			series: [{
+				name: '事件个数',
+				type: 'pie',
+				radius: [15, 110],
+				center: ['50%', '50%'],
+				roseType: 'area',
+				data: [{
+						value: 10,
+						name: '7143QMC99B1528'
+					},
+					{
+						value: 5,
+						name: '7143QMC99B1519'
+					},
+					{
+						value: 15,
+						name: '7143QMC99B1557'
+					},
+					{
+						value: 25,
+						name: '7143QMC99B1509'
+					},
+					{
+						value: 20,
+						name: '7143QMC99B1560'
+					},
+					{
+						value: 35,
+						name: '7143QMC99B1561'
+					},
+					{
+						value: 30,
+						name: '7143QMC99B1558'
+					},
+					{
+						value: 40,
+						name: '7143QMC99B1527'
+					}
+				]
+			}]
+		};
+		incident.setOption(incidentOption);
 
 		window.onresize = function(ev) {
 			publicOpinion.resize();
 			plan.resize();
 			newsInfluence.resize();
+			incident.resize();
 		}
 		window.onload = function(ev) {
 			publicOpinion.resize();
 			plan.resize();
 			newsInfluence.resize();
+			incident.resize();
 		}
 	</script>
 
