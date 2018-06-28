@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				font-size: 12px;
+				overflow: hidden;
+			}
+			
+			body {
+				background-image: url(images/background-all.jpg);
+			}
+			
+			.layout {
+				position: absolute;
+				margin: 30px 15px;
+				width: calc(50% - 30px);
+				height: calc(50% - 60px);
+			}
+			
+			#incident {
+				left: 0;
+				top: 0;
+				background-color: yellow;
+			}
+			
+			#plan {
+				left: 50%;
+				top: 0;
+				background-color: deepskyblue;
+			}
+			
+			#news {
+				left: 0;
+				top: calc(50% - 15px);
+				background-color: greenyellow;
+			}
+			
+			#opinion {
+				left: 50%;
+				top: calc(50% - 15px);
+				background-color: mistyrose;
+			}
+			#fans{
+				position: absolute;
+				left: 0;
+				width: 33%;
+				height: 100%;
+				background-color: darkcyan;
+			}
+			#influence{
+				position: absolute;
+				left: 33%;
+				width: 67%;
+				height: 100%;
+				background-color: cyan;
+			}
+			#weixin{
+				position: absolute;
+				width: 100%;
+				height: 50%;
+			}
+			#weibo{
+				position: absolute;
+				width: 100%;
+				top: 50%;
+				height: 50%;
+			}
+			.fans-icon{
+				float: left;
+				width: 86px;
+				height: 86px;
+			}
+			.fans-label{
+				float: left;
+				width: calc(100% - 86px);
+				height: 86px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="incident" class="layout"></div>
+		<div id="plan" class="layout"></div>
+		<div id="news" class="layout">
+			<div id="fans">
+				<div id="weixin">
+					<div class="fans-icon">
+						<i></i>
+					</div>
+					<div class="fans-label">
+						<strong class="num"></strong>
+						<span></span>
+					</div>
+				</div>
+				<div id="weibo">
+					<div class="fans-icon">
+						<i></i>
+					</div>
+					<div class="fans-label">
+						<strong class="num"></strong>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div id="influence"></div>
+		</div>
+		<div id="opinion" class="layout"></div>
+	</body>
+	<script type="text/javascript" src="js/echarts-all.js" ></script>
+	<script>
+		var publicOpinion = echarts.init(document.getElementById("opinion"));
+		var raderColor = ['#00d9f1', '#f6cac0', '#99f5c0'];
+		var publicOpinionOption = {
+			backgroundColor:{},
+			title:{
+				text:'亚丁景区舆情统计',
+				top:'top',
+				left:'center',
+				textStyle:{
+					color:'#ccc',
+					fontSize:'22'
+				}
+			},
+			grid: {
+				show: false,
+				top: '15%',
+				left: '5%',
+				right: '5%',
+				bottom: '10%'
+			},
+			color: ['#00d9f1', '#f6cac0', '#99f5c0'],
+			xAxis: {
+				show: true,
+				type: 'category',
+				axisLabel: {
+					show: true,
+					textStyle: {
+						color: 'white'
+					}
+				},
+				axisTick: {
+					show: false
+				},
+				axisLine: {
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			},
+			yAxis: {
+				shwo: true,
+				type: 'value',
+				splitNumber: 4,
+				axisLine: {
+					show: false
+				},
+				axisLabel: {
+					show: true,
+					textStyle: {
+						color: '#eee'
+					}
+				},
+				axisTick: {
+					show: false
+				},
+				splitLine: {
+					show: true,
+					lineStyle: {
+						opacity: 0.2
+					}
+				}
+			},
+			series: [{
+				name: 'OpinionBar',
+				type: 'bar',
+				barWidth: '20%',
+				itemStyle: {
+					normal: {
+						barBorderRadius: 80
+					}
+				},
+				label: {
+					normal: {
+						show: false,
+						formatter: '{b}'
+					}
+				}
+			}]
+		};
+		var xData = ['正面', '中性', '负面'];
+		//值数据
+		var dData = [];
+
+		/*
+		 *   Data 示例:
+		 * 	 [
+		 * 		['正面',200],
+		 * 		['中性',200],
+		 * 		['负面',200]
+		 *   ]
+		 */
+		var Data = [];
+
+		function selectFrom(lowerValue, upperValue) {
+			var choices = upperValue - lowerValue + 1;
+			return Math.floor(Math.random() * choices + lowerValue);
+		}
+
+		for(var i = 0; i < 3; i++) {
+			Data.push([xData[i], selectFrom(100, 500)]);
+		}
+
+		function createComparisonFunction(propertyName) {
+			return function(obj1, obj2) {
+				var value1 = obj1[propertyName];
+				var value2 = obj2[propertyName];
+
+				if(value1 > value2) {
+					return -1;
+				} else if(value1 < value2) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		}
+
+		Data.sort(createComparisonFunction(1));
+		/**
+		 * 设置数据样式
+		 * @param {Object} data
+		 */
+		function setPOData(data) {
+			return data.map(function(item, index, array) {
+				return {
+					'name': item[0],
+					'value': item[1],
+					'itemStyle': {
+						'normal': {
+							'color': raderColor[index]
+						}
+					}
+				};
+			})
+		}
+
+		publicOpinion.setOption(publicOpinionOption);
+		publicOpinion.setOption({
+			xAxis: {
+				data: Data.map(function(item, index, array) {
+					return item[0];
+				})
+			},
+			series: [{
+				data: setPOData(Data)
+			}]
+		});
+
+
+		var plan = echarts.init(document.getElementById("plan"));
+	    option = {
+	    	backgroundColor:{
+				color:'deepskyblue'
+			},
+	        title:{
+				text:'应急预案种类统计',
+				top:'top',
+				left:'center',
+				textStyle:{
+					color:'#ccc',
+					fontSize:'22'
+				}
+			},
+	        color:['#4287ff','#61ceff','#a0bdee','#f29e87','#eaca47','#e7b068','#efd784'],
+	        grid: {
+				show: false,
+				top: '15%',
+				left: '5%',
+				right: '5%',
+				bottom: '15%'
+			},
+	        xAxis: {
+	            type: 'category',
+	            data: ['一级预警', '二级预警', '三级预警', '四级预警'],
+	            axisLabel:{
+	                color:"#fff"
+	            }
+	        },
+	        yAxis: {
+	            type: 'value',
+	            axisLabel:{
+	                color:"#fff"
+	            }
+	        },
+	        series: [{
+	            data: [120, 200, 150, 80],
+	            type: 'bar'
+	        }]
+	    };
+	    plan.setOption(option);
+
+		 var newsInfluence = echarts.init(document.getElementById("influence"));
+		
+		    var raderColor = ['#00d9f1','#f6cac0','#99f5c0'];   //数据面积区域填充颜色数组
+		    var raderFrameLineColor = 'rgb(37,85,135)';         //雷达图直径线和分割线颜色
+		    var raderLegendRadius = 5;//雷达图图例大小
+		    var newsInfluenceOption = {
+		    backgroundColor:{},
+		        color:['#00d9f1','#f6cac0','#99f5c0'],
+		        textStyle:{
+		            color:'#eee'
+		        },
+		        //雷达坐标系
+		        radar:{
+		            center:['50%','50%'],
+		            radius:'55%',
+		            shape:'circle',
+		            splitNumber:5,
+		            nameGap:4,
+		            //刻度线，直径线
+		            axisLine:{
+		                show:true,
+		                lineStyle:{
+		                    color:raderFrameLineColor,
+		                    opacity: 0.5,
+		                    width:1
+		                }
+		            },
+		            axisLabel:{
+		                show:false,
+		                inside:true,
+		                textStyle:{
+		                    color: '#eee',
+		                    fontSize:8
+		                }
+		            },
+		            axisTick:{show:false},
+		            //分割线，圆形线
+		            splitLine:{
+		                show:true,
+		                lineStyle:{
+		                    //分割线的颜色
+		                    color:raderFrameLineColor,
+		                    shadowOffsetX: 0,
+		                    shadowOffsetY: 0,
+		                    shadowColor: '#00a7e6',
+		                    shadowBlur:10,
+		                    width:1,
+		                    opacity: 0.7,
+		                }
+		            },
+		            splitArea:{
+		                show:true,
+		                //填充区域的颜色
+		                areaStyle: {
+		                    color: ['rgb(10,34,61)']
+		                }
+		            },
+		            indicator:[
+		                {name:'点赞量',max:1000,min:0},
+		                {name:'阅读量',max:1000,min:0},
+		                {name:'转发量',max:1000,min:0}
+		            ]
+		        },
+		        //图例
+		        legend:{
+		            show:true,
+		            type:'plain',
+		            right:'5%',
+		            bottom:'5%',
+		            orient:'vertical',
+		            textStyle:{color:'white'},
+		            icon:'circle',
+		            itemWidth:raderLegendRadius,
+		            itemHeight:raderLegendRadius
+		        },
+		        //系列
+		        series:[
+		            {
+		                name:'radarData',
+		                type:'radar',
+		                symbol:'none'
+		            }]
+		    };
+		
+		    /*
+		 *  测试数据
+		 */
+		    var dData = [];
+		    dData.push(['新浪',{'阅读数':600,'点赞数':200,'转发量':200}]);
+		    dData.push(['腾讯',{'阅读数':300,'点赞数':800,'转发量':300}]);
+		    dData.push(['电商',{'阅读数':600,'点赞数':1000,'转发量':700}]);
+		    function setRadarData(arr){
+		        var d = [];
+		        arr.forEach(function(item,index,array){
+		            d.push({
+		                'name':item[0],
+		                'value':(function(){
+		                    var a =[];
+		                    for(var i in item[1])
+		                    {
+		                        a.push(item[1][i]);
+		                    }
+		                    return a;
+		                })(),
+		                'lineStyle':{
+		                    'normal':{
+		                        'color':raderColor[index],
+		                        'opacity':0.1   //弱化边界线的存在
+		                    }
+		                },
+		                'areaStyle':{
+		                    'normal':{
+		                        'color':raderColor[index],
+		                        'opacity':0.4
+		                    }
+		                }
+		            });
+		        });
+		        return d;
+		    }
+		
+		    function setIndicator (arr)
+		    {
+		        var data = [];
+		        arr.forEach(function(element)
+		            {
+		                data.push({
+		                    name:element,
+		                    color:'#eee',
+		                    max:1000,
+		                    min:0
+		                });
+		            }
+		        );
+		        return data;
+		    }
+		    /*
+		     * 绘制框架,构造一个原型的雷达图，拥有三个维度（新闻条数、阅读数及转发量）
+		     */
+		    newsInfluence.setOption(newsInfluenceOption);
+		    newsInfluence.setOption({
+		        legend:{
+		            data:dData.map(function(item,index,array){
+		                return item[0]
+		            })
+		        },
+		        series:[{
+		            data:setRadarData(dData)
+		        }]
+		    });
+
+		window.onresize = function(ev) {
+			publicOpinion.resize();
+			plan.resize();
+			newsInfluence.resize();
+		}
+		window.onload = function(ev) {
+			publicOpinion.resize();
+			plan.resize();
+			newsInfluence.resize();
+		}
+	</script>
+
+</html>
