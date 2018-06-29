@@ -158,12 +158,12 @@
 		</div>
 		<div id="opinion" class="layout"></div>
 	</body>
-	<script type="text/javascript" src="js/echarts-all.js"></script>
+	<script type="text/javascript" src="js/echarts3.min.js"></script>
 	<script>
 		var publicOpinion = echarts.init(document.getElementById("opinion"));
 		var raderColor = ['#00d9f1', '#f6cac0', '#99f5c0'];
 		var publicOpinionOption = {
-			backgroundColor: {},
+			backgroundColor: {color:'#ccc'},
 			title: {
 				text: '亚丁景区舆情统计',
 				top: 'top',
@@ -312,7 +312,7 @@
 		var plan = echarts.init(document.getElementById("plan"));
 		option = {
 			color:['#f6cac0'],
-			backgroundColor: {},
+			backgroundColor: {color:'#ccc'},
 			title: {
 				text: '应急预案种类统计',
 				top: 'top',
@@ -356,7 +356,7 @@
 		var raderFrameLineColor = '#000'; //雷达图直径线和分割线颜色
 		var raderLegendRadius = 5; //雷达图图例大小
 		var newsInfluenceOption = {
-			backgroundColor: {},
+			backgroundColor: {color:'#ccc'},
 			title: {
 				text: '运营情况统计',
 				top: 'top',
@@ -536,7 +536,7 @@
 
 		var incident = echarts.init(document.getElementById("incident"));
 		var incidentOption = {
-			backgroundColor: {},
+			backgroundColor: {color:'#fff'},
 			title: {
 				text: '应急事件统计',
 				subtext: '设备编号',
